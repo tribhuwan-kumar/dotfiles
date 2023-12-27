@@ -1,4 +1,5 @@
 :syntax on
+:set nowrap
 :set number
 :set autoread
 :set smarttab
@@ -38,20 +39,21 @@ Plug 'https://github.com/kaicataldo/material.vim' " material colorscheme
 Plug 'https://github.com/LunarVim/Neovim-from-scratch.git' " For vim terminal    
 Plug 'https://github.com/tpope/vim-eunuch.git' " For filr operations
 
-Plug 'michaelb/sniprun', { 'do': 'bash install.sh' } " Code Runner plugin
-Plug 'ayu-theme/ayu-vim' " For colorscheme or other package manager
+Plug 'ayu-theme/ayu-vim' " Ayu colorscheme 
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }  "For Highlighting
-Plug 'nvim-tree/nvim-web-devicons' "For Developer Icons
-Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
+Plug 'nvim-tree/nvim-web-devicons' " Developer Icons
+Plug 'jiangmiao/auto-pairs' " For auto closing ( [ {
 Plug 'sheerun/vim-polyglot'  " Plugin for syntax highlighting and language features
 Plug 'lewis6991/gitsigns.nvim' " For git tracking
 Plug 'sonph/onehalf', { 'rtp': 'vim' } " Onehalf Theme
-Plug 'Rigellute/shades-of-purple.vim'
+Plug 'Rigellute/shades-of-purple.vim' " Purple theme
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-Plug 'CRAG666/code_runner.nvim'
 Plug 'rest-nvim/rest.nvim'
-Plug 'nvim-lua/plenary.nvim'
-
+Plug 'nvim-lua/plenary.nvim' " Dependency
+Plug 'rafamadriz/friendly-snippets' " For snippets
+Plug 'honza/vim-snippets' " For snippets
+Plug 'L3MON4D3/LuaSnip' " For snippets
+Plug 'hrsh7th/nvim-cmp'
 
 " ------------
 " Python Runner
@@ -64,7 +66,7 @@ Plug 'yuezk/vim-js'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'maxmellon/vim-jsx-pretty'
 
-" Auto-completion For Javascript
+" Auto-completion For different file types 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
 
 
@@ -87,7 +89,7 @@ nnoremap <C-k> :q<CR>
 nnoremap <C-s> :w<CR>
 
 
-" For selecting line by 'h,j,k,l' keys in insert mode
+" For selecting lines and string by 'h,j,k,l' keys 
 nnoremap <S-h> vh
 nnoremap <S-j> vj
 nnoremap <S-k> vk
@@ -103,6 +105,8 @@ vnoremap <C-x> x
 vnoremap <C-c> "+y
 nnoremap <C-_> :Commentary<CR>
 vnoremap <C-_> :Commentary<CR>
+vmap <C-h> iw
+vmap <C-l> iw
 
 
 " Exit by 'Esc' in terminal mode
@@ -120,7 +124,11 @@ vnoremap <M-j> :m '>+1<CR>gv=gv
 vnoremap <M-k> :m '<-2<CR>gv=gv
 
 
-:set completeopt-=preview " For No Previews
+" Tab navigation
+nnoremap <C-o> :tabn<CR>
+nnoremap <C-i> :tabp<CR>
+
+
 
 " Autocompletion for python
 let g:python3_host_prog = "/usr/bin/python3"
@@ -128,10 +136,10 @@ let g:python3_host_prog = "/usr/bin/python3"
 
 
 " Ayu Theme
-" :colorscheme ayu      " For themes
-" let ayucolor="light"  " For light version of theme
-" let ayucolor="mirage" " For mirage version of theme
-" let ayucolor="dark"   " For dark version of theme
+" :colorscheme ayu      
+" let ayucolor="light"  
+" let ayucolor="mirage" 
+" let ayucolor="dark"  
 
 
 " shades_of_purple 
