@@ -13,7 +13,10 @@
 :set encoding=UTF-8
 :set completeopt-=preview " For No Previews
 :set clipboard=unnamedplus
+:set mouse=nv
+:set hlsearch
 " :set clipboard=unnamed
+" :set clipboard+=unnamedplus
 
 
 call plug#begin()
@@ -30,11 +33,9 @@ Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
 Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
 Plug 'https://github.com/tc50cal/vim-terminal' " Vim Terminal
 Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
-Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
+Plug 'https://github.com/mg979/vim-visual-multi' " CTRL + N for multiple cursors
 Plug 'https://github.com/rstacruz/vim-closer' " For brackets autocompletion
-Plug 'https://github.com/nvim-tree/nvim-tree.lua' " For file tree
 Plug 'https://github.com/akinsho/toggleterm.nvim' " For Terminal
-Plug 'https://github.com/ayu-theme/ayu-vim'  " For ayu_dark theme
 Plug 'https://github.com/kaicataldo/material.vim' " material colorscheme 
 Plug 'https://github.com/LunarVim/Neovim-from-scratch.git' " For vim terminal    
 Plug 'https://github.com/tpope/vim-eunuch.git' " For filr operations
@@ -49,17 +50,17 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' } " Onehalf Theme
 Plug 'Rigellute/shades-of-purple.vim' " Purple theme
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'rest-nvim/rest.nvim'
-Plug 'nvim-lua/plenary.nvim' " Dependency
-Plug 'rafamadriz/friendly-snippets' " For snippets
-Plug 'honza/vim-snippets' " For snippets
-Plug 'L3MON4D3/LuaSnip' " For snippets
+Plug 'nvim-lua/plenary.nvim' 
+Plug 'rafamadriz/friendly-snippets' " Snippets
+Plug 'honza/vim-snippets' " Snippets
+Plug 'L3MON4D3/LuaSnip' " Snippets
 Plug 'hrsh7th/nvim-cmp'
+Plug 'aurum77/live-server.nvim' " Live Server
 
-" ------------
-" Python Runner
-Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim'
-" Python Runner
-" ------------
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
+Plug 'Xuyuanp/nerdtree-git-plugin' " NerdTree git
+
+Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim' " Code Runner
 
 " These plugins will add highlighting and indenting to JSX and TSX files.
 Plug 'yuezk/vim-js'
@@ -76,17 +77,21 @@ call plug#end()
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']  " list of CoC extensions needed
 
 " Keybindings
+let mapleader = "z"
+
+" NerdTree, FZF, CodeRunner, CoC-git, Exit keybindings 
+nnoremap <Leader>f :FZF<CR>
+nnoremap <Leader>k :q<CR>
+nnoremap <Leader>l :call CocActionAsync('jumpDefinition')<CR>
+nnoremap <Leader>p :vsplit \| term bash<CR>
+nnoremap <Leader>b :botright split \| term bash<CR>
+nnoremap <Leader>r :RunCode<CR>
+nnoremap <Leader>i :CocCommand git.chunkInfo<CR>
+nnoremap <Leader>u :CocCommand git.chunkUndo<CR>
+nnoremap <Leader>a :NERDTreeFocus<CR>
+nnoremap <C-q> :NERDTreeToggle<CR>
+
 nmap <F8> :TagbarToggle<CR>
-noremap  <C-v> "+p
-nnoremap <C-c> yy
-nnoremap <C-f> :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
-nnoremap <C-p> :vsplit \| term bash<CR>
-nnoremap <C-b> :botright split \| term bash<CR>
-nnoremap <C-k> :q<CR>
-nnoremap <C-s> :w<CR>
 
 
 " For selecting lines and string by 'h,j,k,l' keys 
@@ -96,17 +101,21 @@ nnoremap <S-k> vk
 nnoremap <S-l> vl
 
 
-" Undo, Redo, Selection & Yank keybinding
+" Save, Cut, Undo, Redo, Selection & Yank keybindings
+vmap <C-h> iw
+vmap <C-l> iw
+noremap  <C-v> "+p
+nnoremap <C-s> :w<CR>
+nnoremap <C-c> yy
 nnoremap <C-a> ggVG
 nnoremap <C-z> u
 nnoremap <C-S-z> r
 nnoremap <C-x> dd
+vnoremap <C-z> u
 vnoremap <C-x> x
 vnoremap <C-c> "+y
 nnoremap <C-_> :Commentary<CR>
 vnoremap <C-_> :Commentary<CR>
-vmap <C-h> iw
-vmap <C-l> iw
 
 
 " Exit by 'Esc' in terminal mode
@@ -124,10 +133,21 @@ vnoremap <M-j> :m '>+1<CR>gv=gv
 vnoremap <M-k> :m '<-2<CR>gv=gv
 
 
-" Tab navigation
+" Tab management
 nnoremap <C-o> :tabn<CR>
 nnoremap <C-i> :tabp<CR>
+nnoremap <Leader>t :tabnew<CR>
 
+
+" Cursor navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+
+" Coc-git tracking
+inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
 
 " Autocompletion for python
@@ -145,7 +165,7 @@ let g:python3_host_prog = "/usr/bin/python3"
 " shades_of_purple 
 :colorscheme shades_of_purple 
 
-
+" NerdTree icons
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
 
@@ -176,10 +196,6 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 
-" Coc-git tracking
-inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
-
-
 " For onehalf dark theme
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -207,4 +223,24 @@ let g:clipboard = {
 autocmd BufWritePost * NERDTreeRefresh
 autocmd DirChanged * NERDTreeRefresh
 autocmd CursorHold * NERDTreeRefresh
+
+" NerdTree git
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+      \ 'Modified'  :'✹',
+      \ 'Staged'    :'✚',
+      \ 'Untracked' :'✭',
+      \ 'Renamed'   :'➜',
+      \ 'Unmerged'  :'═',
+      \ 'Deleted'   :'✖',
+      \ 'Dirty'     :'✗',
+      \ 'Ignored'   :'☒',
+      \ 'Clean'     :'✔︎',
+      \ 'Unknown'   :'?',
+      \ }
+
+let g:NERDTreeGitStatusConcealBrackets = 0 " default: 0
+
+" Coc-git autorefresh
+autocmd BufWritePost * CocCommand git.refresh
+autocmd DirChanged * CocCommand git.refresh
 
