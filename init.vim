@@ -61,6 +61,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
 Plug 'Xuyuanp/nerdtree-git-plugin' " NerdTree git
 
 Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim' " Code Runner
+Plug 'github/copilot.vim' " Github Coplilot, Do ':Copilot setup' to setup
 
 " These plugins will add highlighting and indenting to JSX and TSX files.
 Plug 'yuezk/vim-js'
