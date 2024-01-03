@@ -147,7 +147,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 
-" Coc-git tracking
+" Accept auto complete by 'Tab' key
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
 
