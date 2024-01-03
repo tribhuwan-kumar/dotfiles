@@ -220,11 +220,6 @@ let g:clipboard = {
      \ }
 
 
-" NerdTree Autorefresh
-autocmd BufWritePost * NERDTreeRefresh
-autocmd DirChanged * NERDTreeRefresh
-autocmd CursorHold * NERDTreeRefresh
-
 " NerdTree git
 let g:NERDTreeGitStatusIndicatorMapCustom = {
       \ 'Modified'  :'✹',
@@ -240,6 +235,11 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
       \ }
 
 let g:NERDTreeGitStatusConcealBrackets = 0 " default: 0
+
+" NerdTree Autorefresh
+autocmd BufWritePost * NERDTreeRefresh
+autocmd DirChanged * NERDTreeRefresh
+autocmd CursorHold * NERDTreeRefresh
 
 " Coc-git autorefresh
 autocmd BufWritePost * CocCommand git.refresh
