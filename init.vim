@@ -206,11 +206,7 @@ autocmd BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 
 
 " <-----------------------------Gitsigns------------------------------------>
-lua << EOF
-require('gitsigns').setup{
-    current_line_blame = true,
-}
-EOF
+lua require('Gitsigns-Config')
 
 
 " <----------------------------Just some notes ---------------------------->
