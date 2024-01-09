@@ -18,7 +18,6 @@
 :set clipboard=unnamedplus " For wl-clipboard
 " :set clipboard=unnamed
 " :set clipboard+=unnamedplus
-set statusline+=%{get(b:,'gitsigns_status','')}
 
 " <-------------------------Plugins------------------------->
 call plug#begin()
@@ -46,7 +45,7 @@ Plug 'nvim-lua/plenary.nvim' " For rest.nvim
 Plug 'rafamadriz/friendly-snippets' " Snippets
 Plug 'honza/vim-snippets' " Snippets
 Plug 'L3MON4D3/LuaSnip' " Snippets
-Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/nvim-cmp' " Completion
 Plug 'aurum77/live-server.nvim' " Live Server
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
@@ -68,8 +67,12 @@ Plug 'maxmellon/vim-jsx-pretty'
 " Auto-completion For different file types 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
 
+" Wilder for Nvim command mode 
+Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }
+Plug 'romgrk/fzy-lua-native', { 'do': 'make' }
 
 call plug#end()
+
 
 " <-------------------------Paths & Variables-------------------------->
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']  " list of CoC extensions needed
@@ -166,6 +169,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+
 " <------------------------------Airline----------------------------->
 " Air-line
 let g:airline_theme='shades_of_purple' 
@@ -207,6 +211,46 @@ autocmd BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 
 " <-----------------------------Gitsigns------------------------------------>
 lua require('Gitsigns-Config')
+set statusline+=%{get(b:,'gitsigns_status','')}
+
+
+" <-----------------------------Wilder------------------------------------>
+" ++once supported in Nvim 0.4+ and Vim 8.1+
+autocmd CmdlineEnter * ++once call s:wilder_init() | call wilder#main#start()
+
+function! s:wilder_init() abort
+  call wilder#setup({
+    \ 'modes': [':', '/', '?'],
+    \ 'next_key': '<Tab>',
+    \ 'previous_key': '<S-Tab>',
+    \ 'accept_key': '<Down>',
+    \ 'reject_key': '<Up>',
+    \ 'enable_cmdline_enter': 0,
+    \ })
+
+  let s:highlighters = [
+    \ wilder#pcre2_highlighter(),
+    \ wilder#basic_highlighter(),
+    \ ]
+
+  call wilder#set_option('pipeline', wilder#branch(
+    \ wilder#cmdline_pipeline({
+    \   'fuzzy': 1,
+    \   'fuzzy_filter': wilder#lua_fzy_filter(),
+    \ }),
+    \ wilder#python_search_pipeline(),
+    \ ))
+
+  call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
+    \ 'highlights': {
+    \   'border': 'Normal',
+    \ },
+    \ 'border': 'rounded',
+    \ 'highlighter': s:highlighters,
+    \ 'left': [' ', wilder#popupmenu_devicons()],
+    \ 'right': [' ', wilder#popupmenu_scrollbar()],
+    \ })))
+endfunction
 
 
 " <----------------------------Just some notes ---------------------------->
