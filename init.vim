@@ -47,7 +47,8 @@ Plug 'honza/vim-snippets' " Snippets
 Plug 'L3MON4D3/LuaSnip' " Snippets
 Plug 'hrsh7th/nvim-cmp' " Completion
 Plug 'aurum77/live-server.nvim' " Live Server
-
+Plug 'gregsexton/MatchTag' " For matching html tags
+" Plug 'Pocco81/AutoSave.nvim' " Auto Save
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
 
 Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim' " Code Runner
@@ -142,6 +143,7 @@ nnoremap <C-x> dd
 vnoremap <C-z> u
 vnoremap <C-x> x
 vnoremap <C-c> "+y
+vnoremap <BS> d
 
 " Exit by 'Esc' in terminal mode
 tnoremap <Esc> <C-\><C-n>
@@ -168,6 +170,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+:noremap j gj
+:noremap k gk
 
 
 " <------------------------------Airline----------------------------->
@@ -193,6 +197,11 @@ let g:airline_symbols.linenr = ''
 autocmd BufWritePost * Gitsigns refresh
 autocmd DirChanged * Gitsigns refresh
 autocmd BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+
+
+" <-----------------------------Autosave------------------------------------>
+let g:auto_save = 1
+let g:auto_save_events = ['InsertLeave', 'TextChanged']
 
 
 " <------------------------------Clipboard----------------------------->
@@ -251,6 +260,13 @@ function! s:wilder_init() abort
     \ 'right': [' ', wilder#popupmenu_scrollbar()],
     \ })))
 endfunction
+
+
+" <-----------------------------Copilot------------------------------------>
+" Copilot keybindings
+let g:copilot_no_tab_map = v:true
+imap <C-L> <Plug>(copilot-accept-word)
+imap <silent><script><expr> <Leader><Tab> copilot#Accept("\<CR>")
 
 
 " <----------------------------Just some notes ---------------------------->
