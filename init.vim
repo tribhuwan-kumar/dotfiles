@@ -14,14 +14,13 @@
 :set shiftwidth=4
 :set softtabstop=4
 :set encoding=UTF-8
-:set completeopt-=preview " For No Previews
-:set clipboard=unnamedplus " For wl-clipboard
-" :set clipboard=unnamed
+:set completeopt-=preview 
+:set clipboard=unnamedplus " system clipboard
 " :set clipboard+=unnamedplus
+set statusline+=%{get(b:,'gitsigns_status','')} " Gitsigns status
 
 " <-------------------------Plugins------------------------->
 call plug#begin()
-
 
 Plug 'github/copilot.vim' " Copilot
 Plug 'tpope/vim-surround' " Surrounding ysw
