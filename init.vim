@@ -33,24 +33,20 @@ Plug 'preservim/tagbar' " Tagbar for code navigation
 Plug 'mg979/vim-visual-multi' " CTRL + N for multiple cursors
 Plug 'rstacruz/vim-closer' " For brackets autocompletion
 Plug 'akinsho/toggleterm.nvim' " For Terminal
-" Plug 'tpope/vim-eunuch.git' " For file operations
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }  "For Highlighting
 Plug 'jiangmiao/auto-pairs' " For auto closing ( [ {
 Plug 'sheerun/vim-polyglot'  " Plugin for syntax highlighting and language features
 Plug 'lewis6991/gitsigns.nvim' " For git tracking
-" Plug 'Rigellute/shades-of-purple.vim' " Purple theme
 Plug 'rest-nvim/rest.nvim' " HTTP Client
 Plug 'nvim-lua/plenary.nvim' " For rest.nvim  
-Plug 'rafamadriz/friendly-snippets' " Snippets
-Plug 'honza/vim-snippets' " Snippets
-Plug 'L3MON4D3/LuaSnip' " Snippets
-Plug 'hrsh7th/nvim-cmp' " Completion
 Plug 'aurum77/live-server.nvim' " Live Server
 Plug 'gregsexton/MatchTag' " For matching html tags
+" Plug 'tpope/vim-eunuch.git' " For file operations
+" Plug 'Rigellute/shades-of-purple.vim' " Purple theme
 " Plug 'Pocco81/AutoSave.nvim' " Auto Save
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }  "For Highlighting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
 
-Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim' " Code Runner
+" Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim' " Code Runner
 Plug 'tribhuwan-kumar/custom-tokyonight.nvim' " Custom Tokyonight theme 
 Plug 'tribhuwan-kumar/custom-vim-airline' " Custom Airline theme
 
@@ -65,11 +61,24 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'maxmellon/vim-jsx-pretty'
 
 " Auto-completion For different file types 
+" Plug 'hrsh7th/nvim-cmp'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
+
+" snippets
+" Plug 'L3MON4D3/LuaSnip' 
+" Plug 'honza/vim-snippets' 
+" Plug 'rafamadriz/friendly-snippets' 
 
 " Wilder for Nvim command mode 
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }
+
+" Debugger
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+
+" <-------------------------Language specific DAP-------------------------->
+Plug 'mfussenegger/nvim-dap-python' " for python
 
 call plug#end()
 
@@ -91,11 +100,6 @@ let g:python3_host_prog = "/usr/bin/python3" " Python bin path
 
 
 " <-------------------------Keybindings------------------------->
-" Copilot Keybindings
-let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <Leader><Tab> copilot#Accept("\<CR>")
-imap <C-L> <Plug>(copilot-accept-word)
-
 " Accept auto complete by 'Tab' key
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
@@ -119,10 +123,10 @@ nnoremap <C-q> :Neotree toggle<CR>
 nnoremap <C-_> :Commentary<CR>
 vnoremap <C-_> :Commentary<CR>
 
-nmap <F8> :TagbarToggle<CR>
+nmap <F1> :TagbarToggle<CR>
 
 
-" For selecting lines and string by 'h,j,k,l' keys 
+" For selecting strings by 'h,j,k,l' keys 
 nnoremap <S-h> vh
 nnoremap <S-j> vj
 nnoremap <S-k> vk
@@ -130,8 +134,8 @@ nnoremap <S-l> vl
 
 
 " Save, Cut, Undo, Redo, Selection & Yank keybindings
-vmap <C-h> iw
-vmap <C-l> iw
+vmap <C-h> b
+vmap <C-l> e
 noremap  <C-v> "+p
 nnoremap <C-s> :w<CR>
 nnoremap <C-c> yy
@@ -266,6 +270,29 @@ endfunction
 let g:copilot_no_tab_map = v:true
 imap <C-L> <Plug>(copilot-accept-word)
 imap <silent><script><expr> <Leader><Tab> copilot#Accept("\<CR>")
+
+
+" <-----------------------------DAP------------------------------------>
+" config
+lua require("dapui").setup()
+lua require('debugger')
+lua require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+
+" Debugger keybindings
+nnoremap <Leader>db :lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <Leader>dc :lua require'dap'.continue()<CR>
+nnoremap <Leader>ds :lua require'dap'.step_into()<CR>
+nnoremap <Leader>do :lua require'dap'.step_over()<CR>
+nnoremap <Leader>dr :lua require'dap'.repl.open()<CR>
+
+
+" <-----------------------------Coc------------------------------------>
+imap <C-j> <C-n>
+imap <C-k> <C-p>
+inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+      
+" inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+" inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
 
 " <----------------------------Just some notes ---------------------------->
