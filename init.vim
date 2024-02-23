@@ -17,11 +17,11 @@
 :set completeopt-=preview 
 :set clipboard=unnamedplus " system clipboard
 " :set clipboard+=unnamedplus
-set statusline+=%{get(b:,'gitsigns_status','')} " Gitsigns status
 
 " <-------------------------Plugins------------------------->
 call plug#begin()
 
+Plug 'tpope/vim-obsession' " Session Management
 Plug 'github/copilot.vim' " Copilot
 Plug 'tpope/vim-surround' " Surrounding ysw
 Plug 'tpope/vim-commentary' " For Commenting gcc & gc
@@ -64,9 +64,12 @@ Plug 'maxmellon/vim-jsx-pretty'
 " Plug 'hrsh7th/nvim-cmp'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
 
+" indent line
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 " snippets
 " Plug 'L3MON4D3/LuaSnip' 
-" Plug 'honza/vim-snippets' 
+Plug 'honza/vim-snippets' 
 " Plug 'rafamadriz/friendly-snippets' 
 
 " Wilder for Nvim command mode 
@@ -175,6 +178,13 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 :noremap j gj
 :noremap k gk
+
+
+
+" Insert mode keybindings
+imap <C-j> <C-n> 
+imap <C-k> <C-p>
+inoremap <C-O> <C-o>o
 
 
 " <------------------------------Airline----------------------------->
@@ -287,12 +297,14 @@ nnoremap <Leader>dr :lua require'dap'.repl.open()<CR>
 
 
 " <-----------------------------Coc------------------------------------>
-imap <C-j> <C-n>
-imap <C-k> <C-p>
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
       
 " inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 " inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+
+" <-----------------------------Indentline------------------------------------>
+lua require("ibl").setup()
 
 
 " <----------------------------Just some notes ---------------------------->
