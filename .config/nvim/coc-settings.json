@@ -1,0 +1,4 @@
+{
+  "git.enableGutters": true,
+  "diagnostic.checkCurrentLine": true
+}
