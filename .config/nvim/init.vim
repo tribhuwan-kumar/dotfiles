@@ -9,6 +9,7 @@
 :set splitright
 :set autoindent
 :set termguicolors
+:set relativenumber
 :set mouse=a
 :set tabstop=4
 :set shiftwidth=4
@@ -75,15 +76,18 @@ Plug 'romgrk/fzy-lua-native', { 'do': 'make' }
 " Bufferline
 " Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
-" indent line
+" Indent line
 Plug 'lukas-reineke/indent-blankline.nvim'
+
+" Markdown preview
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 
 " Debugger
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 
 " <-------------------------Language specific DAP-------------------------->
-Plug 'mfussenegger/nvim-dap-python' " for python
+Plug 'mfussenegger/nvim-dap-python' " For python
 
 
 
@@ -357,6 +361,10 @@ lua require("ibl").setup()
 
 " <-----------------------------Neotree------------------------------------>
 lua require("Neotree-config")
+
+
+" <-----------------------------Markdown------------------------------------>
+let g:instant_markdown_theme = 'dark'
 
 
 " <----------------------------Just some notes ---------------------------->
