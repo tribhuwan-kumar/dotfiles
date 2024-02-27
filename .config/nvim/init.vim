@@ -62,7 +62,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 
 " Auto-completion For different file types 
 " Plug 'hrsh7th/nvim-cmp'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " Autocompletion
 
 " snippets
 Plug 'honza/vim-snippets' 
@@ -96,11 +96,10 @@ call plug#end()
 
 
 " <-------------------------Paths & Variables-------------------------->
-" Paths
+" paths
 let g:tagbar_ctags_bin =  '/usr/bin/ctags' " Tagbar exburenant ctags path
 let g:python3_host_prog = "/usr/bin/python3" " Python bin path
 
-" let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-clangd', 'coc-copilot', 'coc-vimlsp']  " list of CoC extensions needed
 
 " <--------------------------Colorscheme---------------------------->
 " Shades of purple 
@@ -267,6 +266,20 @@ nnoremap <C-q> :Neotree toggle<CR>
 let g:instant_markdown_theme = 'dark'
 
 
+" <------------------------------Clipboard----------------------------->
+" wl-clipboard 'sudo pacman -S wl-clipboard'
+   let g:clipboard = {
+     \   'copy': {
+     \       '+': ['wl-copy', '--trim-newline'],
+     \       '*': ['wl-copy', '--trim-newline'],
+     \   },
+     \   'paste': {
+     \       '+': ['wl-paste', '--no-newline'],
+     \       '*': ['wl-paste', '--no-newline'],
+     \   },
+     \ }
+
+
 " <------------------------------Airline----------------------------->
 " Air-line
 let g:airline_powerline_fonts = 1
@@ -299,20 +312,6 @@ let g:airline#extensions#coc#warning_symbol = 'W:'
 let g:airline#extensions#coc#show_coc_status = 1
 let g:airline#extensions#coc#stl_format_err = '%C(L%L)'
 let g:airline#extensions#coc#stl_format_warn = '%C(L%L)'
-
-
-" <------------------------------Clipboard----------------------------->
-" wl-clipboard 'sudo pacman -S wl-clipboard'
-   let g:clipboard = {
-     \   'copy': {
-     \       '+': ['wl-copy', '--trim-newline'],
-     \       '*': ['wl-copy', '--trim-newline'],
-     \   },
-     \   'paste': {
-     \       '+': ['wl-paste', '--no-newline'],
-     \       '*': ['wl-paste', '--no-newline'],
-     \   },
-     \ }
 
 
 " <-----------------------------Wilder------------------------------------>
