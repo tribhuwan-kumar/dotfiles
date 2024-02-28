@@ -113,6 +113,9 @@ let g:python3_host_prog = "/usr/bin/python3" " Python bin path
 " let mapleader = "z" " My binding
 let mapleader = "\<Space>" " for better convinience
 
+" Help doc
+nnoremap <Leader>h K<CR>
+
 " exit by 'Esc' in terminal mode
 tnoremap <Esc> <C-\><C-n>
 
