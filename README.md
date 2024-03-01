@@ -1,4 +1,44 @@
-# Neovim-configuration-in-Archlinux
-#### My nvim configuration in Arch Linux:
+# My dotfiles
+This is a collection of my dotfiles
 
-![image](https://github.com/tribhuwan-kumar/Neovim-configuration-in-Archlinux/assets/118052427/a5f627f7-2160-457e-b145-579f4f091733)
+### Requirements:
+
+Ensure you have the following installed:
+- [git](https://git-scm.com/)
+
+```bash
+pacman -S git
+```
+
+- [stow](https://www.gnu.org/software/stow/)
+
+```bash
+pacman -S stow
+```
+
+### Installation:
+
+First, clone the repository to your home directory:
+
+```bash
+git clone https://github.com/tribhuwan-kumar/dotfiles.git
+```
+
+Then, navigate to the dotfiles directory:
+
+```bash
+cd dotfiles
+```
+
+Create symlinks to the dotfiles using stow:
+
+```bash
+stow .
+```
+
+### Used CLI tools:
+```bash
+pacman -S fd bat exa fzf tmux neovim zoxide ripgrep thefuck 
+```
+
+
