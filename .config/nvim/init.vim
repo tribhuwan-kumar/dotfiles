@@ -13,6 +13,7 @@
 :set mouse=a
 :set tabstop=4
 :set shiftwidth=4
+:set updatetime=300
 :set softtabstop=4
 :set encoding=UTF-8
 :set completeopt-=preview 
@@ -31,34 +32,24 @@ Plug 'ap/vim-css-color' " CSS Color Preview
 Plug 'tc50cal/vim-terminal' " Vim Terminal
 Plug 'preservim/tagbar' " Tagbar for code navigation
 Plug 'mg979/vim-visual-multi' " CTRL + N for multiple cursors
-Plug 'rstacruz/vim-closer' " For brackets autocompletion
 Plug 'akinsho/toggleterm.nvim' " For Terminal
-Plug 'jiangmiao/auto-pairs' " For auto closing ( [ {
+Plug 'windwp/nvim-autopairs' " For auto closing ( [ {
 Plug 'sheerun/vim-polyglot'  " Plugin for syntax highlighting and language features
 Plug 'lewis6991/gitsigns.nvim' " For git tracking
 Plug 'rest-nvim/rest.nvim' " HTTP Client
 Plug 'nvim-lua/plenary.nvim' " For rest.nvim  
 Plug 'aurum77/live-server.nvim' " Live Server
 Plug 'gregsexton/MatchTag' " For matching html tags
-" Plug 'tpope/vim-eunuch.git' " For file operations
-" Plug 'Rigellute/shades-of-purple.vim' " Purple theme
-" Plug 'Pocco81/AutoSave.nvim' " Auto Save
+Plug 'Pocco81/AutoSave.nvim' " Auto Save
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }  "For Highlighting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
 
-" Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim' " Code Runner
-" Plug 'tribhuwan-kumar/custom-tokyonight.nvim' " Custom Tokyonight theme 
-" Plug 'tribhuwan-kumar/custom-vim-airline' " Custom Airline theme
+Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim' " Code Runner
 
 " Neotree
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
-
-" These plugins will add highlighting and indenting to JSX and TSX files.
-Plug 'yuezk/vim-js'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'maxmellon/vim-jsx-pretty'
 
 " Auto-completion For different file types 
 " Plug 'hrsh7th/nvim-cmp'
@@ -130,7 +121,7 @@ nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| terminal<CR>
 nnoremap <Leader>b :botright split \| terminal<CR>
-nnoremap <Leader>r :CheckCode<CR>
+nnoremap <Leader>r :RunCode<CR>
 
 " cursor navigation
 :noremap j gj
@@ -142,10 +133,12 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Prevent registering to clipboard
-noremap c "_c
+nnoremap S "_S
+nnoremap c "_c
 nnoremap d "_d
 nnoremap D "_D
 nnoremap C "_C
+nnoremap X "+x
 nnoremap xx "+Vx
 nnoremap dd "_dd
 " visual mode
@@ -186,6 +179,11 @@ vnoremap <M-j> :m '>+1<CR>gv=gv
 vnoremap <M-k> :m '<-2<CR>gv=gv
 
 
+" <-------------------------Autopairs------------------------->
+lua require("nvim-autopairs").setup {}
+lua require('autopairs-config')
+
+
 " <------------------------------Autorefresh---------------------------->
 autocmd BufWritePost * Gitsigns refresh
 autocmd DirChanged * Gitsigns refresh
@@ -200,7 +198,7 @@ let g:auto_save_events = ['InsertLeave', 'TextChanged']
 
 " <----------------------------Lualine--------------------------------------->
 lua require('lualine').setup()
-
+lua require('lualine-config')
 
 " <-----------------------------Gitsigns------------------------------------>
 lua require('Gitsigns-Config')
@@ -220,7 +218,7 @@ let g:copilot_no_tab_map = v:true
 
 " copilot keybindings
 imap <C-L> <Plug>(copilot-accept-word)
-imap <silent><script><expr> <Leader><Tab> copilot#Accept("\<CR>")
+imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 
 
 " <-----------------------------DAP------------------------------------>

@@ -1,4 +1,4 @@
-# My dotfiles
+# My dotarch
 This is a collection of my dotfiles
 
 ### Requirements:

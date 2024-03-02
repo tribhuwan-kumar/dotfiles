@@ -1,5 +1,3 @@
-" set initial buffer
-
 " Check os and shell
 function! GetShell(command)
     let escaped_command = shellescape(a:command, 2)
@@ -40,19 +38,21 @@ function! GetShell(command)
 
 endfunction
 
+" set initial buffer
 let s:terminal_bufnr = -1
 " Run terminal command based on shell
 function! RunTerminal(command, shell)
 
     if s:terminal_bufnr == -1
-        if &buftype ==# 'terminal' || &buftype ==# 'term'
-            execute "vsplit | terminal"
-        endif
+        execute "vsplit | terminal"
+        let s:terminal_bufnr = bufnr('%')
+          
+
+        " if &buftype ==# 'terminal' || &buftype ==# 'term'
+        " endif
         " execute "vsplit | term " . a:shell . " -c " . a:command . ";exec " . a:shell
         " execute "vsplit | terminal"
         " terminal 
-        let s:terminal_bufnr = bufnr('%')
-        echo "Terminal buffer ID: " . s:terminal_bufnr
     elseif &buftype ==# 'terminal' || &buftype ==# 'term'
         execute 
         let term_win_id = bufwinnr(s:terminal_bufnr)
