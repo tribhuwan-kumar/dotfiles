@@ -28,7 +28,7 @@ Plug 'github/copilot.vim' " Copilot
 Plug 'tpope/vim-surround' " Surrounding ysw
 Plug 'tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'lifepillar/pgsql.vim' " PSQL Pluging needs :SQLSetType pgsql.vim
-Plug 'ap/vim-css-color' " CSS Color Preview
+Plug 'norcalli/nvim-colorizer.lua' " Colorizer
 Plug 'tc50cal/vim-terminal' " Vim Terminal
 Plug 'preservim/tagbar' " Tagbar for code navigation
 Plug 'mg979/vim-visual-multi' " CTRL + N for multiple cursors
@@ -70,6 +70,7 @@ Plug 'ThePrimeagen/harpoon' " Harpoon
 Plug 'lukas-reineke/indent-blankline.nvim' " Indent line
 Plug 'projekt0n/github-nvim-theme' " Github theme
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'} " Markdown preview
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " better syntax highlighting
 
 " Debugger
 Plug 'mfussenegger/nvim-dap'
@@ -88,11 +89,6 @@ call plug#end()
 " paths
 let g:tagbar_ctags_bin =  '/usr/bin/ctags' " Tagbar exburenant ctags path
 let g:python3_host_prog = "/usr/bin/python3" " Python bin path
-
-
-" <--------------------------Colorscheme---------------------------->
-lua require('theme-config')
-
 
 " <-------------------------Keybindings------------------------->
 " let mapleader = "z" " My binding
@@ -179,10 +175,18 @@ vnoremap <M-j> :m '>+1<CR>gv=gv
 vnoremap <M-k> :m '<-2<CR>gv=gv
 
 
+" <-------------------------Tresssitter----------------------------->
+lua require('tree-sitter-config')
+
+" <--------------------------Colorscheme---------------------------->
+lua require('theme-config')
+
+" <----------------------------Colorizer----------------------------->
+lua require('colorizer').setup()
+
 " <-------------------------Autopairs------------------------->
 lua require("nvim-autopairs").setup {}
 lua require('autopairs-config')
-
 
 " <------------------------------Autorefresh---------------------------->
 autocmd BufWritePost * Gitsigns refresh
@@ -264,7 +268,7 @@ nnoremap <Leader>e :lua require("harpoon.ui").nav_prev()<CR>
 
 
 " <-----------------------------Indentline------------------------------------>
-lua require("ibl").setup()
+lua require("indentline-config")
 
 
 " <-----------------------------Neotree------------------------------------>

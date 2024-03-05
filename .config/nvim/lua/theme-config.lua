@@ -1,11 +1,11 @@
 require("catppuccin").setup({ 
     coc_nvim = true,
     no_italic = false, -- Force no italic
-    no_bold = false, -- Force no bold
+    no_bold = true, -- Force no bold
     no_underline = false, -- Force no underline
     styles = { 
         comments = { "italic" }, 
-        conditionals = { "italic" },
+        conditionals = {},
         loops = {},
         functions = {},
         keywords = {},
@@ -23,6 +23,11 @@ require("catppuccin").setup({
             mantle = "#090909",
             crust = "#090909",
         },
+    },
+    integrations = {
+        gitsigns = true,
+        treesitter = true,
+        neotree = true,
     },
 })
 

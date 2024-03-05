@@ -287,5 +287,3 @@ command! UseTerminal call UseTerminalToShowOutput('ls')
 
 
 
-
-
