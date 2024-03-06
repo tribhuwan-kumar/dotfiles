@@ -65,7 +65,7 @@ Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }
 
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-Plug 'nvim-lualine/lualine.nvim' " Lua line
+Plug 'tribhuwan-kumar/custom-vim-airline' " Airline
 Plug 'ThePrimeagen/harpoon' " Harpoon
 Plug 'lukas-reineke/indent-blankline.nvim' " Indent line
 Plug 'projekt0n/github-nvim-theme' " Github theme
@@ -200,10 +200,6 @@ let g:auto_save = 1
 let g:auto_save_events = ['InsertLeave', 'TextChanged']
 
 
-" <----------------------------Lualine--------------------------------------->
-lua require('lualine').setup()
-lua require('lualine-config')
-
 " <-----------------------------Gitsigns------------------------------------>
 lua require('Gitsigns-Config')
 set statusline+=%{get(b:,'gitsigns_status','')}
@@ -297,6 +293,39 @@ let g:instant_markdown_theme = 'dark'
      \       '*': ['wl-paste', '--no-newline'],
      \   },
      \ }
+
+
+" <---------------------------Airline--------------------------------->
+function! GetFileName()
+  return expand('%:t')
+endfunction
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+" theme
+let g:airline_theme='dark' 
+let g:airline_section_c = '%{GetFileName()}'
+
+" Airline symbols
+let g:airline_section_z = '%2p%% %2l/%L:%1v'
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+
+let g:airline_symbols.whitespace = 'Ξ'
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+
+" Tagbar
+let g:airline#extensions#tagbar#enabled = 0
+
+" Airline with COC
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#coc#show_coc_status = 1
+let g:airline#extensions#coc#warning_symbol = ' '
+let g:airline#extensions#coc#error_symbol = ' '
+let g:airline#extensions#coc#stl_format_err = '%C(%L)'
+let g:airline#extensions#coc#stl_format_warn = '%C(%L)'
 
 
 " <-----------------------------Wilder------------------------------------>
