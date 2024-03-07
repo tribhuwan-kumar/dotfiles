@@ -36,9 +36,10 @@ Create symlinks to the dotfiles using stow:
 stow .
 ```
 
-### Used CLI tools:
+### Used CLI utilities:
 ```bash
 pacman -S fd bat exa fzf tmux neovim zoxide ripgrep thefuck 
+yay -S oh-my-posh
 ```
 
 
