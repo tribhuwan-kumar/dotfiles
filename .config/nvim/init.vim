@@ -297,8 +297,21 @@ let g:instant_markdown_theme = 'dark'
 
 " <---------------------------Airline--------------------------------->
 function! GetFileName()
-  return expand('%:t')
+    if winwidth(0) < 100
+      return expand("%:t")
+    else
+        return expand("%")
+    endif
 endfunction
+
+let g:airline#extensions#default#section_truncate_width = {
+    \ 'b': 80,
+    \ 'x': 70,
+    \ 'y': 80,
+    \ 'z': 40,
+    \ 'warning': 40,
+    \ 'error': 40,
+    \ }
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -322,7 +335,7 @@ let g:airline#extensions#tagbar#enabled = 0
 " Airline with COC
 let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#coc#show_coc_status = 1
-let g:airline#extensions#coc#warning_symbol = ' '
+let g:airline#extensions#coc#warning_symbol = '   '
 let g:airline#extensions#coc#error_symbol = ' '
 let g:airline#extensions#coc#stl_format_err = '%C(%L)'
 let g:airline#extensions#coc#stl_format_warn = '%C(%L)'
