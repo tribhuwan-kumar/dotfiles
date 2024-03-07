@@ -189,6 +189,7 @@ lua require("nvim-autopairs").setup {}
 lua require('autopairs-config')
 
 " <------------------------------Autorefresh---------------------------->
+autocmd BufWritePost *  ColorizerReloadAllBuffers
 autocmd BufWritePost * Gitsigns refresh
 autocmd DirChanged * Gitsigns refresh
 autocmd BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif

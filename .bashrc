@@ -7,7 +7,7 @@
 
 PS1='[\u@\h \W]\$ '
 
-eval "$(oh-my-posh --init --shell bash --config ~/dotarch/Blade-Runner-2049.omp.json)"
+eval "$(oh-my-posh --init --shell bash --config ~/dotarch/accessories/Blade-Runner-2049.omp.json)"
 eval "$(zoxide init --cmd cd bash)"
 
 PS1="\u@\h:\w\$ "
@@ -79,6 +79,14 @@ alias mux='pgrep -vx tmux > /dev/null && \
         tmux run-shell ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh && \
         tmux kill-session -t delete-me && \
         tmux attach || tmux attach'
+
+# rename tmux window to current directory
+RenameTmuxTitle(){
+    if [ -n "$TMUX" ]; then
+        tmux rename-window "$(basename "${PWD}")"
+    fi
+}
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }RenameTmuxTitle"
 
 # Created by `pipx` on 2024-01-18 08:17:45
 export PATH="$PATH:/home/freakybytes/.local/bin"
