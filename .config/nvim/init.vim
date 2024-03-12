@@ -41,7 +41,7 @@ Plug 'nvim-lua/plenary.nvim' " For rest.nvim
 Plug 'aurum77/live-server.nvim' " Live Server
 Plug 'gregsexton/MatchTag' " For matching html tags
 Plug 'Pocco81/AutoSave.nvim' " Auto Save
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }  "For Highlighting
+" Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }  "For Highlighting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
 
 Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim' " Code Runner
@@ -71,6 +71,7 @@ Plug 'lukas-reineke/indent-blankline.nvim' " Indent line
 Plug 'projekt0n/github-nvim-theme' " Github theme
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'} " Markdown preview
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " better syntax highlighting
+Plug 'tribhuwan-kumar/NVIMColorPicker' " colorpicker
 
 " Debugger
 Plug 'mfussenegger/nvim-dap'
@@ -118,6 +119,7 @@ nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| terminal<CR>
 nnoremap <Leader>b :botright split \| terminal<CR>
 nnoremap <Leader>r :RunCode<CR>
+nnoremap <Leader>s :ColorPicker<CR>
 
 " cursor navigation
 :noremap j gj
@@ -194,6 +196,7 @@ autocmd BufWritePost * Gitsigns refresh
 autocmd DirChanged * Gitsigns refresh
 autocmd BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+au FileType html let b:coc_root_patterns = ['.git', '.env', 'tailwind.config.js', 'tailwind.config.cjs']
 
 
 " <-----------------------------Autosave------------------------------------>
@@ -381,15 +384,10 @@ function! s:wilder_init() abort
 endfunction
 
 
+" <-----------------------------ColorPicker------------------------------------>
+" let g:NVIMColorPicker#InsertAfter#TheCursor = 1
+" let g:NVIMColorPicker#InsertBefore#TheCursor = 1
+
 
 " <-----------------------------Sources------------------------------------>
-source $HOME/.config/nvim/run_code.vim
 
-
-" <-------------------------------Garbage-------------------------------->
-" imap <C-Enter> <Esc>o
-" imap <C-Enter> <Esc>o<Esc>i
-" inoremap <C-Enter> <Esc>o<CR>==gi
-" inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
-" :imap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-" :imap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
