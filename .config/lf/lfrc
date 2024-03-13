@@ -1,4 +1,8 @@
 # Basic Settings
+# set previewer true
+# set drawbox true
+# set previewer ~/.config/lf/preview
+# set cleaner ~/.config/lf/cleaner
 set hidden true
 set ignorecase true
 set icons true
@@ -48,14 +52,17 @@ cmd restore_trash ${{
 
 # Basic Functions
 map au unarchive
+map r rename
 map . set hidden!
-map dd trash
+map D trash
 map dr restore_trash
 map p paste
 map x cut
 map y copy
+map J :toggle; down
+map K :toggle; up 
 map <enter> open
-map <esc> quit
+map <esc> unselect
 map q quit
 map R reload
 map mf mkfile

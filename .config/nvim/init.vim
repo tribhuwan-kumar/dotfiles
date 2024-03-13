@@ -120,6 +120,7 @@ nnoremap <Leader>p :vsplit \| terminal<CR>
 nnoremap <Leader>b :botright split \| terminal<CR>
 nnoremap <Leader>r :RunCode<CR>
 nnoremap <Leader>s :ColorPicker<CR>
+vnoremap <Leader>s :ColorPicker<CR>
 
 " cursor navigation
 :noremap j gj
@@ -390,4 +391,3 @@ endfunction
 
 
 " <-----------------------------Sources------------------------------------>
-

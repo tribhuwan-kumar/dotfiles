@@ -4,8 +4,8 @@
         "os": "#e30000",
         "closer": "p:os",
         "pink": "#e30000",
-        "lavender": "#CACACA",
-        "blue":  "#CACACA"
+        "lavender": "#c0caf5",
+        "blue":  "#c0caf5"
   },
   "blocks": [
     {
