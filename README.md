@@ -6,10 +6,6 @@ This is a collection of my dotfiles
 Ensure you have the following installed:
 - [git](https://git-scm.com/)
 
-```bash
-pacman -S git
-```
-
 - [stow](https://www.gnu.org/software/stow/)
 
 ```bash
@@ -21,13 +17,13 @@ pacman -S stow
 First, clone the repository to your home directory:
 
 ```bash
-git clone https://github.com/tribhuwan-kumar/dotfiles.git
+git clone https://github.com/tribhuwan-kumar/dotarch.git
 ```
 
 Then, navigate to the dotfiles directory:
 
 ```bash
-cd dotfiles
+cd dotarch
 ```
 
 Create symlinks to the dotfiles using stow:
@@ -38,8 +34,6 @@ stow .
 
 ### Used CLI utilities:
 ```bash
-pacman -S fd bat exa fzf tmux neovim zoxide ripgrep thefuck 
 yay -S oh-my-posh
+pacman -S lf fd bat eza fzf tree tmux kitty neovim zoxide ripgrep thefuck
 ```
-
-
