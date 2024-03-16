@@ -1,5 +1,6 @@
 # My dotfiles
-This is a collection of my dotfiles
+I don't use this anymore, If you like the theme you can use it, they are still working
+
 
 ### Requirements:
 
