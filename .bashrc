@@ -37,18 +37,18 @@ bind 'set show-all-if-ambiguous on'
 bind "set completion-ignore-case on"
 
 
-# some exports
+# Some exports
 export EDITOR="nvim"
-export TERMIAL="konsole"
+export TERMIAL="kitty"
 export BROWSER="firefox"
 export LC_ALL=en_IN.UTF-8
 export PATH="HOME/.local/bin:$PATH"
 export PATH=~/.npm-global/bin:$PATH
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export BAT_THEME="Catppuccin-mocha"
+export BAT_THEME="ansi"
 
 # FZF
-export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!**/.git/*" --glob "!**/__pycache__/*" --glob "!**/node_modules/*" --glob "!**/env/*"'
 export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=header,grid --line-range :500 {} 2> /dev/null"'
 
 # Aliases

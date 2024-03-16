@@ -40,38 +40,30 @@ Plug 'rest-nvim/rest.nvim' " HTTP Client
 Plug 'nvim-lua/plenary.nvim' " For rest.nvim  
 Plug 'aurum77/live-server.nvim' " Live Server
 Plug 'gregsexton/MatchTag' " For matching html tags
-Plug 'Pocco81/AutoSave.nvim' " Auto Save
-" Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }  "For Highlighting
+Plug 'pocco81/auto-save.nvim' " Auto Save
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
-
 Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim' " Code Runner
 
-" Neotree
+Plug 'honza/vim-snippets' " snippets
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' } " theme
+Plug 'tribhuwan-kumar/custom-vim-airline' " Airline
+Plug 'ThePrimeagen/harpoon' " Harpoon
+Plug 'lukas-reineke/indent-blankline.nvim' " Indent line
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'} " Markdown preview
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
+Plug 'tribhuwan-kumar/NVIMColorPicker' " Colorpicker
+
+" Neotree & its dependencies
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 
-" Auto-completion For different file types 
-" Plug 'hrsh7th/nvim-cmp'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " Autocompletion
-
-" snippets
-Plug 'honza/vim-snippets' 
-" Plug 'L3MON4D3/LuaSnip' 
-" Plug 'rafamadriz/friendly-snippets' 
+" Auto-completion for different file types 
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 " Wilder for Nvim command mode 
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }
-
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-Plug 'tribhuwan-kumar/custom-vim-airline' " Airline
-Plug 'ThePrimeagen/harpoon' " Harpoon
-Plug 'lukas-reineke/indent-blankline.nvim' " Indent line
-Plug 'projekt0n/github-nvim-theme' " Github theme
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'} " Markdown preview
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " better syntax highlighting
-Plug 'tribhuwan-kumar/NVIMColorPicker' " colorpicker
 
 " Debugger
 Plug 'mfussenegger/nvim-dap'
@@ -79,8 +71,6 @@ Plug 'rcarriga/nvim-dap-ui'
 
 " Language specific DAP
 Plug 'mfussenegger/nvim-dap-python' " For python
-
-
 
 Plug 'ryanoasis/vim-devicons' " Developer Icons
 call plug#end()
@@ -98,13 +88,13 @@ let mapleader = "\<Space>" " for better convinience
 " Help doc
 nnoremap <Leader>h K<CR>
 
-" exit by 'Esc' in terminal mode
+" Exit by 'Esc' in terminal mode
 tnoremap <Esc> <C-\><C-n>
 
-" insert mode keybindings
+" Insert mode keybindings
 inoremap <C-O> <C-o>o
 
-" commentary
+" Commentary
 nnoremap <C-_> :Commentary<CR>
 vnoremap <C-_> :Commentary<CR>
 
@@ -122,10 +112,10 @@ nnoremap <Leader>r :RunCode<CR>
 nnoremap <Leader>s :ColorPicker<CR>
 vnoremap <Leader>s :ColorPicker<CR>
 
-" cursor navigation
+" Cursor navigation
 :noremap j gj
 :noremap k gk
-" navigation in windows
+" Navigation in windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -140,7 +130,7 @@ nnoremap C "_C
 nnoremap X "+x
 nnoremap xx "+Vx
 nnoremap dd "_dd
-" visual mode
+" Visual mode
 vnoremap p "_dP
 vnoremap d "_d
 vnoremap D "_D
@@ -152,7 +142,7 @@ nnoremap <S-j> vj
 nnoremap <S-k> vk
 nnoremap <S-l> vl
 
-" save, cut, undo, redo, selection & yank keybindings
+" Save, Cut, Undo, Redo, Selection & Yank keybindings
 vmap <C-h> b
 vmap <C-l> e
 nmap ,p o<Esc>p
@@ -178,18 +168,40 @@ vnoremap <M-j> :m '>+1<CR>gv=gv
 vnoremap <M-k> :m '<-2<CR>gv=gv
 
 
+" <-----------------------------Indentline------------------------------------>
+lua require("indentline-config")
+
+
+" <-----------------------------Markdown------------------------------------>
+let g:instant_markdown_theme = 'dark'
+
+
 " <-------------------------Tresssitter----------------------------->
 lua require('tree-sitter-config')
+
 
 " <--------------------------Colorscheme---------------------------->
 lua require('theme-config')
 
+
 " <----------------------------Colorizer----------------------------->
 lua require('colorizer').setup()
+
 
 " <-------------------------Autopairs------------------------->
 lua require("nvim-autopairs").setup {}
 lua require('autopairs-config')
+
+
+" <-----------------------------Neotree------------------------------------>
+" config
+lua require("Neotree-config")
+
+" keybindings
+" nnoremap <Leader>w :Neotree focus<CR>
+nnoremap <Leader>q :Neotree toggle<CR>
+nnoremap <C-q> :Neotree toggle<CR>
+
 
 " <------------------------------Autorefresh---------------------------->
 autocmd BufWritePost *  ColorizerReloadAllBuffers
@@ -242,8 +254,8 @@ nnoremap <Leader>dr :lua require'dap'.repl.open()<CR>
 
 
 " <-----------------------------Coc------------------------------------>
-" Global variables
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-clangd', 'coc-copilot', 'coc-vimlsp']  " list of CoC extensions needed
+" global variables
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-clangd', 'coc-copilot', 'coc-vimlsp']
 
 " accept auto complete by 'Tab' key & move up and down by 'C-j' and 'C-k' keys, 'C-l' for jump to definition 
 :imap <C-J> <C-n> 
@@ -251,6 +263,23 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', '
 nnoremap <Leader>l :call CocActionAsync('jumpDefinition')<CR>
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 " inoremap <silent><expr> <TAB> pumvisible() ? coc#_select_confirm() : "\<TAB>"
+
+" List of CoC extensions needed
+" friendly-snippets  
+" coc-vimlsp  
+" coc-snippets
+" coc-prettier
+" coc-html-css-support
+" coc-html                                                                                        
+" coc-copilot
+" coc-tsserver
+" coc-tslint-plugin
+" coc-python
+" coc-json
+" coc-htmldjango
+" coc-css
+" coc-clangd
+" @yaegassy/coc-tailwindcss3
 
 
 " <-----------------------------Harpoon------------------------------------>
@@ -260,30 +289,20 @@ lua require("harpoon").setup()
 " keybindings
 nnoremap <Leader>a  :lua require("harpoon.mark").add_file()<CR>
 nnoremap <Leader><Leader> :lua require("harpoon.ui").toggle_quick_menu()<CR>
-" nnoremap <Leader>c :lua if vim.api.nvim_eval('pumvisible()') == 1 then require("harpoon.ui").nav_next() end<CR>
-" nnoremap <Leader>c :lua if vim.api.nvim_eval('pumvisible()') == 1 then vim.api.nvim_command('setlocal nomodifiable') require("harpoon.ui").nav_next() vim.api.nvim_command('setlocal nomodifiable') end<CR>
 
-" Use <Leader>n and <Leader>p for navigation when the Harpoon UI is open
+" Jump to arround files
+nnoremap <Leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <Leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <Leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <Leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <Leader>5 :lua require("harpoon.ui").nav_file(5)<CR>
+nnoremap <Leader>6 :lua require("harpoon.ui").nav_file(6)<CR>
+nnoremap <Leader>7 :lua require("harpoon.ui").nav_file(7)<CR>
+nnoremap <Leader>8 :lua require("harpoon.ui").nav_file(8)<CR>
+
+" Use <Leader>w and <Leader>e for navigation when the Harpoon UI is open
 nnoremap <Leader>w :lua require("harpoon.ui").nav_next()<CR>
 nnoremap <Leader>e :lua require("harpoon.ui").nav_prev()<CR>
-
-
-" <-----------------------------Indentline------------------------------------>
-lua require("indentline-config")
-
-
-" <-----------------------------Neotree------------------------------------>
-" config
-lua require("Neotree-config")
-
-" keybindings
-" nnoremap <Leader>w :Neotree focus<CR>
-nnoremap <Leader>q :Neotree toggle<CR>
-nnoremap <C-q> :Neotree toggle<CR>
-
-
-" <-----------------------------Markdown------------------------------------>
-let g:instant_markdown_theme = 'dark'
 
 
 " <------------------------------Clipboard----------------------------->
