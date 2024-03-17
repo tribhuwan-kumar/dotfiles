@@ -7,7 +7,7 @@
 
 PS1='[\u@\h \W]\$ '
 
-eval "$(oh-my-posh --init --shell bash --config ~/dotarch/accessories/Blade-Runner-2049.omp.json)"
+eval "$(oh-my-posh --init --shell bash --config ~/dotarch/accessories/vendetta.omp.json)"
 eval "$(zoxide init --cmd cd bash)"
 
 PS1="\u@\h:\w\$ "

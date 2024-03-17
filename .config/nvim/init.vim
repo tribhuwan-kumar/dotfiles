@@ -97,6 +97,8 @@ inoremap <C-O> <C-o>o
 " Commentary
 nnoremap <C-_> :Commentary<CR>
 vnoremap <C-_> :Commentary<CR>
+nnoremap <Leader>/ :Commentary<CR>
+vnoremap <Leader>/ :Commentary<CR>
 
 " Tab management
 nnoremap <C-o> :tabn<CR>
@@ -210,11 +212,6 @@ autocmd DirChanged * Gitsigns refresh
 autocmd BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 au FileType html let b:coc_root_patterns = ['.git', '.env', 'tailwind.config.js', 'tailwind.config.cjs']
-
-
-" <-----------------------------Autosave------------------------------------>
-let g:auto_save = 1
-let g:auto_save_events = ['InsertLeave', 'TextChanged']
 
 
 " <-----------------------------Gitsigns------------------------------------>
