@@ -402,8 +402,7 @@ endfunction
 
 
 " <-----------------------------ColorPicker------------------------------------>
-" let g:NVIMColorPicker#InsertAfter#TheCursor = 1
-" let g:NVIMColorPicker#InsertBefore#TheCursor = 1
+let g:NVIMColorPicker#InsertBefore#TheCursor = 1
 
 
 " <-----------------------------Sources------------------------------------>
