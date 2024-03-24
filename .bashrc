@@ -86,12 +86,12 @@ alias mux='pgrep -vx tmux > /dev/null && \
         tmux attach || tmux attach'
 
 # rename tmux window to current directory
-RenameTmuxTitle(){
+RenameTmuxWin(){
     if [ -n "$TMUX" ]; then
         tmux rename-window "$(basename "${PWD}")"
     fi
 }
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }RenameTmuxTitle"
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }RenameTmuxWin"
 
 # Created by `pipx` on 2024-01-18 08:17:45
 export PATH="$PATH:/home/freakybytes/.local/bin"

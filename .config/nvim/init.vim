@@ -13,6 +13,7 @@
 :set mouse=a
 :set tabstop=4
 :set shiftwidth=4
+:set ttimeoutlen=0
 :set updatetime=300
 :set softtabstop=4
 :set encoding=UTF-8
@@ -158,6 +159,7 @@ vnoremap <C-z> u
 vnoremap <C-x> x
 vnoremap <C-c> "+y
 vnoremap <BS> "_d
+nnoremap <Leader>z I<Esc>vg_
 
 " Alt + arrow Up/Down or 'j,k' to move line up and down
 inoremap <M-Up> <Esc>:m-2<CR>==gi
