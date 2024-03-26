@@ -11,11 +11,12 @@
 :set termguicolors
 :set relativenumber
 :set mouse=a
-:set tabstop=4
-:set shiftwidth=4
+" :set tabstop=4
+" :set expandtab
+" :set shiftwidth=4
+" :set softtabstop=4
 :set ttimeoutlen=0
 :set updatetime=300
-:set softtabstop=4
 :set encoding=UTF-8
 :set completeopt-=preview 
 :set clipboard=unnamedplus " system clipboard
@@ -408,3 +409,5 @@ let g:NVIMColorPicker#InsertBefore#TheCursor = 1
 
 
 " <-----------------------------Sources------------------------------------>
+:set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+

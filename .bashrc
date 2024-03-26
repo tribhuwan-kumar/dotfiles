@@ -29,10 +29,20 @@ function hstrnotiocsti {
 if [[ $- =~ .*i.* ]]; then bind -x '"\C-r": "hstrnotiocsti"'; fi
 export HSTR_TIOCSTI=n
 
+# BASH VI mode
+bind 'set editing-mode vi'
+bind 'set show-mode-in-prompt on'
+bind 'set keyseq-timeout 0.01'
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+bind 'set vi-ins-mode-string \1\e[6 q\2'
+bind 'set vi-cmd-mode-string \1\e[2 q\2'
+bind 'set keymap vi-insert'
+bind 'RETURN: "\e\n"'
+
 # Bash completion
 source /usr/share/bash-completion/bash_completion
 bind 'TAB:menu-complete'
-set show-all-if-ambiguous on
 bind 'set show-all-if-ambiguous on'
 bind "set completion-ignore-case on"
 
@@ -78,16 +88,21 @@ alias pip='function _pip(){
     fi;
 };_pip'
 
-# tmux session restoration
+# TMUX session restoration
 alias mux='pgrep -vx tmux > /dev/null && \
         tmux new -d -s delete-me && \
         tmux run-shell ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh && \
         tmux kill-session -t delete-me && \
         tmux attach || tmux attach'
 
-# rename tmux window to current directory
+# Rename tmux window to current directory
 RenameTmuxWin(){
-    if [ -n "$TMUX" ]; then
+    if ! tmux ls >/dev/null 2>&1; then
+        return
+    fi
+    local CURRENT_PANE_PID=$(tmux display-message -p '#{pane_pid}')
+    local TYMPID=$(ps aux | grep "/usr/local/bin/tym" | grep -v grep | awk '{print $2}' | tail -n 1)
+    if [ "$CURRENT_PANE_PID" != "$TYMPID" ]; then
         tmux rename-window "$(basename "${PWD}")"
     fi
 }
