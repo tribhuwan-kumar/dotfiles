@@ -20,6 +20,7 @@
 :set encoding=UTF-8
 :set completeopt-=preview 
 :set clipboard=unnamedplus " system clipboard
+:set timeoutlen=2000
 " :set clipboard+=unnamedplus
 
 " <-------------------------Plugins------------------------->
@@ -162,6 +163,82 @@ vnoremap <C-c> "+y
 vnoremap <BS> "_d
 nnoremap <Leader>z I<Esc>vg_
 
+" Short the SORROUNDINGS
+"CUT with no REG
+nnoremap c( "_ci(
+nnoremap c) "_ci)
+nnoremap c[ "_ci[
+nnoremap c] "_ci]
+nnoremap c{ "_ci{
+nnoremap c} "_ci}
+nnoremap c< "_ci<
+nnoremap c> "_ci>
+nnoremap c" "_ci"
+nnoremap c' "_ci'
+nnoremap c` "_ci`
+nnoremap cw "_ciw
+nnoremap cp "_cip
+
+" Visually Select
+nnoremap v( vi(
+nnoremap v) vi)
+nnoremap v[ vi[
+nnoremap v] vi]
+nnoremap v{ vi{
+nnoremap v} vi}
+nnoremap v< vi<
+nnoremap v> vi>
+nnoremap v" vi"
+nnoremap v' vi'
+nnoremap v` vi`
+nnoremap vw viw
+nnoremap vp vip
+
+" Delete with no REG
+nnoremap d( "_di(
+nnoremap d) "_di)
+nnoremap d[ "_di[
+nnoremap d] "_di]
+nnoremap d{ "_di{
+nnoremap d} "_di}
+nnoremap d< "_di<
+nnoremap d> "_di>
+nnoremap d" "_di"
+nnoremap d' "_di'
+nnoremap d` "_di`
+nnoremap dw "_diw
+nnoremap dp "_dip
+
+" Yank
+nnoremap y( yi(
+nnoremap y) yi)
+nnoremap y[ yi[
+nnoremap y] yi]
+nnoremap y{ yi{
+nnoremap y} yi}
+nnoremap y< yi<
+nnoremap y> yi>
+nnoremap y" yi"
+nnoremap y' yi'
+nnoremap y` yi`
+nnoremap yw yiw
+nnoremap yp yip
+
+" CUT in REG
+nnoremap q( ci(
+nnoremap q) ci)
+nnoremap q[ ci[
+nnoremap q] ci]
+nnoremap q{ ci{
+nnoremap q} ci}
+nnoremap q< ci<
+nnoremap q> ci>
+nnoremap q" ci"
+nnoremap q' ci'
+nnoremap q` ci`
+nnoremap qw ciw
+nnoremap qp cip
+
 " Alt + arrow Up/Down or 'j,k' to move line up and down
 inoremap <M-Up> <Esc>:m-2<CR>==gi
 inoremap <M-Down> <Esc>:m+<CR>==gi
@@ -210,8 +287,7 @@ nnoremap <C-q> :Neotree toggle<CR>
 
 " <------------------------------Autorefresh---------------------------->
 autocmd BufWritePost *  ColorizerReloadAllBuffers
-autocmd BufWritePost * Gitsigns refresh
-autocmd DirChanged * Gitsigns refresh
+autocmd BufWritePost,DirChanged * Gitsigns refresh
 autocmd BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 au FileType html let b:coc_root_patterns = ['.git', '.env', 'tailwind.config.js', 'tailwind.config.cjs']
