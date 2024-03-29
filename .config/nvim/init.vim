@@ -11,10 +11,11 @@
 :set termguicolors
 :set relativenumber
 :set mouse=a
-" :set tabstop=4
-" :set expandtab
-" :set shiftwidth=4
-" :set softtabstop=4
+:set tabstop=4
+:set expandtab
+:set shiftwidth=4
+:set softtabstop=4
+:set signcolumn=yes
 :set ttimeoutlen=0
 :set updatetime=300
 :set encoding=UTF-8
@@ -71,6 +72,7 @@ Plug 'romgrk/fzy-lua-native', { 'do': 'make' }
 " Debugger
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
+Plug 'nvim-neotest/nvim-nio'
 
 " Language specific DAP
 Plug 'mfussenegger/nvim-dap-python' " For python
@@ -152,14 +154,7 @@ vmap <C-h> b
 vmap <C-l> e
 nmap ,p o<Esc>p
 nnoremap <C-s> :w<CR>
-nnoremap <C-c> yy
 nnoremap <C-a> ggVG
-nnoremap <C-z> u
-nnoremap <C-S-z> r
-nnoremap <C-x> dd
-vnoremap <C-z> u
-vnoremap <C-x> x
-vnoremap <C-c> "+y
 vnoremap <BS> "_d
 nnoremap <Leader>z I<Esc>vg_
 
@@ -280,7 +275,7 @@ lua require('autopairs-config')
 lua require("Neotree-config")
 
 " keybindings
-" nnoremap <Leader>w :Neotree focus<CR>
+nnoremap <C-z> :Neotree focus<CR>
 nnoremap <Leader>q :Neotree toggle<CR>
 nnoremap <C-q> :Neotree toggle<CR>
 
@@ -303,6 +298,8 @@ nnoremap <Leader>o :Gitsigns preview_hunk<CR>
 nnoremap <Leader>u :Gitsigns reset_hunk<CR>
 nnoremap <Leader>n :Gitsigns next_hunk<CR>
 nnoremap <Leader>m :Gitsigns prev_hunk<CR>
+nnoremap gs :Gitsigns stage_hunk<CR>
+nnoremap gr :Gitsigns undo_stage_hunk<CR>
 
 
 " <-----------------------------Copilot------------------------------------>
@@ -485,5 +482,5 @@ let g:NVIMColorPicker#InsertBefore#TheCursor = 1
 
 
 " <-----------------------------Sources------------------------------------>
-:set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+:setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
