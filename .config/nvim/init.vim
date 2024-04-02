@@ -152,7 +152,7 @@ nnoremap <S-l> vl
 " Save, Cut, Undo, Redo, Selection & Yank keybindings
 vmap <C-h> b
 vmap <C-l> e
-nmap ,p o<Esc>p
+nmap ,p o<Esc>p==
 nnoremap <C-s> :w<CR>
 nnoremap <C-a> ggVG
 vnoremap <BS> "_d
@@ -187,7 +187,6 @@ nnoremap v" vi"
 nnoremap v' vi'
 nnoremap v` vi`
 nnoremap vw viw
-nnoremap vp vip
 
 " Delete with no REG
 nnoremap d( "_di(
@@ -361,7 +360,7 @@ lua require("harpoon").setup()
 
 " keybindings
 nnoremap <Leader>a  :lua require("harpoon.mark").add_file()<CR>
-nnoremap <Leader><Leader> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <Leader>j :lua require("harpoon.ui").toggle_quick_menu()<CR>
 
 " Jump to arround files
 nnoremap <Leader>1 :lua require("harpoon.ui").nav_file(1)<CR>

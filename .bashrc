@@ -75,6 +75,7 @@ alias gcl='git clone'
 alias gc='git commit'
 alias gs='git status'
 alias gaa='git add --all'
+alias trsh='trashbhuwan'
 alias grep='grep -i --color=auto'
 alias ls="exa --icons --group-directories-first"
 alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
@@ -111,6 +112,9 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }RenameTmuxWin"
 # Created by `pipx` on 2024-01-18 08:17:45
 export PATH="$PATH:/home/freakybytes/.local/bin"
 
+export LUA_PATH='/usr/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?/init.lua;/usr/share/lua/5.4/?/init.lua;/usr/local/lib/lua/5.4/?.lua;/usr/local/lib/lua/5.4/?/init.lua;/usr/lib/lua/5.4/?.lua;/usr/lib/lua/5.4/?/init.lua;./?.lua;./?/init.lua;/home/freakybytes/.luarocks/share/lua/5.4/?.lua;/home/freakybytes/.luarocks/share/lua/5.4/?/init.lua'
+export LUA_CPATH='/usr/local/lib/lua/5.4/?.so;/usr/lib/lua/5.4/?.so;/usr/local/lib/lua/5.4/loadall.so;/usr/lib/lua/5.4/loadall.so;./?.so;/home/freakybytes/.luarocks/lib/lua/5.4/?.so'
+export PATH='/home/freakybytes/.luarocks/bin:/home/freakybytes/.npm-global/bin:HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/var/lib/flatpak/exports/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/freakybytes/.local/bin'
 
 # lf icons
 export LF_ICONS="\

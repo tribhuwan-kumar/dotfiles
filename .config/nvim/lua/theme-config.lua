@@ -3,6 +3,7 @@ require("catppuccin").setup({
     no_italic = false, -- Force no italic
     no_bold = true, -- Force no bold
     no_underline = false, -- Force no underline
+    transparent_background = true,
     styles = { 
         comments = { "italic" }, 
         conditionals = {},

@@ -36,8 +36,7 @@ cmd trash ${{
   files=$(printf "$fx" | tr '\n' ';')
   while [ "$files" ]; do
     file=${files%%;*}
-
-    trash-put "$(basename "$file")"
+    trashbhuwan -p "$(basename "$file")" 
     if [ "$files" = "$file" ]; then
       files=''
     else
@@ -47,7 +46,16 @@ cmd trash ${{
 }}
 
 cmd restore_trash ${{
-  trash-restore
+  files=$(printf "$fx" | tr '\n' ';')
+  while [ "$files" ]; do
+    file=${files%%;*}
+    trashbhuwan -r "$(basename "$file")" 
+    if [ "$files" = "$file" ]; then
+      files=''
+    else
+      files="${files#*;}"
+    fi
+  done 
 }}
 
 # Basic Functions
@@ -55,7 +63,7 @@ map au unarchive
 map r rename
 map . set hidden!
 map D trash
-map dr restore_trash
+map d restore_trash
 map p paste
 map x cut
 map y copy
@@ -67,13 +75,14 @@ map q quit
 map R reload
 map mf mkfile
 map md mkdir
+map tch touch
 
 # Movement
-map gd cd ~/documents
-map gD cd ~/downloads
-map gp cd ~/pictures
+map gd cd ~/Documents
+map gD cd ~/Downloads
+map gp cd ~/Pictures
+map gm cd ~/Music
 map gc cd ~/.config
 map gr cd ~/Desktop/Repos
-map gv cd ~/videos
-map gs cd ~/.local/bin
+map gv cd ~/Videos
 map gt cd ~/.local/share/Trash/files
