@@ -1,4 +1,5 @@
 {
+    "json.schemaDownload.enable": true,
     "diagnostic.level": "warning",
     "diagnostic.signLevel": "warning",
     "diagnostic.errorSign": " ",

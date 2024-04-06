@@ -6,6 +6,8 @@
 :set autoread
 :set smarttab
 :set hlsearch
+:set ignorecase
+:set smartcase
 :set splitright
 :set autoindent
 :set termguicolors
@@ -28,7 +30,7 @@
 call plug#begin()
 
 Plug 'tpope/vim-obsession' " Session Management
-Plug 'github/copilot.vim' " Copilot
+" Plug 'github/copilot.vim' " Copilot
 Plug 'tpope/vim-surround' " Surrounding ysw
 Plug 'tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'lifepillar/pgsql.vim' " PSQL Pluging needs :SQLSetType pgsql.vim
@@ -109,8 +111,12 @@ vnoremap <Leader>/ :Commentary<CR>
 nnoremap <C-o> :tabn<CR>
 nnoremap <C-i> :tabp<CR>
 
-" FZF, Tagbar keybindings 
+" FZF, Wrap, Tagbar keybindings 
+nnoremap <C-e> <C-a>
+nnoremap <C-p> <C-e>
 nmap <F1> :TagbarToggle<CR>
+nnoremap <C-c> :set nowrap<CR>
+nnoremap <Leader>v <C-v>
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| terminal<CR>
@@ -393,10 +399,10 @@ nnoremap <Leader>e :lua require("harpoon.ui").nav_prev()<CR>
 
 " <---------------------------Airline--------------------------------->
 function! GetFileName()
-    if winwidth(0) < 100
+    if winwidth(0) < 115
       return expand("%:t")
     else
-        return expand("%")
+      return expand("%")
     endif
 endfunction
 
@@ -421,6 +427,7 @@ let g:airline_section_z = '%2p%% %2l/%L:%1v'
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 
+let g:airline#extensions#whitespace#enabled = 0
 let g:airline_symbols.whitespace = 'Ξ'
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
