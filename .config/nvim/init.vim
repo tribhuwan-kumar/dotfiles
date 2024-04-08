@@ -124,6 +124,7 @@ nnoremap <Leader>b :botright split \| terminal<CR>
 nnoremap <Leader>r :RunCode<CR>
 nnoremap <Leader>s :ColorPicker<CR>
 vnoremap <Leader>s :ColorPicker<CR>
+nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 
 " Cursor navigation
 :noremap j gj
