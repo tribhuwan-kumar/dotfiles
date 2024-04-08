@@ -16,6 +16,7 @@
 :set tabstop=4
 :set expandtab
 :set shiftwidth=4
+:set laststatus=3
 :set softtabstop=4
 :set signcolumn=yes
 :set ttimeoutlen=0
@@ -106,6 +107,8 @@ nnoremap <C-_> :Commentary<CR>
 vnoremap <C-_> :Commentary<CR>
 nnoremap <Leader>/ :Commentary<CR>
 vnoremap <Leader>/ :Commentary<CR>
+nnoremap gc :Commentary<CR>
+vnoremap gc :Commentary<CR>
 
 " Tab management
 nnoremap <C-o> :tabn<CR>
@@ -428,6 +431,7 @@ let g:airline_section_z = '%2p%% %2l/%L:%1v'
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 
+let g:airline_exclude_preview = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline_symbols.whitespace = 'Ξ'
 let g:webdevicons_enable_airline_tabline = 1
@@ -487,6 +491,14 @@ endfunction
 " <-----------------------------ColorPicker------------------------------------>
 let g:NVIMColorPicker#InsertBefore#TheCursor = 1
 
+" <-----------------------------Preview------------------------------------>
+function! OpenPreview()
+    setlocal previewheight=1
+    let l:line = line('.')
+    execute 'pedit +' . l:line . ' %'
+endfunction
+
+nnoremap <silent> gp :call OpenPreview()<CR>
 
 " <-----------------------------Sources------------------------------------>
 :setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
