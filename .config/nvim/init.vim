@@ -24,7 +24,7 @@
 :set encoding=UTF-8
 :set completeopt-=preview 
 :set clipboard=unnamedplus " system clipboard
-:set timeoutlen=2000
+:set timeoutlen=1000
 " :set clipboard+=unnamedplus
 
 " <-------------------------Plugins------------------------->
@@ -99,8 +99,28 @@ nnoremap <Leader>h K<CR>
 " Exit by 'Esc' in terminal mode
 tnoremap <Esc> <C-\><C-n>
 
+" Cursor navigation
+:noremap j gj
+:noremap k gk
+
+" Tab management
+nnoremap <C-o> :tabn<CR>
+nnoremap <C-i> :tabp<CR>
+
 " Insert mode keybindings
 inoremap <C-O> <C-o>o
+inoremap <C-b> <C-o>vbd
+
+" Increase, decrease & scroll
+nnoremap <C-e> <C-a>
+nnoremap <C-p> <C-e>
+nnoremap <C-b> vbd
+
+" Navigation in windows
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Commentary
 nnoremap <C-_> :Commentary<CR>
@@ -110,13 +130,7 @@ vnoremap <Leader>/ :Commentary<CR>
 nnoremap gc :Commentary<CR>
 vnoremap gc :Commentary<CR>
 
-" Tab management
-nnoremap <C-o> :tabn<CR>
-nnoremap <C-i> :tabp<CR>
-
 " FZF, Wrap, Tagbar keybindings 
-nnoremap <C-e> <C-a>
-nnoremap <C-p> <C-e>
 nmap <F1> :TagbarToggle<CR>
 nnoremap <C-c> :set nowrap<CR>
 nnoremap <Leader>v <C-v>
@@ -124,19 +138,11 @@ nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| terminal<CR>
 nnoremap <Leader>b :botright split \| terminal<CR>
-nnoremap <Leader>r :RunCode<CR>
+nnoremap <Leader>r :vsplit \| RunCode<CR>
+nnoremap <Leader><Leader>b :botright split \| RunCode<CR>
 nnoremap <Leader>s :ColorPicker<CR>
 vnoremap <Leader>s :ColorPicker<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
-
-" Cursor navigation
-:noremap j gj
-:noremap k gk
-" Navigation in windows
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 
 " Prevent registering to clipboard
 nnoremap S "_S
@@ -145,7 +151,7 @@ nnoremap d "_d
 nnoremap D "_D
 nnoremap C "_C
 nnoremap X "+x
-nnoremap xx "+Vx
+nnoremap xx dd
 nnoremap dd "_dd
 " Visual mode
 vnoremap p "_dP
@@ -260,6 +266,8 @@ lua require("indentline-config")
 
 " <-----------------------------Markdown------------------------------------>
 let g:instant_markdown_theme = 'dark'
+let g:instant_markdown_autostart = 0
+let g:instant_markdown_allow_unsafe_content = 1
 
 
 " <-------------------------Tresssitter----------------------------->
@@ -402,14 +410,6 @@ nnoremap <Leader>e :lua require("harpoon.ui").nav_prev()<CR>
 
 
 " <---------------------------Airline--------------------------------->
-function! GetFileName()
-    if winwidth(0) < 115
-      return expand("%:t")
-    else
-      return expand("%")
-    endif
-endfunction
-
 let g:airline#extensions#default#section_truncate_width = {
     \ 'b': 80,
     \ 'x': 70,
@@ -424,14 +424,12 @@ if !exists('g:airline_symbols')
 endif
 " theme
 let g:airline_theme='dark' 
-let g:airline_section_c = '%{GetFileName()}'
 
 " Airline symbols
 let g:airline_section_z = '%2p%% %2l/%L:%1v'
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 
-let g:airline_exclude_preview = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline_symbols.whitespace = 'Ξ'
 let g:webdevicons_enable_airline_tabline = 1
@@ -499,6 +497,7 @@ function! OpenPreview()
 endfunction
 
 nnoremap <silent> gp :call OpenPreview()<CR>
+nnoremap gq :pclose<CR>
 
 " <-----------------------------Sources------------------------------------>
 :setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
