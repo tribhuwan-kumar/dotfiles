@@ -17,7 +17,7 @@ cmd mkdir ${{
 cmd mkfile ${{
   printf "File Name: "
   read ans
-  $EDITOR $ans
+  touch $ans
 }}
 
 # Archive bindings
@@ -73,9 +73,8 @@ map <enter> open
 map <esc> unselect
 map q quit
 map R reload
-map mf mkfile
-map md mkdir
-map tch touch
+map za mkfile
+map zA mkdir
 
 # Movement
 map gd cd ~/Documents
@@ -85,4 +84,5 @@ map gm cd ~/Music
 map gc cd ~/.config
 map gr cd ~/Desktop/Repos
 map gv cd ~/Videos
+map gm cd /mnt/dex/media
 map gt cd ~/.local/share/Trash/files
