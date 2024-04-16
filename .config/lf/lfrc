@@ -1,11 +1,13 @@
 # Basic Settings
-# set previewer true
-# set drawbox true
-# set previewer ~/.config/lf/preview
-# set cleaner ~/.config/lf/cleaner
+set icons true
 set hidden true
 set ignorecase true
-set icons true
+
+# CTPV
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
 
 # Custom Functions
 cmd mkdir ${{

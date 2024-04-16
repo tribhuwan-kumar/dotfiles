@@ -49,7 +49,7 @@ Plug 'aurum77/live-server.nvim' " Live Server
 Plug 'gregsexton/MatchTag' " For matching html tags
 Plug 'pocco81/auto-save.nvim' " Auto Save
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
-Plug 'tribhuwan-kumar/Code-runner-plugin-for-Nvim' " Code Runner
+Plug 'tribhuwan-kumar/CodeRunner' " Code Runner
 
 Plug 'honza/vim-snippets' " snippets
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' } " theme
