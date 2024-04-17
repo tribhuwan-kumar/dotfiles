@@ -19,6 +19,6 @@ pacman -S lf fd bat eza fzf stow tree tmux kitty neovim zoxide ripgrep
 - Trash Manager: [trashbhuwan](https://github.com/tribhuwan-kumar/trashbhuwan)
 - Image Viewer: [imv](https://sr.ht/~exec64/imv/)
 - Video Player: [mpv](https://mpv.io/)
-- Fonts: [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans) & [San Francisco](https://github.com/tribhuwan-kumar/dotarch/blob/main/SanFrancisco)
+- Fonts: [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans) & [San Francisco](https://github.com/tribhuwan-kumar/dotarch/tree/main/accessories/San%20Francisco)
 
 For managing dotfiles I use [Stow](https://www.gnu.org/software/stow/) & For PDFs I use [Firefox](https://www.mozilla.org/en-US/firefox/new/)
