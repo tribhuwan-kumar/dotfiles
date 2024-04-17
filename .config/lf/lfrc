@@ -29,6 +29,7 @@ cmd unarchive ${{
       *.tar.gz) tar -xzvf "$f" ;;
       *.tar.bz2) tar -xjvf "$f" ;;
       *.tar) tar -xvf "$f" ;;
+      *.rar) unrar e "$f" ;;
       *) echo "Unsupported format" ;;
   esac
 }}
@@ -60,12 +61,26 @@ cmd restore_trash ${{
   done 
 }}
 
+cmd delete_trash ${{
+  files=$(printf "$fx" | tr '\n' ';')
+  while [ "$files" ]; do
+    file=${files%%;*}
+    trashbhuwan -dl "$(basename "$file")" 
+    if [ "$files" = "$file" ]; then
+      files=''
+    else
+      files="${files#*;}"
+    fi
+  done 
+}}
+
 # Basic Functions
 map au unarchive
 map r rename
 map . set hidden!
-map D trash
-map d restore_trash
+map ad trash
+map ar restore_trash
+map ald delete_trash
 map p paste
 map x cut
 map y copy
@@ -75,8 +90,8 @@ map <enter> open
 map <esc> unselect
 map q quit
 map R reload
-map za mkfile
-map zA mkdir
+map aa mkfile
+map aA mkdir
 
 # Movement
 map gd cd ~/Documents
@@ -86,5 +101,5 @@ map gm cd ~/Music
 map gc cd ~/.config
 map gr cd ~/Desktop/Repos
 map gv cd ~/Videos
-map gm cd /mnt/dex/media
+map gs cd /mnt/dex/media
 map gt cd ~/.local/share/Trash/files

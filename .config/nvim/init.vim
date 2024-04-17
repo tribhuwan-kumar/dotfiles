@@ -24,7 +24,7 @@
 :set encoding=UTF-8
 :set completeopt-=preview 
 :set clipboard=unnamedplus " system clipboard
-:set timeoutlen=1000
+:set timeoutlen=1500
 " :set clipboard+=unnamedplus
 
 " <-------------------------Plugins------------------------->
