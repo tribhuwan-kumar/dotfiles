@@ -4,7 +4,7 @@ This is a collection of my dotfiles!!
 ### Used CLI utilities:
 ```bash
 yay -S oh-my-posh
-pacman -S lf fd bat eza fzf stow tree tmux kitty neovim zoxide ripgrep
+pacman -S lf fd bat mpv imv eza fzf stow tree tmux kitty neovim zoxide ripgrep
 ```
 ### Softwares I use:
 

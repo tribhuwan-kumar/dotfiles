@@ -3,5 +3,13 @@ require("neo-tree").setup({
     position = "right",
     width =  30,
   },
+  filesystem = {
+    filtered_items = {
+      visible = false,
+      hide_by_name = {
+        "node_modules",
+      },
+    }
+  }
 })
 

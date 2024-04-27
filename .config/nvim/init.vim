@@ -23,6 +23,7 @@
 :set updatetime=300
 :set encoding=UTF-8
 :set completeopt-=preview 
+set foldmethod=manual
 :set clipboard=unnamedplus " system clipboard
 :set timeoutlen=1500
 " :set clipboard+=unnamedplus
@@ -81,6 +82,7 @@ Plug 'nvim-neotest/nvim-nio'
 Plug 'mfussenegger/nvim-dap-python' " For python
 
 Plug 'ryanoasis/vim-devicons' " Developer Icons
+Plug 'segeljakt/vim-silicon' " For screenshot
 call plug#end()
 
 
@@ -104,17 +106,17 @@ tnoremap <Esc> <C-\><C-n>
 :noremap k gk
 
 " Tab management
-nnoremap <C-o> :tabn<CR>
+nnoremap <C-o> :b#<CR>
 nnoremap <C-i> :tabp<CR>
 
 " Insert mode keybindings
 inoremap <C-O> <C-o>o
-inoremap <C-b> <C-o>vbd
+inoremap <C-b> <C-o>diw
 
 " Increase, decrease & scroll
 nnoremap <C-e> <C-a>
 nnoremap <C-p> <C-e>
-nnoremap <C-b> vbd
+nnoremap <C-b> diw
 
 " Navigation in windows
 nnoremap <C-h> <C-w>h
@@ -172,7 +174,7 @@ nmap ,p o<Esc>p==
 nnoremap <C-s> :w<CR>
 nnoremap <C-a> ggVG
 vnoremap <BS> "_d
-nnoremap <Leader>z I<Esc>vg_
+nnoremap <Leader>z ^vg_
 
 " Short the SORROUNDINGS
 "CUT with no REG
@@ -203,6 +205,7 @@ nnoremap v" vi"
 nnoremap v' vi'
 nnoremap v` vi`
 nnoremap vw viw
+nnoremap vp vip
 
 " Delete with no REG
 nnoremap d( "_di(
@@ -499,6 +502,24 @@ endfunction
 nnoremap <silent> gp :call OpenPreview()<CR>
 nnoremap gq :pclose<CR>
 
+" <-----------------------------Folds------------------------------------>
+augroup RememberFolds
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
+augroup END
+
+" <-----------------------------Manage 'term' buffers----------------------------------->
+function! s:deleteTermBuffers() abort
+    for termBuf in filter(range(1, bufnr('$')), 'bufname(v:val) =~ "^term://"')
+        execute 'bdelete! ' . termBuf
+    endfor
+endfunction
+
+augroup CloseTerminalWindow
+    autocmd!
+    autocmd WinClosed * call timer_start(20000, { -> s:deleteTermBuffers() })
+augroup END
+
 " <-----------------------------Sources------------------------------------>
 :setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
-
