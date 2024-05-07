@@ -37,15 +37,12 @@ Plug 'tpope/vim-surround' " Surrounding ysw
 Plug 'tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'lifepillar/pgsql.vim' " PSQL Pluging needs :SQLSetType pgsql.vim
 Plug 'norcalli/nvim-colorizer.lua' " Colorizer
-Plug 'tc50cal/vim-terminal' " Vim Terminal
 Plug 'preservim/tagbar' " Tagbar for code navigation
 Plug 'mg979/vim-visual-multi' " CTRL + N for multiple cursors
-Plug 'akinsho/toggleterm.nvim' " For Terminal
 Plug 'windwp/nvim-autopairs' " For auto closing ( [ {
 Plug 'sheerun/vim-polyglot'  " Plugin for syntax highlighting and language features
 Plug 'lewis6991/gitsigns.nvim' " For git tracking
-Plug 'rest-nvim/rest.nvim' " HTTP Client
-Plug 'nvim-lua/plenary.nvim' " For rest.nvim  
+Plug 'nvim-lua/plenary.nvim' " Pop-up api
 Plug 'aurum77/live-server.nvim' " Live Server
 Plug 'gregsexton/MatchTag' " For matching html tags
 Plug 'pocco81/auto-save.nvim' " Auto Save
@@ -80,6 +77,10 @@ Plug 'nvim-neotest/nvim-nio'
 
 " Language specific DAP
 Plug 'mfussenegger/nvim-dap-python' " For python
+
+" For database
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
 
 Plug 'ryanoasis/vim-devicons' " Developer Icons
 Plug 'segeljakt/vim-silicon' " For screenshot
@@ -142,8 +143,7 @@ nnoremap <Leader>p :vsplit \| terminal<CR>
 nnoremap <Leader>b :botright split \| terminal<CR>
 nnoremap <Leader>r :vsplit \| RunCode<CR>
 nnoremap <Leader><Leader>b :botright split \| RunCode<CR>
-nnoremap <Leader>s :ColorPicker<CR>
-vnoremap <Leader>s :ColorPicker<CR>
+nnoremap <Leader><Leader>p :tabnew \| term bash<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 
 " Prevent registering to clipboard
@@ -491,6 +491,9 @@ endfunction
 
 " <-----------------------------ColorPicker------------------------------------>
 let g:NVIMColorPicker#InsertBefore#TheCursor = 1
+nnoremap <Leader>s :ColorPicker<CR>
+vnoremap <Leader>s :ColorPicker<CR>
+inoremap <C-c> <C-o>:ColorPicker<CR>
 
 " <-----------------------------Preview------------------------------------>
 function! OpenPreview()
@@ -518,7 +521,7 @@ endfunction
 
 augroup CloseTerminalWindow
     autocmd!
-    autocmd WinClosed * call timer_start(20000, { -> s:deleteTermBuffers() })
+    autocmd TermClose * call timer_start(10, { -> s:deleteTermBuffers() })
 augroup END
 
 " <-----------------------------Sources------------------------------------>
