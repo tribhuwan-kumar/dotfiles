@@ -191,6 +191,7 @@ nnoremap c' "_ci'
 nnoremap c` "_ci`
 nnoremap cw "_ciw
 nnoremap cp "_cip
+nnoremap ct "_cit
 
 " Visually Select
 nnoremap v( vi(
@@ -206,6 +207,7 @@ nnoremap v' vi'
 nnoremap v` vi`
 nnoremap vw viw
 nnoremap vp vip
+nnoremap vt vit
 
 " Delete with no REG
 nnoremap d( "_di(
@@ -221,6 +223,7 @@ nnoremap d' "_di'
 nnoremap d` "_di`
 nnoremap dw "_diw
 nnoremap dp "_dip
+nnoremap dt "_dit
 
 " Yank
 nnoremap y( yi(
@@ -236,6 +239,7 @@ nnoremap y' yi'
 nnoremap y` yi`
 nnoremap yw yiw
 nnoremap yp yip
+nnoremap yt yit
 
 " CUT in REG
 nnoremap q( ci(
@@ -251,6 +255,7 @@ nnoremap q' ci'
 nnoremap q` ci`
 nnoremap qw ciw
 nnoremap qp cip
+nnoremap qt cit
 
 " Alt + arrow Up/Down or 'j,k' to move line up and down
 inoremap <M-Up> <Esc>:m-2<CR>==gi
@@ -356,6 +361,15 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', '
 nnoremap <Leader>l :call CocActionAsync('jumpDefinition')<CR>
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 " inoremap <silent><expr> <TAB> pumvisible() ? coc#_select_confirm() : "\<TAB>"
+
+" coc filetype config
+let g:coc_filetype_map = {
+  \ 'htmldjango': 'html',
+  \ 'blade': 'html',
+  \ 'twig': 'html',
+  \ 'jst': 'html',
+  \ 'ejs': 'html',
+  \ }
 
 " List of CoC extensions needed
 " friendly-snippets  
