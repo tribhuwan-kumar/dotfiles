@@ -95,19 +95,6 @@ alias mux='pgrep -vx tmux > /dev/null && \
         tmux kill-session -t delete-me && \
         tmux attach || tmux attach'
 
-# Rename tmux window to current directory
-RenameTmuxWin(){
-    if ! tmux ls >/dev/null 2>&1; then
-        return
-    fi
-    local CURRENT_PANE_PID=$(tmux display-message -p '#{pane_pid}')
-    local TYMPID=$(ps aux | grep "/usr/local/bin/tym" | grep -v grep | awk '{print $2}' | tail -n 1)
-    if [ "$CURRENT_PANE_PID" != "$TYMPID" ]; then
-        tmux rename-window "$(basename "${PWD}")"
-    fi
-}
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }RenameTmuxWin"
-
 # Created by `pipx` on 2024-01-18 08:17:45
 export PATH="$PATH:/home/freakybytes/.local/bin"
 
@@ -243,7 +230,7 @@ ex=:\
 *.rm=:\
 *.rmvb=:\
 *.flc=:\
-*.avi=\uf410:\
+*.avi=:\
 *.fli=:\
 *.flv=:\
 *.gl=:\

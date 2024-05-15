@@ -48,6 +48,7 @@ Plug 'gregsexton/MatchTag' " For matching html tags
 Plug 'pocco81/auto-save.nvim' " Auto Save
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
 Plug 'tribhuwan-kumar/CodeRunner' " Code Runner
+Plug 'christoomey/vim-tmux-navigator' " Tmux navigator
 
 Plug 'honza/vim-snippets' " snippets
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' } " theme
@@ -141,9 +142,9 @@ nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| terminal<CR>
 nnoremap <Leader>b :botright split \| terminal<CR>
-nnoremap <Leader>r :vsplit \| RunCode<CR>
-nnoremap <Leader><Leader>b :botright split \| RunCode<CR>
-nnoremap <Leader><Leader>p :tabnew \| term bash<CR>
+nnoremap <Leader>r :VRunCode<CR>
+nnoremap <Leader><Leader>b :HRunCode<CR>
+nnoremap <Leader>t :tabnew \| term bash<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 
 " Prevent registering to clipboard
@@ -524,18 +525,6 @@ augroup RememberFolds
   autocmd!
   autocmd BufWinLeave *.* mkview
   autocmd BufWinEnter *.* silent! loadview
-augroup END
-
-" <-----------------------------Manage 'term' buffers----------------------------------->
-function! s:deleteTermBuffers() abort
-    for termBuf in filter(range(1, bufnr('$')), 'bufname(v:val) =~ "^term://"')
-        execute 'bdelete! ' . termBuf
-    endfor
-endfunction
-
-augroup CloseTerminalWindow
-    autocmd!
-    autocmd TermClose * call timer_start(10, { -> s:deleteTermBuffers() })
 augroup END
 
 " <-----------------------------Sources------------------------------------>
