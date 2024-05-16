@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LIST_DATA="#{pane_current_command} | #{window_name} #{pane_current_path}"
+LIST_DATA="#{pane_current_path} | #{pane_current_command} | #{window_name} "
 FZF_COMMAND="fzf-tmux -p --delimiter=: --with-nth 4 --color=hl:2"
 TARGET_SPEC="#{session_name}:#{window_id}:#{pane_id}:"
 

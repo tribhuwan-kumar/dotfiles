@@ -23,7 +23,7 @@
 :set updatetime=300
 :set encoding=UTF-8
 :set completeopt-=preview 
-set foldmethod=manual
+:set foldmethod=manual
 :set clipboard=unnamedplus " system clipboard
 :set timeoutlen=1500
 " :set clipboard+=unnamedplus
@@ -528,4 +528,4 @@ augroup RememberFolds
 augroup END
 
 " <-----------------------------Sources------------------------------------>
-:setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+" :setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
