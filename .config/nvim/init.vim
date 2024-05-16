@@ -62,7 +62,7 @@ Plug 'tribhuwan-kumar/NVIMColorPicker' " Colorpicker
 " Neotree & its dependencies
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
-Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'tribhuwan-kumar/neo-tree.nvim'
 
 " Auto-completion for different file types 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
@@ -371,23 +371,6 @@ let g:coc_filetype_map = {
   \ 'jst': 'html',
   \ 'ejs': 'html',
   \ }
-
-" List of CoC extensions needed
-" friendly-snippets  
-" coc-vimlsp  
-" coc-snippets
-" coc-prettier
-" coc-html-css-support
-" coc-html                                                                                        
-" coc-copilot
-" coc-tsserver
-" coc-tslint-plugin
-" coc-python
-" coc-json
-" coc-htmldjango
-" coc-css
-" coc-clangd
-" @yaegassy/coc-tailwindcss3
 
 
 " <-----------------------------Harpoon------------------------------------>
