@@ -32,6 +32,7 @@ set clipboard=unnamedplus
 call plug#begin()
 
 Plug 'tpope/vim-dadbod'                                                                       " Databases support
+Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
 " Plug 'github/copilot.vim'                                                                     " Copilot
 Plug 'honza/vim-snippets'                                                                     " Snippets
@@ -92,6 +93,10 @@ tnoremap <Esc> <C-\><C-n>
 :noremap j gj
 :noremap k gk
 
+" Vertical Motion
+nnoremap <C-d> }
+nnoremap <C-u> {
+
 " Tab management
 nnoremap <C-o> :b#<CR>
 nnoremap <C-i> :tabp<CR>
@@ -111,15 +116,16 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" FZF, Wrap, Tagbar keybindings 
+" FZF, Wrap, Tagbar, Visual Block, Code Runner keybinding
+nnoremap <C-z> <C-q>
 nnoremap <C-c> :set nowrap<CR>
 nnoremap <Leader>v <C-v>
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| terminal<CR>
-nnoremap <Leader>b :botright split \| terminal<CR>
-nnoremap <Leader>p :VRunCode<CR>
-nnoremap <Leader>r :HRunCode<CR>
+nnoremap <Leader>B :botright split \| terminal<CR>
+nnoremap <Leader>r :VRunCode<CR>
+nnoremap <Leader>b :HRunCode<CR>
 nnoremap <Leader>t :tabnew \| term bash<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 
@@ -132,7 +138,6 @@ nnoremap C "_C
 nnoremap X "+x
 nnoremap xx dd
 nnoremap dd "_dd
-" Visual mode
 vnoremap p "_dP
 vnoremap d "_d
 vnoremap D "_D
@@ -145,9 +150,6 @@ nnoremap <S-k> vk
 nnoremap <S-l> vl
 
 " Save, Cut, Undo, Redo, Selection & Yank keybindings
-vmap <C-h> b
-vmap <C-l> e
-nmap ,p o<Esc>p==
 nnoremap <C-s> :w<CR>
 nnoremap <C-a> ggVG
 vnoremap <BS> "_d
@@ -234,7 +236,7 @@ nnoremap qw ciw
 nnoremap qp cip
 nnoremap qt cit
 
-" Alt + arrow Up/Down or 'j,k' to move line up and down
+" Move lines by index +1,-1
 inoremap <M-Up> <Esc>:m-2<CR>==gi
 inoremap <M-Down> <Esc>:m+<CR>==gi
 nnoremap <M-Up> :m-2<CR>==
@@ -243,6 +245,12 @@ nnoremap <M-j> :m .+1<CR>==
 nnoremap <M-k> :m .-2<CR>==
 vnoremap <M-j> :m '>+1<CR>gv=gv
 vnoremap <M-k> :m '<-2<CR>gv=gv
+
+" Resize windows
+nnoremap ) <CMD>vertical resize +5<CR>
+nnoremap ( <CMD>vertical resize -5<CR>
+nnoremap + <CMD>horizontal resize +2<CR>
+nnoremap _ <CMD>horizontal resize -2<CR>
 
 
 " <---------------------------Indentline------------------------------------->
@@ -290,7 +298,6 @@ lua require('autopairs-config')
 lua require("Neotree-config")
 
 " keybindings
-nnoremap <C-z> :Neotree focus<CR>
 nnoremap <Leader>q :Neotree toggle<CR>
 nnoremap <C-q> :Neotree toggle<CR>
 
@@ -339,14 +346,8 @@ nnoremap <Leader>dr :lua require'dap'.repl.open()<CR>
 
 
 " <-----------------------------Coc----------------------------------------->
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-clangd', 'coc-copilot', 'coc-vimlsp']
-
-" keybindings
-nnoremap <Leader>l :call CocActionAsync('jumpDefinition')<CR>
-inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
-
-" coc filetype config
-" au FileType html let b:coc_root_patterns = ['.git', '.env', 'tailwind.config.js', 'tailwind.config.cjs']
+au FileType html let b:coc_root_patterns = ['.git', '.env', 'tailwind.config.js', 'tailwind.config.cjs']
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-pyright', 'coc-clangd', 'coc-copilot', 'coc-vimlsp']
 let g:coc_filetype_map = {
     \ 'htmldjango': 'html',
     \ 'blade': 'html',
@@ -354,6 +355,10 @@ let g:coc_filetype_map = {
     \ 'jst': 'html',
     \ 'ejs': 'html',
     \ }
+
+" keybindings
+nnoremap <Leader>l :call CocActionAsync('jumpDefinition')<CR>
+inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
 
 " <----------------------------Harpoon--------------------------------------->
@@ -385,8 +390,8 @@ let g:clipboard = {
     \       '*': ['wl-copy', '--trim-newline'],
     \   },
     \   'paste': {
-    \       '+': ['wl-paste', '--no-newline'],
-    \       '*': ['wl-paste', '--no-newline'],
+    \       '+': ['wl-paste'],
+    \       '*': ['wl-paste'],
     \   },
     \ }
 
