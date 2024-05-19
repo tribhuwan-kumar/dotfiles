@@ -7,8 +7,9 @@
 
 PS1='[\u@\h \W]\$ '
 
-eval "$(oh-my-posh --init --shell bash --config ~/dotarch/accessories/vendetta.omp.json)"
+eval "$(fzf --bash)"
 eval "$(zoxide init --cmd cd bash)"
+eval "$(oh-my-posh --init --shell bash --config ~/dotarch/accessories/vendetta.omp.json)"
 
 PS1="\u@\h:\w\$ "
 

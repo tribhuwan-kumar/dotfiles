@@ -21,7 +21,7 @@ set shiftwidth=4
 set ttimeoutlen=0
 set softtabstop=4
 set updatetime=300
-set timeoutlen=1500
+set timeoutlen=1000
 set encoding=UTF-8
 set signcolumn=yes
 set foldmethod=manual
@@ -34,7 +34,7 @@ call plug#begin()
 Plug 'tpope/vim-dadbod'                                                                       " Databases support
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
-" Plug 'github/copilot.vim'                                                                     " Copilot
+Plug 'github/copilot.vim'                                                                     " Copilot
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
 Plug 'tpope/vim-obsession'                                                                    " Session management
@@ -50,6 +50,7 @@ Plug 'numToStr/Comment.nvim'                                                    
 Plug 'segeljakt/vim-silicon'                                                                  " Screenshot
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
 Plug 'mfussenegger/nvim-dap'                                                                  " Debugger
+Plug 'nvimdev/dashboard-nvim'                                                                 " Startup theme
 Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
 Plug 'lewis6991/gitsigns.nvim'                                                                " Git Signs
@@ -62,6 +63,7 @@ Plug 'kristijanhusak/vim-dadbod-ui'                                             
 Plug 'tribhuwan-kumar/neo-tree.nvim'                                                          " File System
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
+Plug 'HiPhish/rainbow-delimiters.nvim'                                                        " Rainbow brackets
 Plug 'tribhuwan-kumar/custom-vim-airline'                                                     " Status bar
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
@@ -76,7 +78,7 @@ Plug 'ryanoasis/vim-devicons'                                                   
 call plug#end()
 
 
-" <-------------------------Paths & Variables------------------------------->
+" <----------------------------Paths---------------------------------------->
 let g:python3_host_prog = "/usr/bin/python3"                                                  " Python bin path
 
 " <-------------------------Keybindings------------------------------------->
@@ -123,9 +125,9 @@ nnoremap <Leader>v <C-v>
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| terminal<CR>
-nnoremap <Leader>B :botright split \| terminal<CR>
+nnoremap <Leader>b :botright split \| terminal<CR>
 nnoremap <Leader>r :VRunCode<CR>
-nnoremap <Leader>b :HRunCode<CR>
+nnoremap <Leader>B :HRunCode<CR>
 nnoremap <Leader>t :tabnew \| term bash<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 
@@ -143,13 +145,13 @@ vnoremap d "_d
 vnoremap D "_D
 vnoremap c "_c
 
-" For selecting strings by 'h,j,k,l' keys 
+" Selection
 nnoremap <S-h> vh
 nnoremap <S-j> vj
 nnoremap <S-k> vk
 nnoremap <S-l> vl
 
-" Save, Cut, Undo, Redo, Selection & Yank keybindings
+" Save, Selection
 nnoremap <C-s> :w<CR>
 nnoremap <C-a> ggVG
 vnoremap <BS> "_d
@@ -253,31 +255,16 @@ nnoremap + <CMD>horizontal resize +2<CR>
 nnoremap _ <CMD>horizontal resize -2<CR>
 
 
+" <----------------------------Auto CMDs------------------------------------->
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+autocmd BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+
+
 " <---------------------------Indentline------------------------------------->
 lua require("indentline-config")
 
 
-" <-----------------------------Tagbar--------------------------------------->
-let g:tagbar_ctags_bin =  "/usr/bin/ctags"                                                    " Tagbar exburenant path
-
-" keybindings
-nmap <F1> :TagbarToggle<CR>
-
-" <-----------------------------Comment-------------------------------------->
-lua require('comment-config')
-
-" keybindings
-vnoremap <Leader>/ :lua require('Comment.api').toggle.linewise()<CR>
-nnoremap <Leader>/ :lua require('Comment.api').toggle.linewise()<CR>
-
-
-" <---------------------------Markdown--------------------------------------->
-let g:instant_markdown_theme = 'dark'
-let g:instant_markdown_autostart = 0
-let g:instant_markdown_allow_unsafe_content = 1
-
-
-" <-------------------------Tresssitter-------------------------------------->
+" <--------------------------Tresssitter------------------------------------->
 lua require('tree-sitter-config')
 
 
@@ -285,35 +272,45 @@ lua require('tree-sitter-config')
 lua require('theme-config')
 
 
-" <--------------------------Colorizer--------------------------------------->
+" <-------------------------Dashboard---------------------------------------->
+lua require("dashboard-config")
+
+
+" <------------------------Colorizer----------------------------------------->
 lua require('colorizer').setup()
+autocmd BufWritePost *  ColorizerReloadAllBuffers
 
 
-" <-------------------------Autopairs---------------------------------------->
+" <--------------------------Tagbar------------------------------------------>
+let g:tagbar_ctags_bin =  "/usr/bin/ctags"                                                    " Tagbar exburenant path
+                                                                                              " Keybindings
+nmap <F1> :TagbarToggle<CR>
+
+
+" <----------------------------Autopairs------------------------------------->
 lua require("nvim-autopairs").setup {}
 lua require('autopairs-config')
 
 
-" <-------------------------Neotree------------------------------------------>
-lua require("Neotree-config")
+" <----------------------------Comment--------------------------------------->
+lua require('comment-config')
+                                                                                               " Keybindings
+vnoremap <Leader>/ :lua require('Comment.api').toggle.linewise()<CR>
+nnoremap <Leader>/ :lua require('Comment.api').toggle.linewise()<CR>
 
-" keybindings
+
+" <---------------------------Neotree---------------------------------------->
+lua require("neotree-config")
+                                                                                                " Keybindings
 nnoremap <Leader>q :Neotree toggle<CR>
 nnoremap <C-q> :Neotree toggle<CR>
 
 
-" <------------------------------Auto CMDs----------------------------------->
-autocmd BufWritePost *  ColorizerReloadAllBuffers
-autocmd BufWritePost,DirChanged * Gitsigns refresh
-autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
-autocmd BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-
-
 " <-----------------------------Gitsigns------------------------------------>
-lua require('Gitsigns-Config')
+lua require('gitsigns-config')
 set statusline+=%{get(b:,'gitsigns_status','')}
-
-" keybindings
+autocmd BufWritePost,DirChanged * Gitsigns refresh
+                                                                                                " Keybindings
 nnoremap <Leader>i :Gitsigns preview_hunk_inline<CR>
 nnoremap <Leader>o :Gitsigns preview_hunk<CR>
 nnoremap <Leader>u :Gitsigns reset_hunk<CR>
@@ -323,21 +320,12 @@ nnoremap gs :Gitsigns stage_hunk<CR>
 nnoremap gr :Gitsigns undo_stage_hunk<CR>
 
 
-" <-----------------------------Copilot------------------------------------>
-let g:copilot_no_tab_map = v:true
-
-" keybindings
-imap <C-L> <Plug>(copilot-accept-word)
-imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
-
-
 " <------------------------------DAP--------------------------------------->
 lua require("dapui").setup()
 lua require('gdb-debugger')
 lua require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 lua require('dap').set_log_level('DEBUG')
-
-" keybindings
+                                                                                                " Keybindings
 nnoremap <Leader>db :lua require'dap'.toggle_breakpoint()<CR>
 nnoremap <Leader>dc :lua require'dap'.continue()<CR>
 nnoremap <Leader>ds :lua require'dap'.step_into()<CR>
@@ -355,20 +343,17 @@ let g:coc_filetype_map = {
     \ 'jst': 'html',
     \ 'ejs': 'html',
     \ }
-
-" keybindings
+                                                                                                " Keybindings
 nnoremap <Leader>l :call CocActionAsync('jumpDefinition')<CR>
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
 
 " <----------------------------Harpoon--------------------------------------->
 lua require("harpoon").setup()
-
-" keybindings
+                                                                                                " Keybindings
 nnoremap <Leader>a  :lua require("harpoon.mark").add_file()<CR>
 nnoremap <Leader>j :lua require("harpoon.ui").toggle_quick_menu()<CR>
-
-" Jump to arround files
+                                                                                                " Jump to arround files
 nnoremap <Leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
 nnoremap <Leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
 nnoremap <Leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
@@ -377,23 +362,67 @@ nnoremap <Leader>5 :lua require("harpoon.ui").nav_file(5)<CR>
 nnoremap <Leader>6 :lua require("harpoon.ui").nav_file(6)<CR>
 nnoremap <Leader>7 :lua require("harpoon.ui").nav_file(7)<CR>
 nnoremap <Leader>8 :lua require("harpoon.ui").nav_file(8)<CR>
-
-" File navigation
+                                                                                                  " File navigation
 nnoremap <Leader>w :lua require("harpoon.ui").nav_next()<CR>
 nnoremap <Leader>e :lua require("harpoon.ui").nav_prev()<CR>
 
 
-" <--------------------------WL-Clipboard--------------------------------------->
-let g:clipboard = {
-    \   'copy': {
-    \       '+': ['wl-copy', '--trim-newline'],
-    \       '*': ['wl-copy', '--trim-newline'],
-    \   },
-    \   'paste': {
-    \       '+': ['wl-paste'],
-    \       '*': ['wl-paste'],
-    \   },
+" <---------------------------Markdown--------------------------------------->
+let g:instant_markdown_theme = 'dark'
+let g:instant_markdown_autostart = 0
+let g:instant_markdown_allow_unsafe_content = 1
+
+
+" <-----------------------------Copilot--------------------------------------->
+let g:copilot_no_tab_map = v:true
+                                                                                                   " Keybindings
+imap <C-L> <Plug>(copilot-accept-word)
+imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
+
+
+" <-----------------------------ColorPicker------------------------------------>
+let g:NVIMColorPicker#InsertBefore#TheCursor = 1
+                                                                                                   " Keybindings
+nnoremap <Leader>s :ColorPicker<CR>
+vnoremap <Leader>s :ColorPicker<CR>
+inoremap <C-c> <C-o>:ColorPicker<CR>
+
+
+" <-----------------------------Preview---------------------------------------->
+function! OpenPreview()
+    setlocal previewheight=1
+    let l:line = line('.')
+    execute 'pedit +' . l:line . ' %'
+endfunction
+                                                                                                   " Keybindings
+nnoremap <silent> gp :call OpenPreview()<CR>
+nnoremap gq :pclose<CR>
+
+" <-----------------------------Folds------------------------------------------>
+augroup RememberFolds
+    autocmd!
+    autocmd BufWinLeave *.* mkview
+    autocmd BufWinEnter *.* silent! loadview
+augroup END
+
+
+" <-----------------------------Silicon----------------------------------------->
+let g:silicon = {
+    \   'theme':             'DarkNeon',
+    \   'font':               'Fantasque Sans Mono',
+    \   'background':         '#090909',
+    \   'shadow-color':       '#000000',
+    \   'line-pad':                   2,
+    \   'pad-horiz':                 80,
+    \   'pad-vert':                 100,
+    \   'shadow-blur-radius':         0,
+    \   'shadow-offset-x':            0,
+    \   'shadow-offset-y':            0,
+    \   'line-number':           v:true,
+    \   'round-corner':          v:true,
+    \   'window-controls':       v:true
     \ }
+let g:silicon['output'] = '~/Pictures/Code-Screenshots/vim-screenshot-{time:%Y-%m-%d-%H%M%S}.png'
 
 
 " <---------------------------Airline---------------------------------------->
@@ -407,27 +436,21 @@ let g:airline#extensions#default#section_truncate_width = {
     \ }
 
 if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 
-" Theme
-let g:airline_theme='dark' 
+let g:airline_theme='dark'                                                                      " Theme
 
-" Airline symbols
-let g:airline_section_z = '%2p%% %2l/%L:%1v'
+let g:airline_section_z = '%2p%% %2l/%L:%1v'                                                    " Airline symbols
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline_symbols.whitespace = 'Ξ'
-let g:webdevicons_enable_airline_tabline = 1
-let g:webdevicons_enable_airline_statusline = 1
+let g:airline#extensions#whitespace#enabled = 0                                                 " Whitespace
+let g:webdevicons_enable_airline_tabline = 1                                                    " Tabline
+let g:webdevicons_enable_airline_statusline = 1                                                 " Statusline
+let g:airline#extensions#tagbar#enabled = 0                                                     " Tagbar
 
-" Tagbar
-let g:airline#extensions#tagbar#enabled = 0
-
-" Airline with COC
-let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#coc#enabled = 1                                                        " Airline with COC
 let g:airline#extensions#coc#show_coc_status = 1
 let g:airline#extensions#coc#warning_symbol = '   '
 let g:airline#extensions#coc#error_symbol = ' '
@@ -471,34 +494,6 @@ function! s:wilder_init() abort
     \ 'right': [' ', wilder#popupmenu_scrollbar()],
     \ })))
 endfunction
-
-
-" <-----------------------------ColorPicker------------------------------------>
-let g:NVIMColorPicker#InsertBefore#TheCursor = 1
-
-" keybindings
-nnoremap <Leader>s :ColorPicker<CR>
-vnoremap <Leader>s :ColorPicker<CR>
-inoremap <C-c> <C-o>:ColorPicker<CR>
-
-
-" <-----------------------------Preview---------------------------------------->
-function! OpenPreview()
-    setlocal previewheight=1
-    let l:line = line('.')
-    execute 'pedit +' . l:line . ' %'
-endfunction
-
-" keybindings
-nnoremap <silent> gp :call OpenPreview()<CR>
-nnoremap gq :pclose<CR>
-
-" <-----------------------------Folds------------------------------------------>
-augroup RememberFolds
-  autocmd!
-  autocmd BufWinLeave *.* mkview
-  autocmd BufWinEnter *.* silent! loadview
-augroup END
 
 " <----------------------------Sources----------------------------------------->
 " :setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
