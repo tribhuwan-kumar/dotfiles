@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-if [ ! -d "$HOME/dotarch" ];then
-    git clone https://github/tribhuwan-kumar/dotarch.git "$HOME/dotarch"
-fi
-
 checkFile() {
     if [ -d "$1" ] || [ -f "$1" ]; then
         echo "$1 configuration already exists!"
@@ -11,15 +7,12 @@ checkFile() {
         case "$RESPONSE" in
             [yY][eE][sS]|[yY]) 
                 rm -rf "$1"
-                return 0
                 ;;
             *)
                 echo "Cancelled"
-                exit 1
                 ;;
         esac
     fi
-    cd "$HOME/dotarch" || exit && stow .
 }
 
 checkPackage(){
@@ -35,7 +28,7 @@ checkPackage(){
         elif [ "$1" == "trashbhuwan" ];then
             echo "'$1' is not found!"
             echo "Installing $1"
-            curl -O https://raw.githubusercontent.com/tribhuwan-kumar/trashbhuwan/main/trashbhuwan && chmod +x trashbhuwan && sudo mv trashbhuwan /usr/local/bin/
+            curl -s -O https://raw.githubusercontent.com/tribhuwan-kumar/trashbhuwan/main/trashbhuwan && chmod +x trashbhuwan && sudo mv trashbhuwan /usr/local/bin/
         else
             sudo pacman -S "$1"
         fi
@@ -43,7 +36,16 @@ checkPackage(){
 }
 
 
-checkPackage "curl"
+checkFile "$HOME/.bashrc"
+checkFile "$HOME/.tmux.conf"
+checkFile "$HOME/.config/lf"
+checkFile "$HOME/.config/nix"
+checkFile "$HOME/.config/pip"
+checkFile "$HOME/.config/mpv"
+checkFile "$HOME/.config/imv"
+checkFile "$HOME/.config/nvim"
+checkFile "$HOME/.config/kitty"
+
 checkPackage "git"
 checkPackage "lf"
 checkPackage "bat"
@@ -57,30 +59,30 @@ checkPackage "tmux"
 checkPackage "nvim"
 checkPackage "kitty"
 checkPackage "zoxide"
-checkPackage "wl-clipboard"
 checkPackage "trashbhuwan"
+checkPackage "wl-clipboard"
 
-checkFile "$HOME/.bashrc"
-checkFile "$HOME/.tmux.conf"
-checkFile "$HOME/.config/lf"
-checkFile "$HOME/.config/nix"
-checkFile "$HOME/.config/pip"
-checkFile "$HOME/.config/mpv"
-checkFile "$HOME/.config/imv"
-checkFile "$HOME/.config/nvim"
-checkFile "$HOME/.config/kitty"
-
+if [ ! -d "$HOME/dotarch" ];then
+    git clone https://github/tribhuwan-kumar/dotarch.git "$HOME/dotarch"
+    read -p "Are sure want to create config syslink of $1? [y/N] " RESPONSE
+    case "$RESPONSE" in
+        [yY][eE][sS]|[yY]) 
+            cd "$HOME/dotarch" && stow .
+            ;;
+        *)
+            echo "Cancelled"
+            ;;
+    esac
+fi
 
 font_install() {
     read -p "Install fonts? [y/N] " RESPONSE
     case "$RESPONSE" in
         [yY][eE][sS]|[yY]) 
             sudo cp "$HOME/dotarch/accessories/FantasqueSansMono" "$HOME/dotarch/accessories/San Francisco" /usr/share/fonts
-            return 0
             ;;
         *)
             echo "Not installing fonts"
-            exit 1
             ;;
     esac
 }
@@ -94,7 +96,7 @@ checkVimPlug(){
 checkVimPlug
 
 installTPM(){
-    if [ ! -d "$HOME/.tmux" ]; then
+    if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
         git clone https://github.com/tmux-plugins/tpm.git "$HOME/.tmux/plugins/tpm"
     fi
 }

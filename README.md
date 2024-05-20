@@ -1,10 +1,9 @@
 # My dotarch
 This is a collection of my dotfiles!!
 
-### Used CLI utilities:
+### Set up in Arch Linux:
 ```bash
-yay -S oh-my-posh
-pacman -S lf fd bat mpv imv eza fzf stow tree tmux kitty neovim zoxide ripgrep wl-clipboard
+curl -s -O https://raw.githubusercontent.com/tribhuwan-kumar/dotarch/main/accessories/setup.sh && chmod +x setup.sh && ./setup.sh
 ```
 ### Softwares I use:
 
