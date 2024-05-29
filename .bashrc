@@ -51,18 +51,19 @@ bind "set completion-ignore-case on"
 # Some exports
 export EDITOR="nvim"
 export TERMIAL="kitty"
+export BAT_THEME="ansi"
 export BROWSER="firefox"
 export LC_ALL=en_IN.UTF-8
 export PATH="HOME/.local/bin:$PATH"
 export PATH=~/.npm-global/bin:$PATH
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export BAT_THEME="ansi"
 
 # FZF
-export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!**/.git/*" --glob "!**/__pycache__/*" --glob "!**/node_modules/*" --glob "!**/env/*"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!**/.git/*" --glob "!**/__pycache__/*" --glob "!**/node_modules/*" --glob "!**/env/*" --glob "!**/target/*"'
 export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=header,grid --line-range :500 {} 2> /dev/null"'
 
 # Aliases
+alias cat='bat'
 alias tx='tmux'
 alias ex='exit'
 alias vi='nvim'

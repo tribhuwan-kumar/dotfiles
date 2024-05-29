@@ -9,7 +9,13 @@ require("neo-tree").setup({
             hide_by_name = {
                 "node_modules",
             },
-        }
-    }
+        always_show = {
+                ".local",
+                ".config",
+                ".bashrc",
+                ".tmux.conf"
+            },
+        },
+    },
 })
 

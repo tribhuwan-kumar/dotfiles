@@ -16,7 +16,6 @@ set relativenumber
 
 set mouse=a
 set tabstop=4
-set laststatus=3
 set shiftwidth=4
 set ttimeoutlen=0
 set softtabstop=4
@@ -50,7 +49,6 @@ Plug 'numToStr/Comment.nvim'                                                    
 Plug 'segeljakt/vim-silicon'                                                                  " Screenshot
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
 Plug 'mfussenegger/nvim-dap'                                                                  " Debugger
-Plug 'nvimdev/dashboard-nvim'                                                                 " Startup theme
 Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
 Plug 'lewis6991/gitsigns.nvim'                                                                " Git Signs
@@ -63,7 +61,6 @@ Plug 'kristijanhusak/vim-dadbod-ui'                                             
 Plug 'tribhuwan-kumar/neo-tree.nvim'                                                          " File System
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
-Plug 'HiPhish/rainbow-delimiters.nvim'                                                        " Rainbow brackets
 Plug 'tribhuwan-kumar/custom-vim-airline'                                                     " Status bar
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
@@ -94,10 +91,6 @@ tnoremap <Esc> <C-\><C-n>
 " Cursor navigation
 :noremap j gj
 :noremap k gk
-
-" Vertical Motion
-nnoremap <C-d> }
-nnoremap <C-u> {
 
 " Tab management
 nnoremap <C-o> :b#<CR>
@@ -270,10 +263,6 @@ lua require('tree-sitter-config')
 
 " <-------------------------Colorscheme-------------------------------------->
 lua require('theme-config')
-
-
-" <-------------------------Dashboard---------------------------------------->
-lua require("dashboard-config")
 
 
 " <------------------------Colorizer----------------------------------------->
@@ -497,3 +486,4 @@ endfunction
 
 " <----------------------------Sources----------------------------------------->
 " :setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+source ~/dotarch/.config/nvim/qucik-word.vim
