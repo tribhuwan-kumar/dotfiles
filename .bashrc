@@ -13,24 +13,15 @@ eval "$(oh-my-posh --init --shell bash --config ~/dotarch/accessories/vendetta.o
 
 PS1="\u@\h:\w\$ "
 
-# HSTR configuration 
-alias hh=hstr
-export HSTR_CONFIG=hicolor
+# History
 shopt -s histappend
-export HISTCONTROL=ignorespace
-export HISTFILESIZE=10000
-export HISTSIZE=${HISTFILESIZE}
-# synchronization between bash memory and history file
+export HISTSIZE=2000
+export HISTFILESIZE=100000
+export HISTCONTROL=ignoredups:ignorespace:erasedups
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
-function hstrnotiocsti {
-    { READLINE_LINE="$( { </dev/tty hstr ${READLINE_LINE}; } 2>&1 1>&3 3>&- )"; } 3>&1;
-    READLINE_POINT=${#READLINE_LINE}
-}
-# if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
-if [[ $- =~ .*i.* ]]; then bind -x '"\C-r": "hstrnotiocsti"'; fi
-export HSTR_TIOCSTI=n
 
 # BASH VI mode
+source $HOME/dotarch/accessories/bash-vi.sh
 bind 'set editing-mode vi'
 bind 'set show-mode-in-prompt on'
 bind 'set keyseq-timeout 0.01'
@@ -61,8 +52,10 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 # FZF
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!**/.git/*" --glob "!**/__pycache__/*" --glob "!**/node_modules/*" --glob "!**/env/*" --glob "!**/target/*"'
 export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=header,grid --line-range :500 {} 2> /dev/null"'
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | wl-copy)+abort'"
 
 # Aliases
+alias hh=hstr
 alias cat='bat'
 alias tx='tmux'
 alias ex='exit'
