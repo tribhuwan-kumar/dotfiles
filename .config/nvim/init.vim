@@ -100,11 +100,6 @@ nnoremap <C-i> :tabp<CR>
 inoremap <C-O> <C-o>o
 inoremap <C-b> <C-o>diw
 
-" Increase, decrease & scroll
-nnoremap <C-e> <C-a>
-nnoremap <C-p> <C-e>
-nnoremap <C-b> diw
-
 " Navigation in windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -146,7 +141,7 @@ nnoremap <S-l> vl
 
 " Save, Selection
 nnoremap <C-s> :w<CR>
-nnoremap <C-a> ggVG
+nnoremap <C-b> ggVG
 vnoremap <BS> "_d
 nnoremap <Leader>z ^vg_
 
