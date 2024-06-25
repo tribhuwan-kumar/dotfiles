@@ -1,7 +1,9 @@
 # Basic Settings
 set icons true
 set hidden true
+set reverse true
 set ignorecase true
+set sortby ctime
 
 # CTPV
 set previewer ctpv
@@ -94,8 +96,8 @@ map aa mkfile
 map aA mkdir
 
 # Movement
-map gd cd ~/Documents
-map gD cd ~/Downloads
+map gD cd ~/Documents
+map gd cd ~/Downloads
 map gp cd ~/Pictures
 map gm cd ~/Music
 map gc cd ~/.config

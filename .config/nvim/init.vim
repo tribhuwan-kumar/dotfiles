@@ -17,6 +17,7 @@ set relativenumber
 set mouse=a
 set tabstop=4
 set shiftwidth=4
+set textwidth=160
 set ttimeoutlen=0
 set softtabstop=4
 set updatetime=300
@@ -65,6 +66,7 @@ Plug 'tribhuwan-kumar/custom-vim-airline'                                       
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                                " Lua native fuzzy finder
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " tsx, jsx commenting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
