@@ -88,7 +88,10 @@ let mapleader = "\<Space>"                                                      
 nnoremap <Leader>h K<CR>
 
 " Exit by 'Esc' in terminal mode
-tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc><Esc> <C-\><C-n>
+
+" Open recent file
+:nnoremap <Leader>or :edit #<1<CR>
 
 " Cursor navigation
 :noremap j gj
