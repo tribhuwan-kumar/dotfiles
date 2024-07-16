@@ -34,6 +34,7 @@ call plug#begin()
 Plug 'tpope/vim-dadbod'                                                                       " Databases support
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
+Plug 'prisma/vim-prisma'                                                                      " Prisma
 " Plug 'github/copilot.vim'                                                                   " Copilot
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
