@@ -76,6 +76,16 @@ cmd delete_trash ${{
   done 
 }}
 
+cmd copy_files ${{ 
+  files=$(printf "$fx" | tr '\n' ';')
+  mime=$(file --mime-type -b "$files")
+  if [[ $mime == image/* ]]; then
+    wl-copy < "$files"
+  else [[ $mime == video/* ]];
+    echo -n "file://$files" | wl-copy -t text/uri-list
+  fi
+}}
+
 # Basic Functions
 map au unarchive
 map r rename
@@ -96,12 +106,12 @@ map aa mkfile
 map aA mkdir
 
 # Movement
-map gD cd ~/Documents
-map gd cd ~/Downloads
-map gp cd ~/Pictures
 map gm cd ~/Music
-map gc cd ~/.config
-map gr cd ~/Desktop/Repos
 map gv cd ~/Videos
+map gc cd ~/.config
+map gp cd ~/Pictures
+map gd cd ~/Downloads
+map gD cd ~/Documents
 map gs cd /mnt/dex/media
+map gr cd ~/Desktop/Repos
 map gt cd ~/.local/share/Trash/files
