@@ -88,6 +88,7 @@ cmd copy_files ${{
 
 # Basic Functions
 map au unarchive
+map ay copy_files
 map r rename
 map . set hidden!
 map ad trash
