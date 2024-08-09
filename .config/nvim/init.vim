@@ -97,6 +97,7 @@ tnoremap <Esc><Esc> <C-\><C-n>
 " Cursor navigation
 :noremap j gj
 :noremap k gk
+nnoremap <C-d> <C-d>zz
 
 " Tab management
 nnoremap <C-o> :b#<CR>
@@ -147,7 +148,7 @@ nnoremap <S-l> vl
 
 " Save, Selection
 nnoremap <C-s> :w<CR>
-nnoremap <C-b> ggVG
+nnoremap <C-g> ggVG
 vnoremap <BS> "_d
 nnoremap <Leader>z ^vg_
 
@@ -292,8 +293,9 @@ nnoremap <Leader>/ :lua require('Comment.api').toggle.linewise()<CR>
 " <---------------------------Neotree---------------------------------------->
 lua require("neotree-config")
                                                                                                 " Keybindings
-nnoremap <Leader>q :Neotree toggle<CR>
 nnoremap <C-q> :Neotree toggle<CR>
+nnoremap <Leader>q :Neotree toggle<CR>
+nnoremap <Leader>c :Neotree reveal_file=%<CR>
 
 
 " <-----------------------------Gitsigns------------------------------------>
