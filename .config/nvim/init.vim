@@ -1,7 +1,7 @@
 " <-------------------------@tribhuwan-kumar------------------------>
 " <-------------------------Neovim Settings------------------------->
 syntax on
-set wrap
+set nowrap
 set number
 set hlsearch
 set smarttab
@@ -13,6 +13,7 @@ set ignorecase
 set autoindent
 set termguicolors
 set relativenumber
+set viewoptions-=curdir
 
 set mouse=a
 set tabstop=4
@@ -40,8 +41,9 @@ Plug 'honza/vim-snippets'                                                       
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
 Plug 'tpope/vim-obsession'                                                                    " Session management
 Plug 'gregsexton/MatchTag'                                                                    " Highlights matching html tags
+Plug 'andymass/vim-matchup'                                                                   " Match up
 Plug 'rcarriga/nvim-dap-ui'                                                                   " DAP UI
-Plug 'sheerun/vim-polyglot'                                                                   " Syntax highlighting & language features
+" Plug 'sheerun/vim-polyglot'                                                                   " Syntax highlighting & language features
 Plug 'ThePrimeagen/harpoon'                                                                   " File tracking
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
@@ -115,7 +117,6 @@ nnoremap <C-l> <C-w>l
 
 " FZF, Wrap, Tagbar, Visual Block, Code Runner keybinding
 nnoremap <C-z> <C-q>
-nnoremap <C-c> :set nowrap<CR>
 nnoremap <Leader>v <C-v>
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
@@ -294,8 +295,7 @@ nnoremap <Leader>/ :lua require('Comment.api').toggle.linewise()<CR>
 lua require("neotree-config")
                                                                                                 " Keybindings
 nnoremap <C-q> :Neotree toggle<CR>
-nnoremap <Leader>q :Neotree toggle<CR>
-nnoremap <Leader>c :Neotree reveal_file=%<CR>
+nnoremap <C-c> :Neotree reveal_file=%<CR>
 
 
 " <-----------------------------Gitsigns------------------------------------>
@@ -336,6 +336,8 @@ let g:coc_filetype_map = {
     \ 'ejs': 'html',
     \ }
                                                                                                 " Keybindings
+nnoremap <Leader>c :call CocActionAsync('rename')<CR>
+nnoremap <Leader>q :call CocActionAsync('refactor')<CR>
 nnoremap <Leader>l :call CocActionAsync('jumpDefinition')<CR>
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 

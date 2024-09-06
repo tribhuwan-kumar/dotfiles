@@ -8,6 +8,8 @@
 PS1='[\u@\h \W]\$ '
 
 eval "$(fzf --bash)"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 eval "$(zoxide init --cmd cd bash)"
 eval "$(oh-my-posh --init --shell bash --config ~/dotarch/accessories/vendetta.omp.json)"
 
@@ -15,8 +17,8 @@ PS1="\u@\h:\w\$ "
 
 # History
 shopt -s histappend
-export HISTSIZE=2000
-export HISTFILESIZE=100000
+export HISTSIZE=200000
+export HISTFILESIZE=200000
 export HISTCONTROL=ignoredups:ignorespace:erasedups
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 

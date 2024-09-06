@@ -15,8 +15,8 @@
     "diagnostic.showDeprecated": true,
     "diagnostic.checkCurrentLine": true,
     "list.floatPreview": true,
-    "list.source.location.defaultAction": "preview",
-    "list.source.location.defaultOptions": ["--auto-preview"],
+    "list.source.location.defaultAction": "open",
+    "list.source.location.defaultOptions": ["--first"],
     "json.schemaDownload.enable": true,
     "notification.disabledProgressSources": ["*"],
     "workspace.ignoredFolders": [
