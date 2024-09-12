@@ -36,14 +36,12 @@ Plug 'tpope/vim-dadbod'                                                         
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
 Plug 'prisma/vim-prisma'                                                                      " Prisma
-" Plug 'github/copilot.vim'                                                                   " Copilot
+Plug 'github/copilot.vim'                                                                     " Copilot
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
 Plug 'tpope/vim-obsession'                                                                    " Session management
 Plug 'gregsexton/MatchTag'                                                                    " Highlights matching html tags
-Plug 'andymass/vim-matchup'                                                                   " Match up
 Plug 'rcarriga/nvim-dap-ui'                                                                   " DAP UI
-" Plug 'sheerun/vim-polyglot'                                                                   " Syntax highlighting & language features
 Plug 'ThePrimeagen/harpoon'                                                                   " File tracking
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
@@ -69,10 +67,11 @@ Plug 'tribhuwan-kumar/custom-vim-airline'                                       
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                                " Lua native fuzzy finder
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " tsx, jsx commenting
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " Tsx, Jsx commenting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }                                 " Copilot chat
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}                            " Auto-completion & LSP
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}       " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
@@ -367,10 +366,13 @@ let g:instant_markdown_autostart = 0
 let g:instant_markdown_allow_unsafe_content = 1
 
 
-" <-----------------------------Copilot--------------------------------------->
+" <-----------------------------Copilot & Copilot chat--------------------------------------->
+lua require('copilot-chat')
 let g:copilot_no_tab_map = v:true
+autocmd BufRead * Copilot disable
                                                                                                    " Keybindings
 imap <C-L> <Plug>(copilot-accept-word)
+nnoremap <Leader>gg :CopilotChatToggle<CR>
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 
 

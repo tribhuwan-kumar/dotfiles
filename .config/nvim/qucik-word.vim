@@ -1,4 +1,4 @@
-set wildignore+=*/.git/**,*/.venv/**,*/node_modules/**,*.json,*.lock,*.jpg,*.png,*.ico,*.jpeg,*.svg
+set wildignore+=*/.git/**,*/.venv/**,*/node_modules/**,*/__pycache__/**,*.json,*.lock,*.jpg,*.png,*.ico,*.jpeg,*.svg,*.ttf
 
 function SearchWordInFile()
     let l:word = expand("<cword>")
