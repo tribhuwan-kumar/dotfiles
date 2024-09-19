@@ -151,6 +151,7 @@ nnoremap <C-s> :w<CR>
 nnoremap <C-g> ggVG
 vnoremap <BS> "_d
 nnoremap <Leader>z ^vg_
+nnoremap ,p o<ESC>p
 
 " Short the SORROUNDINGS
 "CUT with no REG
@@ -252,7 +253,7 @@ nnoremap _ <CMD>horizontal resize -2<CR>
 
 " <----------------------------Auto CMDs------------------------------------->
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
-autocmd BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
 
 
 " <---------------------------Indentline------------------------------------->

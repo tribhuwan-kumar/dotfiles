@@ -6,6 +6,8 @@ require("CopilotChat").setup {
   show_help = false,
   language = "English",
   auto_follow_cursor = false,
+  highlight_selection = false,
+  context = "buffers",
   build = "make tiktoken",
   disable_extra_info = 'no',
   question_header = '## Me ',
