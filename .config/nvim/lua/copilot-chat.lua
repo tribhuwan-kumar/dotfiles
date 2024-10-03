@@ -4,6 +4,7 @@ require("CopilotChat").setup {
   selection = select.unnamed,
   debug = true,
   show_help = false,
+  show_folds = false,
   language = "English",
   auto_follow_cursor = false,
   highlight_selection = false,

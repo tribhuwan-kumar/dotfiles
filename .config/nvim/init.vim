@@ -219,20 +219,20 @@ nnoremap yp yip
 nnoremap yt yit
 
 " CUT in REG
-nnoremap q( ci(
-nnoremap q) ci)
-nnoremap q[ ci[
-nnoremap q] ci]
-nnoremap q{ ci{
-nnoremap q} ci}
-nnoremap q< ci<
-nnoremap q> ci>
-nnoremap q" ci"
-nnoremap q' ci'
-nnoremap q` ci`
-nnoremap qw ciw
-nnoremap qp cip
-nnoremap qt cit
+nnoremap q( di(
+nnoremap q) di)
+nnoremap q[ di[
+nnoremap q] di]
+nnoremap q{ di{
+nnoremap q} di}
+nnoremap q< di<
+nnoremap q> di>
+nnoremap q" di"
+nnoremap q' di'
+nnoremap q` di`
+nnoremap qw diw
+nnoremap qp dip
+nnoremap qt dit
 
 " Move lines by index +1,-1
 inoremap <M-Up> <Esc>:m-2<CR>==gi
