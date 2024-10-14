@@ -71,6 +71,7 @@ alias gs='git status'
 alias gaa='git add --all'
 alias trsh='trashbhuwan'
 alias grep='grep -i --color=auto'
+alias hibernate='systemctl hibernate'
 alias ls="exa --icons --group-directories-first"
 alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(green)%h%C(reset) - %C(magenta)%aD%C(reset) %C(yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(cyan)%s%C(reset) %C(dim blue)- %an%C(reset)' --all"
 alias pyenv-venv='eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"'

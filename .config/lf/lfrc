@@ -113,6 +113,6 @@ map gc cd ~/.config
 map gp cd ~/Pictures
 map gd cd ~/Downloads
 map gD cd ~/Documents
-map gs cd /mnt/dex/media
+map gs cd /mnt/heap/media
 map gr cd ~/Desktop/Repos
 map gt cd ~/.local/share/Trash/files

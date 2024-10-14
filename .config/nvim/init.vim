@@ -116,7 +116,8 @@ nnoremap <C-l> <C-w>l
 
 " FZF, Wrap, Tagbar, Visual Block, Code Runner keybinding
 nnoremap <C-z> <C-q>
-nnoremap <Leader>v <C-v>
+nnoremap <Leader>z <C-v>
+nnoremap <Leader><Esc> :noh<CR>
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| terminal<CR>
@@ -125,6 +126,7 @@ nnoremap <Leader>r :VRunCode<CR>
 nnoremap <Leader>B :HRunCode<CR>
 nnoremap <Leader>t :tabnew \| term bash<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
+nnoremap <Leader><Tab> :set tabstop=2 shiftwidth=2 expandtab<CR>
 
 " Prevent registering to clipboard
 nnoremap S "_S
@@ -150,8 +152,8 @@ nnoremap <S-l> vl
 nnoremap <C-s> :w<CR>
 nnoremap <C-g> ggVG
 vnoremap <BS> "_d
-nnoremap <Leader>z ^vg_
-nnoremap ,p o<ESC>p
+nnoremap <Leader>v ^vg_
+nnoremap ,p o<ESC>p==
 
 " Short the SORROUNDINGS
 "CUT with no REG
@@ -327,7 +329,7 @@ nnoremap <Leader>dr :lua require'dap'.repl.open()<CR>
 
 " <-----------------------------Coc----------------------------------------->
 au FileType html let b:coc_root_patterns = ['.git', '.env', 'tailwind.config.js', 'tailwind.config.cjs']
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-pyright', 'coc-clangd', 'coc-copilot', 'coc-vimlsp']
+
 let g:coc_filetype_map = {
     \ 'htmldjango': 'html',
     \ 'blade': 'html',
@@ -335,6 +337,33 @@ let g:coc_filetype_map = {
     \ 'jst': 'html',
     \ 'ejs': 'html',
     \ }
+
+let g:coc_global_extensions = [
+    \ 'coc-sh',
+    \ 'coc-go',
+    \ 'coc-css', 
+    \ 'coc-lua',
+    \ 'coc-html', 
+    \ 'coc-json', 
+    \ 'coc-yaml',
+    \ 'coc-docker',
+    \ 'coc-prisma',
+    \ 'coc-eslint',
+    \ 'coc-clangd', 
+    \ 'coc-vimlsp',
+    \ 'coc-copilot', 
+    \ 'coc-copilot',
+    \ 'coc-pyright', 
+    \ 'coc-tsserver', 
+    \ 'coc-prettier', 
+    \ 'coc-htmldjango',
+    \ 'coc-marketplace',
+    \ 'coc-rust-analyzer',
+    \ '@yaegassy/coc-volar',
+    \ 'coc-html-css-support',
+    \ '@yaegassy/coc-tailwindcss3',
+    \ 'https://github.com/rafamadriz/friendly-snippets@main',
+    \ ]
                                                                                                 " Keybindings
 nnoremap <Leader>c :call CocActionAsync('rename')<CR>
 nnoremap <Leader>q :call CocActionAsync('refactor')<CR>
