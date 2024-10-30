@@ -55,6 +55,7 @@ Plug 'pocco81/auto-save.nvim'                                                   
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
 Plug 'lewis6991/gitsigns.nvim'                                                                " Git Signs
 Plug 'aurum77/live-server.nvim'                                                               " Live Server
+Plug 'AndrewRadev/tagalong.vim'                                                               " Auto rename tags
 Plug 'tribhuwan-kumar/CodeRunner'                                                             " Code Runner
 Plug 'norcalli/nvim-colorizer.lua'                                                            " Colorizer
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons

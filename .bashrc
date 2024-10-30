@@ -259,3 +259,4 @@ ex=:\
 *.pdf=:\
 *.nix=:\
 "
+. "/home/freakybytes/.deno/env"

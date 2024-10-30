@@ -21,6 +21,7 @@ require("catppuccin").setup({
     },
     color_overrides = {
         mocha = {
+            apple = "#c83434",
             rosewater = "#ea6962",
             flamingo = "#ea6962",
             red = "#ea6962",
@@ -106,6 +107,9 @@ require("catppuccin").setup({
                 Tag = { fg = colors.peach },
                 Label = { fg = colors.peach },
                 Structure = { fg = colors.peach },
+		        Comment = { fg = colors.overlay0 },
+                TermCursor = { bg = colors.subtext1 },
+                MatchParen = { fg = colors.apple },
                 Operator = { fg = colors.peach },
                 Title = { fg = colors.peach },
                 Special = { fg = colors.yellow },
