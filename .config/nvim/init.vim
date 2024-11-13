@@ -21,7 +21,7 @@ set shiftwidth=4
 set textwidth=160
 set ttimeoutlen=0
 set softtabstop=4
-set updatetime=300
+set updatetime=250
 set timeoutlen=1000
 set encoding=UTF-8
 set signcolumn=yes
@@ -35,35 +35,49 @@ call plug#begin()
 Plug 'tpope/vim-dadbod'                                                                       " Databases support
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
+Plug 'L3MON4D3/LuaSnip'                                                                       " Snippets engine
+Plug 'hrsh7th/nvim-cmp'                                                                       " Completion
+Plug 'hrsh7th/cmp-path'                                                                       " Path completion
 Plug 'prisma/vim-prisma'                                                                      " Prisma
 Plug 'github/copilot.vim'                                                                     " Copilot
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
+Plug 'hrsh7th/cmp-buffer'                                                                     " Buffer completion
 Plug 'tpope/vim-obsession'                                                                    " Session management
 Plug 'gregsexton/MatchTag'                                                                    " Highlights matching html tags
+Plug 'onsails/lspkind.nvim'                                                                   " LSP icons
 Plug 'rcarriga/nvim-dap-ui'                                                                   " DAP UI
 Plug 'ThePrimeagen/harpoon'                                                                   " File tracking
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
+Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
 Plug 'nvim-neotest/nvim-nio'                                                                  " Asynchronous IO
 Plug 'nvim-lua/plenary.nvim'                                                                  " Pop-up api
 Plug 'numToStr/Comment.nvim'                                                                  " Better Commenting
+Plug 'neovim/nvim-lspconfig'                                                                  " Native LSP
 Plug 'segeljakt/vim-silicon'                                                                  " Screenshot
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
 Plug 'mfussenegger/nvim-dap'                                                                  " Debugger
 Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
 Plug 'lewis6991/gitsigns.nvim'                                                                " Git Signs
+Plug 'williamboman/mason.nvim'                                                                " LSP installer
 Plug 'aurum77/live-server.nvim'                                                               " Live Server
+Plug 'Jezda1337/nvim-html-css'                                                                " HTML completion
+Plug 'rasulomaroff/cmp-bufname'                                                               " Bufname completion
 Plug 'AndrewRadev/tagalong.vim'                                                               " Auto rename tags
+Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
 Plug 'tribhuwan-kumar/CodeRunner'                                                             " Code Runner
 Plug 'norcalli/nvim-colorizer.lua'                                                            " Colorizer
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
 Plug 'mfussenegger/nvim-dap-python'                                                           " Python debugger
+Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
 Plug 'kristijanhusak/vim-dadbod-ui'                                                           " vim-dadbod UI
+Plug 'lukas-reineke/lsp-format.nvim'                                                          " Formatter
 Plug 'tribhuwan-kumar/neo-tree.nvim'                                                          " File System
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
+Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
 Plug 'tribhuwan-kumar/custom-vim-airline'                                                     " Status bar
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
@@ -73,7 +87,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                             
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
 Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }                                 " Copilot chat
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}                            " Auto-completion & LSP
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}       " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
@@ -259,6 +272,24 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
 
 
+" <---------------------------LSP------------------------------------->
+lua require("lsp-config")
+
+" keybindings
+nnoremap <Leader>l <C-]>
+
+" <---------------------------Mason------------------------------------->
+lua require("mason-config")
+
+
+" <---------------------------Completion------------------------------------->
+lua require("completion-config")
+
+
+" <---------------------------Snippets------------------------------------->
+lua require("luasnip-config")
+
+
 " <---------------------------Indentline------------------------------------->
 lua require("indentline-config")
 
@@ -326,50 +357,6 @@ nnoremap <Leader>dc :lua require'dap'.continue()<CR>
 nnoremap <Leader>ds :lua require'dap'.step_into()<CR>
 nnoremap <Leader>do :lua require'dap'.step_over()<CR>
 nnoremap <Leader>dr :lua require'dap'.repl.open()<CR>
-
-
-" <-----------------------------Coc----------------------------------------->
-au FileType html let b:coc_root_patterns = ['.git', '.env', 'tailwind.config.js', 'tailwind.config.cjs']
-
-let g:coc_filetype_map = {
-    \ 'htmldjango': 'html',
-    \ 'blade': 'html',
-    \ 'twig': 'html',
-    \ 'jst': 'html',
-    \ 'ejs': 'html',
-    \ }
-
-let g:coc_global_extensions = [
-    \ 'coc-sh',
-    \ 'coc-go',
-    \ 'coc-css', 
-    \ 'coc-lua',
-    \ 'coc-html', 
-    \ 'coc-json', 
-    \ 'coc-yaml',
-    \ 'coc-docker',
-    \ 'coc-prisma',
-    \ 'coc-eslint',
-    \ 'coc-clangd', 
-    \ 'coc-vimlsp',
-    \ 'coc-copilot', 
-    \ 'coc-copilot',
-    \ 'coc-pyright', 
-    \ 'coc-tsserver', 
-    \ 'coc-prettier', 
-    \ 'coc-htmldjango',
-    \ 'coc-marketplace',
-    \ 'coc-rust-analyzer',
-    \ '@yaegassy/coc-volar',
-    \ 'coc-html-css-support',
-    \ '@yaegassy/coc-tailwindcss3',
-    \ 'https://github.com/rafamadriz/friendly-snippets@main',
-    \ ]
-                                                                                                " Keybindings
-nnoremap <Leader>c :call CocActionAsync('rename')<CR>
-nnoremap <Leader>q :call CocActionAsync('refactor')<CR>
-nnoremap <Leader>l :call CocActionAsync('jumpDefinition')<CR>
-inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
 
 " <----------------------------Harpoon--------------------------------------->
@@ -477,13 +464,12 @@ let g:webdevicons_enable_airline_tabline = 1                                    
 let g:webdevicons_enable_airline_statusline = 1                                                 " Statusline
 let g:airline#extensions#tagbar#enabled = 0                                                     " Tagbar
 
-let g:airline#extensions#coc#enabled = 1                                                        " Airline with COC
-let g:airline#extensions#coc#show_coc_status = 1
-let g:airline#extensions#coc#warning_symbol = '   '
-let g:airline#extensions#coc#error_symbol = ' '
-let g:airline#extensions#coc#stl_format_err = '%C(%L)'
-let g:airline#extensions#coc#stl_format_warn = '%C(%L)'
-
+  let g:airline#extensions#nvimlsp#enabled = 1
+  let g:airline#extensions#nvimlsp#error_symbol = ' '
+  let g:airline#extensions#nvimlsp#warning_symbol = ' '
+  let g:airline#extensions#nvimlsp#show_line_numbers = 1
+  let g:airline#extensions#nvimlsp#open_lnum_symbol = '('
+  let g:airline#extensions#nvimlsp#close_lnum_symbol = ')'
 
 " <-----------------------------Wilder----------------------------------------->
 autocmd CmdlineEnter * ++once call s:wilder_init() | call wilder#main#start()
@@ -523,5 +509,4 @@ function! s:wilder_init() abort
 endfunction
 
 " <----------------------------Sources----------------------------------------->
-" :setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 source ~/dotarch/.config/nvim/qucik-word.vim
