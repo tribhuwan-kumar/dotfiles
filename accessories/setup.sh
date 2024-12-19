@@ -111,7 +111,7 @@ setupDotarch() {
         installPackges
         installOrphanPackages
         echo -e "setting up dotarch, please wait!!"
-        git clone https://github/tribhuwan-kumar/dotarch.git "$HOME/dotarch"
+        git clone --branch lsp https://github/tribhuwan-kumar/dotarch.git "$HOME/dotarch"
         if cd "$HOME/dotarch" && stow . > /dev/null; then
           echo -e "dotarch's configuration was successfull, now you can enjoy the perfect OS enviorment :)"
         else
