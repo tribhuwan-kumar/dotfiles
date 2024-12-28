@@ -1,4 +1,3 @@
-" <-------------------------@tribhuwan-kumar------------------------>
 " <-------------------------Neovim Settings------------------------->
 syntax on
 set nowrap
@@ -47,7 +46,6 @@ Plug 'tpope/vim-obsession'                                                      
 Plug 'gregsexton/MatchTag'                                                                    " Highlights matching html tags
 Plug 'onsails/lspkind.nvim'                                                                   " LSP icons
 Plug 'rcarriga/nvim-dap-ui'                                                                   " DAP UI
-Plug 'ThePrimeagen/harpoon'                                                                   " File tracking
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
@@ -61,6 +59,8 @@ Plug 'mfussenegger/nvim-dap'                                                    
 Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
 Plug 'lewis6991/gitsigns.nvim'                                                                " Git Signs
+Plug 'tribhuwan-kumar/harpoon'                                                                " File tracking
+Plug 'zapling/mason-lock.nvim'                                                                " Mason lock
 Plug 'williamboman/mason.nvim'                                                                " LSP installer
 Plug 'aurum77/live-server.nvim'                                                               " Live Server
 Plug 'Jezda1337/nvim-html-css'                                                                " HTML completion
@@ -272,37 +272,41 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
 
 
-" <---------------------------LSP------------------------------------->
+" <---------------------------LSP--------------------------------------------->
 lua require("lsp-config")
 
 " keybindings
 nnoremap <Leader>l <C-]>
 
-" <---------------------------Mason------------------------------------->
+" <---------------------------Mason------------------------------------------->
 lua require("mason-config")
 
 
-" <---------------------------Completion------------------------------------->
+" <---------------------------Mason-Lock-------------------------------------->
+lua require("mason-lock-config")
+
+
+" <---------------------------Completion-------------------------------------->
 lua require("completion-config")
 
 
-" <---------------------------Snippets------------------------------------->
+" <---------------------------Snippets---------------------------------------->
 lua require("luasnip-config")
 
 
-" <---------------------------Indentline------------------------------------->
+" <---------------------------Indentline-------------------------------------->
 lua require("indentline-config")
 
 
-" <--------------------------Tresssitter------------------------------------->
+" <--------------------------Tresssitter-------------------------------------->
 lua require('tree-sitter-config')
 
 
-" <-------------------------Colorscheme-------------------------------------->
+" <-------------------------Colorscheme--------------------------------------->
 lua require('theme-config')
 
 
-" <------------------------Colorizer----------------------------------------->
+" <------------------------Colorizer------------------------------------------>
 lua require('colorizer').setup()
 autocmd BufWritePost *  ColorizerReloadAllBuffers
 
@@ -464,12 +468,12 @@ let g:webdevicons_enable_airline_tabline = 1                                    
 let g:webdevicons_enable_airline_statusline = 1                                                 " Statusline
 let g:airline#extensions#tagbar#enabled = 0                                                     " Tagbar
 
-  let g:airline#extensions#nvimlsp#enabled = 1
-  let g:airline#extensions#nvimlsp#error_symbol = ' '
-  let g:airline#extensions#nvimlsp#warning_symbol = ' '
-  let g:airline#extensions#nvimlsp#show_line_numbers = 1
-  let g:airline#extensions#nvimlsp#open_lnum_symbol = '('
-  let g:airline#extensions#nvimlsp#close_lnum_symbol = ')'
+let g:airline#extensions#nvimlsp#enabled = 1
+let g:airline#extensions#nvimlsp#error_symbol = ' '
+let g:airline#extensions#nvimlsp#warning_symbol = ' '
+let g:airline#extensions#nvimlsp#show_line_numbers = 1
+let g:airline#extensions#nvimlsp#open_lnum_symbol = '('
+let g:airline#extensions#nvimlsp#close_lnum_symbol = ')'
 
 " <-----------------------------Wilder----------------------------------------->
 autocmd CmdlineEnter * ++once call s:wilder_init() | call wilder#main#start()
