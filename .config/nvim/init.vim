@@ -25,7 +25,7 @@ set timeoutlen=1000
 set encoding=UTF-8
 set signcolumn=yes
 set foldmethod=manual
-set completeopt-=preview 
+set completeopt-=preview
 set clipboard=unnamedplus
 
 " <--------------------------------------------------------Plugins using VIM-PLUG----------------------------------------------------------------------->
@@ -49,6 +49,7 @@ Plug 'rcarriga/nvim-dap-ui'                                                     
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
+Plug 'oysandvik94/curl.nvim'                                                                  " Curl
 Plug 'nvim-neotest/nvim-nio'                                                                  " Asynchronous IO
 Plug 'nvim-lua/plenary.nvim'                                                                  " Pop-up api
 Plug 'numToStr/Comment.nvim'                                                                  " Better Commenting
@@ -268,6 +269,7 @@ nnoremap _ <CMD>horizontal resize -2<CR>
 
 
 " <----------------------------Auto CMDs------------------------------------->
+autocmd BufRead,BufNewFile *.http set filetype=http
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
 
@@ -296,6 +298,10 @@ lua require("luasnip-config")
 
 " <---------------------------Indentline-------------------------------------->
 lua require("indentline-config")
+
+
+" <---------------------------Curl------------------------------------------>
+lua require("curl-config")
 
 
 " <--------------------------Tresssitter-------------------------------------->
@@ -408,9 +414,9 @@ inoremap <C-c> <C-o>:ColorPicker<CR>
 
 " <-----------------------------Preview---------------------------------------->
 function! OpenPreview()
-    setlocal previewheight=1
-    let l:line = line('.')
-    execute 'pedit +' . l:line . ' %'
+	setlocal previewheight=1
+	let l:line = line('.')
+	execute 'pedit +' . l:line . ' %'
 endfunction
                                                                                                    " Keybindings
 nnoremap <silent> gp :call OpenPreview()<CR>
@@ -418,40 +424,40 @@ nnoremap gq :pclose<CR>
 
 " <-----------------------------Folds------------------------------------------>
 augroup RememberFolds
-    autocmd!
-    autocmd BufWinLeave *.* mkview
-    autocmd BufWinEnter *.* silent! loadview
+	autocmd!
+	autocmd BufWinLeave *.* mkview
+	autocmd BufWinEnter *.* silent! loadview
 augroup END
 
 
 " <-----------------------------Silicon----------------------------------------->
 let g:silicon = {
-    \   'theme':             'DarkNeon',
-    \   'font':               'Fantasque Sans Mono',
-    \   'background':         '#090909',
-    \   'shadow-color':       '#000000',
-    \   'line-pad':                   2,
-    \   'pad-horiz':                 80,
-    \   'pad-vert':                 100,
-    \   'shadow-blur-radius':         0,
-    \   'shadow-offset-x':            0,
-    \   'shadow-offset-y':            0,
-    \   'line-number':           v:true,
-    \   'round-corner':          v:true,
-    \   'window-controls':       v:true
-    \ }
+			\   'theme':             'DarkNeon',
+			\   'font':               'Fantasque Sans Mono',
+			\   'background':         '#090909',
+			\   'shadow-color':       '#000000',
+			\   'line-pad':                   2,
+			\   'pad-horiz':                 80,
+			\   'pad-vert':                 100,
+			\   'shadow-blur-radius':         0,
+			\   'shadow-offset-x':            0,
+			\   'shadow-offset-y':            0,
+			\   'line-number':           v:true,
+			\   'round-corner':          v:true,
+			\   'window-controls':       v:true
+			\ }
 let g:silicon['output'] = '~/Pictures/Code-Screenshots/vim-screenshot-{time:%Y-%m-%d-%H%M%S}.png'
 
 
 " <---------------------------Airline---------------------------------------->
 let g:airline#extensions#default#section_truncate_width = {
-    \ 'b': 80,
-    \ 'x': 70,
-    \ 'y': 80,
-    \ 'z': 40,
-    \ 'warning': 40,
-    \ 'error': 40,
-    \ }
+			\ 'b': 80,
+			\ 'x': 70,
+			\ 'y': 80,
+			\ 'z': 40,
+			\ 'warning': 40,
+			\ 'error': 40,
+			\ }
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
