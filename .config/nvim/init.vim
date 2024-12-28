@@ -15,11 +15,11 @@ set relativenumber
 set viewoptions-=curdir
 
 set mouse=a
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set textwidth=160
 set ttimeoutlen=0
-set softtabstop=4
+set softtabstop=2
 set updatetime=250
 set timeoutlen=1000
 set encoding=UTF-8
@@ -141,7 +141,7 @@ nnoremap <Leader>r :VRunCode<CR>
 nnoremap <Leader>B :HRunCode<CR>
 nnoremap <Leader>t :tabnew \| term bash<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
-nnoremap <Leader><Tab> :set tabstop=2 shiftwidth=2 expandtab<CR>
+nnoremap <Leader><Tab> :set tabstop=4 shiftwidth=4 expandtab<CR>
 
 " Prevent registering to clipboard
 nnoremap S "_S
@@ -432,32 +432,32 @@ augroup END
 
 " <-----------------------------Silicon----------------------------------------->
 let g:silicon = {
-			\   'theme':             'DarkNeon',
-			\   'font':               'Fantasque Sans Mono',
-			\   'background':         '#090909',
-			\   'shadow-color':       '#000000',
-			\   'line-pad':                   2,
-			\   'pad-horiz':                 80,
-			\   'pad-vert':                 100,
-			\   'shadow-blur-radius':         0,
-			\   'shadow-offset-x':            0,
-			\   'shadow-offset-y':            0,
-			\   'line-number':           v:true,
-			\   'round-corner':          v:true,
-			\   'window-controls':       v:true
-			\ }
+      \   'theme':             'DarkNeon',
+      \   'font':               'Fantasque Sans Mono',
+      \   'background':         '#090909',
+      \   'shadow-color':       '#000000',
+      \   'line-pad':                   2,
+      \   'pad-horiz':                 80,
+      \   'pad-vert':                 100,
+      \   'shadow-blur-radius':         0,
+      \   'shadow-offset-x':            0,
+      \   'shadow-offset-y':            0,
+      \   'line-number':           v:true,
+      \   'round-corner':          v:true,
+      \   'window-controls':       v:true
+      \ }
 let g:silicon['output'] = '~/Pictures/Code-Screenshots/vim-screenshot-{time:%Y-%m-%d-%H%M%S}.png'
 
 
 " <---------------------------Airline---------------------------------------->
 let g:airline#extensions#default#section_truncate_width = {
-			\ 'b': 80,
-			\ 'x': 70,
-			\ 'y': 80,
-			\ 'z': 40,
-			\ 'warning': 40,
-			\ 'error': 40,
-			\ }
+      \ 'b': 80,
+      \ 'x': 70,
+      \ 'y': 80,
+      \ 'z': 40,
+      \ 'warning': 40,
+      \ 'error': 40,
+      \ }
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
