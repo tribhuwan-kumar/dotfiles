@@ -268,7 +268,7 @@ nnoremap + <CMD>horizontal resize +2<CR>
 nnoremap _ <CMD>horizontal resize -2<CR>
 
 
-" <----------------------------Auto CMDs------------------------------------->
+" <----------------------------Auto CMDs-------------------------------------->
 autocmd BufRead,BufNewFile *.http set filetype=http
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
@@ -300,8 +300,12 @@ lua require("luasnip-config")
 lua require("indentline-config")
 
 
-" <---------------------------Curl------------------------------------------>
+" <---------------------------Curl-------------------------------------------->
 lua require("curl-config")
+
+
+" <---------------------------Rocks------------------------------------------->
+lua require("rocks-config")
 
 
 " <--------------------------Tresssitter-------------------------------------->
