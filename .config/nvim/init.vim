@@ -69,13 +69,13 @@ Plug 'rasulomaroff/cmp-bufname'                                                 
 Plug 'AndrewRadev/tagalong.vim'                                                               " Auto rename tags
 Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
 Plug 'tribhuwan-kumar/CodeRunner'                                                             " Code Runner
+Plug 'nvim-neo-tree/neo-tree.nvim'                                                            " File System
 Plug 'norcalli/nvim-colorizer.lua'                                                            " Colorizer
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
 Plug 'mfussenegger/nvim-dap-python'                                                           " Python debugger
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
 Plug 'kristijanhusak/vim-dadbod-ui'                                                           " vim-dadbod UI
 Plug 'lukas-reineke/lsp-format.nvim'                                                          " Formatter
-Plug 'tribhuwan-kumar/neo-tree.nvim'                                                          " File System
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
 Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
@@ -87,7 +87,7 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'                              
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }                                 " Copilot chat
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }                                   " Copilot chat
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}       " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
@@ -95,7 +95,7 @@ call plug#end()
 
 
 " <----------------------------Paths---------------------------------------->
-let g:python3_host_prog = "/usr/bin/python3"                                                  " Python bin path
+let g:python3_host_prog = "/opt/homebrew/bin/python3"                                         " Python bin path
 
 " <-------------------------Keybindings------------------------------------->
 " let mapleader = "z"                                                                         " My binding

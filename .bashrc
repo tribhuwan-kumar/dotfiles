@@ -8,10 +8,9 @@
 PS1='[\u@\h \W]\$ '
 
 eval "$(fzf --bash)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(zoxide init --cmd cd bash)"
 eval "$(oh-my-posh --init --shell bash --config ~/dotarch/accessories/vendetta.omp.json)"
-
-PS1="\u@\h:\w\$ "
 
 # History
 shopt -s histappend
@@ -33,21 +32,18 @@ bind 'set keymap vi-insert'
 bind 'RETURN: "\e\n"'
 
 # Bash completion
-source /usr/share/bash-completion/bash_completion
 bind 'TAB:menu-complete'
 bind 'set show-all-if-ambiguous on'
 bind "set completion-ignore-case on"
-
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
 # Some exports
 export EDITOR="nvim"
 export TERMIAL="kitty"
 export BAT_THEME="ansi"
 export BROWSER="firefox"
-export LC_ALL=en_IN.UTF-8
-export PATH="HOME/.local/bin:$PATH"
-export PATH=~/.npm-global/bin:$PATH
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+export PATH="$HOME/.cargo/env:$PATH"
 
 # FZF
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!**/.git/*" --glob "!**/__pycache__/*" --glob "!**/node_modules/*" --glob "!**/env/*" --glob "!**/target/*"'
@@ -55,7 +51,6 @@ export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=header,grid --lin
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | wl-copy)+abort'"
 
 # Aliases
-alias hh=hstr
 alias cat='bat'
 alias tx='tmux'
 alias ex='exit'
@@ -72,7 +67,7 @@ alias gaa='git add --all'
 alias trsh='trashbhuwan'
 alias grep='grep -i --color=auto'
 alias hibernate='systemctl hibernate'
-alias ls="exa --icons --group-directories-first"
+alias ls="eza --icons --group-directories-first"
 alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(green)%h%C(reset) - %C(magenta)%aD%C(reset) %C(yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(cyan)%s%C(reset) %C(dim blue)- %an%C(reset)' --all"
 alias pyenv-venv='eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"'
 
@@ -259,4 +254,7 @@ ex=:\
 *.pdf=:\
 *.nix=:\
 "
-. "/home/freakybytes/.deno/env"
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
