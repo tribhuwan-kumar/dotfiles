@@ -56,6 +56,8 @@ require("catppuccin").setup({
         CmpItemMenu = { fg = colors.surface2 },
         CursorLineNr = { fg = colors.text },
         FloatBorder = { bg = colors.base, fg = colors.surface0 },
+        Visual = { bg = colors.surface0 },
+        VisualNOS = { bg = colors.surface0 },
         LineNr = { fg = colors.overlay0 },
         LspInfoBorder = { link = "FloatBorder" },
         NeoTreeDirectoryIcon = { fg = colors.subtext1 },
