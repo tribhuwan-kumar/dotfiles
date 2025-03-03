@@ -36,6 +36,7 @@ local border = {
 -- servers
 local servers = {
   'html',
+  'cssls',
   'ts_ls',
   'eslint',
   'pyright',

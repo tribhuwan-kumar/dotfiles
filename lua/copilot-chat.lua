@@ -38,10 +38,10 @@ require("CopilotChat").setup {
     show_diff = {
       normal = '<Leader>gd'
     },
-    show_system_prompt = {
+    show_info = {
       normal = '<Leader>gp'
     },
-    show_user_selection = {
+    show_context = {
       normal = '<Leader>gs'
     },
   },
@@ -58,3 +58,4 @@ vim.api.nvim_set_keymap('v', '<Leader>gc', '', {
   end,
   desc = "CopilotChat - chat",
 })
+

@@ -75,7 +75,7 @@ Plug 'mfussenegger/nvim-dap-python'                                             
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
 Plug 'kristijanhusak/vim-dadbod-ui'                                                           " vim-dadbod UI
 Plug 'lukas-reineke/lsp-format.nvim'                                                          " Formatter
-Plug 'tribhuwan-kumar/neo-tree.nvim'                                                          " File System
+Plug 'nvim-neo-tree/neo-tree.nvim'                                                            " File System
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
 Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
@@ -87,15 +87,22 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'                              
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }                                 " Copilot chat
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }                                   " Copilot chat
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}       " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
 call plug#end()
 
+" <----------------------------Paths---------------------------------------->                  " Python bin path
+function! FindPythonPath()
+    let python_paths = split(trim(system('where.exe python 2>nul')), '\n')
+    let python_path = python_paths[0]
+    if !empty(python_path)
+        let g:python3_host_prog = python_path
+    endif
+endfunction
 
-" <----------------------------Paths---------------------------------------->
-let g:python3_host_prog = "/usr/bin/python3"                                                  " Python bin path
+call FindPythonPath()
 
 " <-------------------------Keybindings------------------------------------->
 " let mapleader = "z"                                                                         " My binding
@@ -135,8 +142,8 @@ nnoremap <Leader>z <C-v>
 nnoremap <Leader><Esc> :noh<CR>
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
-nnoremap <Leader>p :vsplit \| terminal<CR>
-nnoremap <Leader>b :botright split \| terminal<CR>
+nnoremap <Leader>p :vsplit \| term powershell.exe<CR>
+nnoremap <Leader>b :botright split \| term powershell.exe<CR>
 nnoremap <Leader>r :VRunCode<CR>
 nnoremap <Leader>B :HRunCode<CR>
 nnoremap <Leader>t :tabnew \| term bash<CR>
@@ -523,7 +530,7 @@ function! s:wilder_init() abort
 endfunction
 
 " <--------------------------Search word----------------------------------->
-set wildignore+=*\\.git\\**, *\\.venv\\**, *\\dev\\**, *\\target\\**, *\\deps\\**, *\\_build\\**, *\\node_modules\\**, *\\__pycache__\\**, *.json, *.lock, *.jpg, *.png, *.ico, *.jpeg, *.svg, *.ttf
+set wildignore+=*\.git\**,*\.venv\**,*\dev\**,*\target\**,*\deps\**,*\_build\**,*\node_modules\**,*\__pycache__\**,*.json,*.lock,*.jpg,*.png,*.ico,*.jpeg,*.svg,*.ttf
 function SearchWordInFile()
 	let l:word = expand("<cword>")
 	let l:filename = expand("%")
