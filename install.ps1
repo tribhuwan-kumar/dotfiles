@@ -1,3 +1,8 @@
+Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*nvim*' } | ForEach-Object {
+  taskkill.exe /T /F /PID $_.ProcessId; Write-Output
+ "process with pid $($_.ProcessId) has been terminated."
+}
+
 if (-Not (Get-Command git -ErrorAction SilentlyContinue)) {
     winget install --id Git.Git -e --source winget
 }
@@ -15,8 +20,13 @@ if (-Not (Test-Path $dotarchPath)) {
 if (-Not (Test-Path $nvimPath)) {
     New-Item -ItemType Directory -Path $nvimPath
 }
-Get-ChildItem -Path $dotarchPath | ForEach-Object {
-    New-Item -ItemType SymbolicLink -Path "$nvimPath\$_" -Target "$dotarchPath\$_"
+
+Get-ChildItem -Path $dotarchPath |  Where-Object { $_.Name -ne ".git" } | ForEach-Object {
+  $linkPath = "$nvimPath\$_"
+  if (Test-Path $linkPath) {
+    Remove-Item -Path $linkPath -Force
+  }
+  New-Item -ItemType SymbolicLink -Path $linkPath -Target "$dotarchPath\$_"
 }
 
 if (-Not (Get-Command bun -ErrorAction SilentlyContinue)) {
