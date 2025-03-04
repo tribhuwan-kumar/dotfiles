@@ -7,6 +7,22 @@ if (-Not (Get-Command git -ErrorAction SilentlyContinue)) {
     winget install --id Git.Git -e --source winget
 }
 
+if (-Not (Get-Command nvim -ErrorAction SilentlyContinue)) {
+  winget install --id=Neovim.Neovim  -e
+}
+
+if (-Not (Get-Command bun -ErrorAction SilentlyContinue)) {
+  powershell -c "irm bun.sh/install.ps1|iex"
+}
+
+if (-Not (Get-Command python -ErrorAction SilentlyContinue)) {
+  winget install --id=Python.Python.3.12  -e
+}
+
+# if (-Not (Get-Command lua -ErrorAction SilentlyContinue)) {
+#   winget install "lua for windows"
+# }
+
 iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim-data/site/autoload/plug.vim" -Force
 
@@ -27,10 +43,6 @@ Get-ChildItem -Path $dotarchPath |  Where-Object { $_.Name -ne ".git" } | ForEac
     Remove-Item -Path $linkPath -Force
   }
   New-Item -ItemType SymbolicLink -Path $linkPath -Target "$dotarchPath\$_"
-}
-
-if (-Not (Get-Command bun -ErrorAction SilentlyContinue)) {
-  powershell -c "irm bun.sh/install.ps1|iex"
 }
 
 # takeown /F $nvimPath /R /D Y
