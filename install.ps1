@@ -102,7 +102,7 @@ if (-Not (Test-Path $profilePath)) {
     New-Item -ItemType File -Path $profilePath -Force
 }
 
-Add-Content -Path $profilePath -Value $profileContent
+Set-Content -Path $profilePath -Value $profileContent
 
 # permission
 takeown /F "$dotarchPath" /R /D Y
