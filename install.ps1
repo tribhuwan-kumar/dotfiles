@@ -26,6 +26,7 @@ if (-Not (Get-Command python -ErrorAction SilentlyContinue)) {
 iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim-data/site/autoload/plug.vim" -Force
 
+$CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 $dotarchPath = "$env:USERPROFILE\Downloads\dotarch"
 $nvimPath = "$env:LOCALAPPDATA\nvim"
 
@@ -45,5 +46,65 @@ Get-ChildItem -Path $dotarchPath |  Where-Object { $_.Name -ne ".git" } | ForEac
   New-Item -ItemType SymbolicLink -Path $linkPath -Target "$dotarchPath\$_"
 }
 
-# takeown /F $nvimPath /R /D Y
+# profile
+$profileContent = @'
+function Git-Push {
+  git push
+}
+
+function Git-Pull {
+  git pull
+}
+
+function Git-Commit {
+  git commit
+}
+
+function Show-GitStatus {
+  git status
+}
+
+function Open-Nvim {
+  nvim
+}
+
+function Clear-Screen {
+  clear
+}
+
+function Exit-Shell {
+  exit
+}
+
+function Show-GitLog {
+  git log --graph --abbrev-commit --decorate --format=format:'%C(green)%h%C(reset) - %C(magenta)%aD%C(reset) %C(yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(cyan)%s%C(reset) %C(dim blue)- %an%C(reset)' --all
+}
+
+Set-Alias gpp Git-Push
+Set-Alias gpl Git-Pull
+Set-Alias gcc Git-Commit
+Set-Alias gss Show-GitStatus
+Set-Alias c Clear-Screen
+Set-Alias vi Open-Nvim
+Set-Alias ex Exit-Shell
+Set-Alias glg Show-GitLog
+
+Import-Module PSReadLine
+Set-PSReadLineOption -EditMode Vi
+
+Set-PSReadLineKeyHandler -Key j -Function HistorySearchForward -ViMode Command
+Set-PSReadLineKeyHandler -Key k -Function HistorySearchBackward -ViMode Command
+'@
+
+$profilePath = $PROFILE
+
+if (-Not (Test-Path $profilePath)) {
+    New-Item -ItemType File -Path $profilePath -Force
+}
+
+Add-Content -Path $profilePath -Value $profileContent
+
+# permission
+takeown /F "$dotarchPath" /R /D Y
+icacls $dotarchPath /grant "`"$CurrentUser`":(OI)(CI)F" /T /Q
 
