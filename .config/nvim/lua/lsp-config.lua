@@ -35,19 +35,25 @@ local border = {
 
 -- servers
 local servers = {
-  'ccls',
   'html',
   'cssls',
   'ts_ls',
   'jdtls',
   'vimls',
+  'cmake',
+  'jsonls',
   'bashls',
   'lua_ls',
   'clangd',
   'eslint',
   'pyright',
+  'marksman',
+  'dockerls',
   'tailwindcss',
+  'mdx_analyzer',
   'rust_analyzer',
+  'css_variables',
+  'cssmodules_ls',
 }
 
 for _, lsp in ipairs(servers) do

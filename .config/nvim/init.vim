@@ -23,7 +23,7 @@ set softtabstop=2
 set updatetime=250
 set timeoutlen=1000
 set encoding=UTF-8
-set signcolumn=yes
+set signcolumn=yes:2
 set foldmethod=manual
 set completeopt-=preview
 set clipboard=unnamedplus
@@ -99,7 +99,7 @@ let g:python3_host_prog = "/usr/bin/python3"                                    
 
 " <-------------------------Keybindings------------------------------------->
 " let mapleader = "z"                                                                         " My binding
-let mapleader = "\<Space>"                                                                    " For better convinience
+let mapleader = "\<Space>"                                                                    " For better convenience
 
 " Help doc
 nnoremap <Leader>h K<CR>
@@ -378,7 +378,7 @@ lua require("harpoon").setup()
                                                                                                 " Keybindings
 nnoremap <Leader>a  :lua require("harpoon.mark").add_file()<CR>
 nnoremap <Leader>j :lua require("harpoon.ui").toggle_quick_menu()<CR>
-                                                                                                " Jump to arround files
+                                                                                                " Jump to around files
 nnoremap <Leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
 nnoremap <Leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
 nnoremap <Leader>3 :lua require("harpoon.ui").nav_file(3)<CR>

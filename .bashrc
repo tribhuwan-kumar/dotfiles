@@ -1,8 +1,6 @@
 #
 # ~/.bashrc
 #
-
-# If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 PS1='[\u@\h \W]\$ '
@@ -70,22 +68,12 @@ alias gc='git commit'
 alias gs='git status'
 alias gaa='git add --all'
 alias trsh='trashbhuwan'
+alias psrch='pip_search'
 alias grep='grep -i --color=auto'
 alias hibernate='systemctl hibernate'
 alias ls="exa --icons --group-directories-first"
 alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(green)%h%C(reset) - %C(magenta)%aD%C(reset) %C(yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(cyan)%s%C(reset) %C(dim blue)- %an%C(reset)' --all"
 alias pyenv-venv='eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"'
-
-#pip search alias
-alias psrch='pip_search'
-alias pip='function _pip(){
-    if [ $1 = "search" ]; then
-        pip_search "$2";
-    else pip "$@";
-    fi;
-};_pip'
-
-# TMUX session restoration
 alias mux='pgrep -vx tmux > /dev/null && \
         tmux new -d -s delete-me && \
         tmux run-shell ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh && \
@@ -260,3 +248,7 @@ ex=:\
 *.nix=:\
 "
 . "/home/freakybytes/.deno/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
