@@ -324,7 +324,7 @@ lua require('theme-config')
 
 
 " <------------------------Colorizer------------------------------------------>
-lua require('highlights-colors-config.lua')
+lua require('highlights-colors-config')
 
 
 " <--------------------------Tagbar------------------------------------------>
