@@ -69,7 +69,6 @@ Plug 'rasulomaroff/cmp-bufname'                                                 
 Plug 'AndrewRadev/tagalong.vim'                                                               " Auto rename tags
 Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
 Plug 'tribhuwan-kumar/CodeRunner'                                                             " Code Runner
-Plug 'norcalli/nvim-colorizer.lua'                                                            " Colorizer
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
 Plug 'mfussenegger/nvim-dap-python'                                                           " Python debugger
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
@@ -79,16 +78,17 @@ Plug 'nvim-neo-tree/neo-tree.nvim'                                              
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
 Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
+Plug 'brenoprata10/nvim-highlight-colors'                                                     " Highlights colors
 Plug 'tribhuwan-kumar/custom-vim-airline'                                                     " Status bar
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                                " Lua native fuzzy finder
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " Tsx, Jsx commenting
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
 Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main', 'commit': '2ebe591' }              " Copilot chat
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}       " Markdown preview
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() }, 'branch': 'master', 'commit': '0476a65' }  " Fuzzy finder
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
 call plug#end()
@@ -147,7 +147,7 @@ nnoremap <Leader>b :botright split \| term powershell.exe<CR>
 nnoremap <Leader>r :VRunCode<CR>
 nnoremap <Leader>B :HRunCode<CR>
 nnoremap <Leader>t :tabnew \| term bash<CR>
-nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>R :source ~/AppData/Local/nvim/init.vim<CR>
 nnoremap <Leader><Tab> :set tabstop=4 shiftwidth=4 expandtab<CR>
 
 " Prevent registering to clipboard
@@ -324,8 +324,7 @@ lua require('theme-config')
 
 
 " <------------------------Colorizer------------------------------------------>
-lua require('colorizer').setup()
-autocmd BufWritePost *  ColorizerReloadAllBuffers
+lua require('highlights-colors-config.lua')
 
 
 " <--------------------------Tagbar------------------------------------------>

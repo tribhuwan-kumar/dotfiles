@@ -91,6 +91,7 @@ Set-Alias glg Show-GitLog
 
 Import-Module PSReadLine
 Set-PSReadLineOption -EditMode Vi
+Set-PSReadLineOption -PredictionSource None
 
 Set-PSReadLineKeyHandler -Key j -Function HistorySearchForward -ViMode Command
 Set-PSReadLineKeyHandler -Key k -Function HistorySearchBackward -ViMode Command
