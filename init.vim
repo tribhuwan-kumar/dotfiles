@@ -328,7 +328,15 @@ lua require('highlights-colors-config')
 
 
 " <--------------------------Tagbar------------------------------------------>
-let g:tagbar_ctags_bin =  "/usr/bin/ctags"                                                    " Tagbar exburenant path
+function! FindCtagsPath()
+    let ctags_paths = split(trim(system('where.exe ctags 2>nul')), '\n')
+    let ctags_path = ctags_paths[0]
+    if !empty(ctags_path)
+        let g:tagbar_ctags_bin = ctags_path
+    endif
+endfunction
+
+call FindCtagsPath()
                                                                                               " Keybindings
 nmap <F1> :TagbarToggle<CR>
 
