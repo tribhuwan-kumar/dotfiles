@@ -85,11 +85,11 @@ Plug 'lukas-reineke/indent-blankline.nvim'                                      
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                                " Lua native fuzzy finder
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " Tsx, Jsx commenting
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
 Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main', 'commit': '2ebe591' }              " Copilot chat
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}       " Markdown preview
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() }, 'branch': 'master', 'commit': '0476a65' }  " Fuzzy finder
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
 call plug#end()
