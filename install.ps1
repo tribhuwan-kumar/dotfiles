@@ -27,12 +27,24 @@ if (-Not (Get-Command fzf -ErrorAction SilentlyContinue)) {
   winget install --id=ajeetdsouza.zoxide  -e
 }
 
+if (-Not (Get-Command bat -ErrorAction SilentlyContinue)) {
+  winget install sharkdp.bat
+}
+
+if (-Not (Get-Command rg -ErrorAction SilentlyContinue)) {
+  winget install BurntSushi.ripgrep.MSVC
+}
+
 if (-Not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
   winget install JanDeDobbeleer.OhMyPosh -s winget
 }
 
 if (-Not (Test-Path "C:\Program Files\Alacritty\alacritty.exe")) {
   winget install -e --id Alacritty.Alacritty
+}
+
+if (-Not (Get-Module -ListAvailable -Name PSFzf)) {
+    Install-Module -Name PSFzf -Force -Scope CurrentUser
 }
 
 # if (-Not (Get-Command lua -ErrorAction SilentlyContinue)) {
@@ -55,7 +67,7 @@ if (-Not (Test-Path $nvimPath)) {
     New-Item -ItemType Directory -Path $nvimPath
 }
 
-Get-ChildItem -Path $dotarchPath |  Where-Object { $_.Name -ne ".git" -or $_.Name -ne  "alacritty" } | ForEach-Object {
+Get-ChildItem -Path $dotarchPath |  Where-Object { $_.Name -ne ".git" -and $_.Name -ne  "alacritty" } | ForEach-Object {
   $linkPath = "$nvimPath\$_"
   if (Test-Path $linkPath) {
     Remove-Item -Path $linkPath -Force
@@ -120,6 +132,10 @@ Set-PSReadLineKeyHandler -Key k -Function HistorySearchBackward -ViMode Command
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/Downloads/dotarch/vendetta.omp.json) })
 Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
+$env:FZF_ALT_C_OPTS='--walker-skip .git,node_modules,target,env,__pycache__,.next,dist --preview "tree -C {}"'
+$env:FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!**/.git/*" --glob "!**/__pycache__/*" --glob "!**/node_modules/*" --glob "!**/env/*" --glob "!**/target/*" --glob "!**/.next/*" --glob "!**/dist/*"'
+$env:FZF_DEFAULT_OPTS = $FZF_DEFAULT_OPTS+'--color=fg:#bdae93,fg+:#ebdbb2,bg:#0C0D0C,bg+:#292929 --color=hl:#bdae93,hl+:#ebdbb2,info:#afaf87,marker:#a9b665 --color=prompt:#ea6962,spinner:#7daea3,pointer:#e78a4e,header:#87afaf --color=border:#262626,label:#aeaeae,query:#d9d9d9 --border="rounded" --border-label="" --preview-window="border-rounded"'
+$env:FZF_CTRL_T_OPTS= '--walker-skip .git,node_modules,target,env,__pycache__,.next,dist --preview "bat -n --color=always --style=header,grid --line-range :500 {} 2> NUL" --bind "ctrl-/:change-preview-window(down|hidden|)"'
 '@
 
 $profilePath = $PROFILE

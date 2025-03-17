@@ -35,6 +35,7 @@ Plug 'tpope/vim-dadbod'                                                         
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
 Plug 'L3MON4D3/LuaSnip'                                                                       " Snippets engine
+Plug 'junegunn/fzf.vim'                                                                       " fzf vim
 Plug 'hrsh7th/nvim-cmp'                                                                       " Completion
 Plug 'hrsh7th/cmp-path'                                                                       " Path completion
 Plug 'prisma/vim-prisma'                                                                      " Prisma
