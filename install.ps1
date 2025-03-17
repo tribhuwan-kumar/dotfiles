@@ -133,10 +133,11 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/Downloads/dotarch/vendetta.omp.json) })
 Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 $env:BAT_THEME = "gruvbox-dark"
-$env:FZF_ALT_C_OPTS='--walker-skip .git,node_modules,target,env,__pycache__,.next,dist --preview "tree -C {}"'
-$env:FZF_DEFAULT_COMMAND = 'rg --files --hidden --ignore-vcs --glob "!**/.git/*" --glob "!**/__pycache__/*" --glob "!**/node_modules/*" --glob "!**/env/*" --glob "!**/target/*" --glob "!**/.next/*" --glob "!**/dist/*"'
-$env:FZF_DEFAULT_OPTS = $FZF_DEFAULT_OPTS+'--color=fg:#bdae93,fg+:#ebdbb2,bg:#0C0D0C,bg+:#292929 --color=hl:#bdae93,hl+:#ebdbb2,info:#afaf87,marker:#a9b665 --color=prompt:#ea6962,spinner:#7daea3,pointer:#e78a4e,header:#87afaf --color=border:#262626,label:#aeaeae,query:#d9d9d9 --border="rounded" --border-label="" --preview-window="border-rounded"'
-$env:FZF_CTRL_T_OPTS= '--walker-skip .git,node_modules,target,env,__pycache__,.next,dist --preview "bat -n --color=always --style=header,grid --line-range :500 {} 2> NUL" --bind "ctrl-/:change-preview-window(down|hidden|)"'
+$env:FZF_ALT_C_OPTS = '--walker-skip .git,node_modules,target,env,__pycache__,.next,dist --preview "tree -C {}"'
+$env:FZF_DEFAULT_COMMAND = 'rg --files --hidden --ignore-vcs  --glob "!**/.git/*" --glob "!**/__pycache__/*" --glob "!**/node_modules/*" --glob "!**/env/*" --glob "!**/target/*" --glob "!**/.next/*" --glob "!**/dist/*"'
+$env:FZF_DEFAULT_OPTS = $FZF_DEFAULT_OPTS+'--color=fg:#bdae93,fg+:#ebdbb2,bg:#0C0D0C,bg+:#292929 --color=hl:#bdae93,hl+:#ebdbb2,info:#afaf87,marker:#a9b665 --color=prompt:#ea6962,spinner:#7daea3,pointer:#e78a4e,header:#87afaf --color=border:#262626,label:#aeaeae,query:#d9d9d9 --border="rounded" --border-label="" --preview-window="border-rounded" --preview "bat -n --color=always --style=header,grid --line-range :500 {} 2> NUL"'
+$env:FZF_CTRL_T_OPTS = '--walker-skip .git,node_modules,target,env,__pycache__,.next,dist --bind "ctrl-/:change-preview-window(down|hidden|)"'
+$env:FZF_CTRL_R_OPTS= '--preview "echo {}" --preview-window up:3:hidden:wrap --bind "ctrl-/:toggle-preview" --bind "ctrl-y:execute-silent(echo -n {2..} | Set-Clipboard)+abort"'
 '@
 
 $profilePath = $PROFILE
