@@ -54,6 +54,7 @@ local servers = {
   'rust_analyzer',
   'css_variables',
   'cssmodules_ls',
+  'taplo'
 }
 
 for _, lsp in ipairs(servers) do

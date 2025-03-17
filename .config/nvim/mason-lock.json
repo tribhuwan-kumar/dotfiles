@@ -15,6 +15,7 @@
   "pyright": "1.1.396",
   "rust-analyzer": "2025-03-10",
   "tailwindcss-language-server": "0.14.9",
+  "taplo": "0.9.3",
   "typescript-language-server": "4.3.4",
   "vim-language-server": "2.3.1",
   "yaml-language-server": "1.17.0"
