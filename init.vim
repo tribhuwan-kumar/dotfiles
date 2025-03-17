@@ -142,8 +142,8 @@ nnoremap <Leader>z <C-v>
 nnoremap <Leader><Esc> :noh<CR>
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
-nnoremap <Leader>p :vsplit \| term powershell.exe<CR>
-nnoremap <Leader>b :botright split \| term powershell.exe<CR>
+nnoremap <Leader>p :vsplit \| term powershell.exe -nologo<CR>
+nnoremap <Leader>b :botright split \| term powershell.exe -nologo<CR>
 nnoremap <Leader>r :VRunCode<CR>
 nnoremap <Leader>B :HRunCode<CR>
 nnoremap <Leader>t :tabnew \| term bash<CR>

@@ -31,6 +31,10 @@ if (-Not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
   winget install JanDeDobbeleer.OhMyPosh -s winget
 }
 
+if (-Not (Test-Path "C:\Program Files\Alacritty\alacritty.exe")) {
+  winget install -e --id Alacritty.Alacritty
+}
+
 # if (-Not (Get-Command lua -ErrorAction SilentlyContinue)) {
 #   winget install "lua for windows"
 # }
@@ -41,6 +45,7 @@ iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
 $CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 $dotarchPath = "$env:USERPROFILE\Downloads\dotarch"
 $nvimPath = "$env:LOCALAPPDATA\nvim"
+$alacrittyPath = "$env:APPDATA\alacritty"
 
 if (-Not (Test-Path $dotarchPath)) {
   git clone --branch win https://github.com/tribhuwan-kumar/dotarch.git "$env:USERPROFILE\Downloads\dotarch"
@@ -50,13 +55,18 @@ if (-Not (Test-Path $nvimPath)) {
     New-Item -ItemType Directory -Path $nvimPath
 }
 
-Get-ChildItem -Path $dotarchPath |  Where-Object { $_.Name -ne ".git" } | ForEach-Object {
+Get-ChildItem -Path $dotarchPath |  Where-Object { $_.Name -ne ".git" -or $_.Name -ne  "alacritty" } | ForEach-Object {
   $linkPath = "$nvimPath\$_"
   if (Test-Path $linkPath) {
     Remove-Item -Path $linkPath -Force
   }
   New-Item -ItemType SymbolicLink -Path $linkPath -Target "$dotarchPath\$_"
 }
+
+if (Test-Path $alacrittyPath) {
+  Remove-Item -Path $alacrittyPath -Force
+}
+New-Item -ItemType SymbolicLink -Path $alacrittyPath -Target "$dotarchPath\alacritty"
 
 # profile
 $profileContent = @'
