@@ -19,6 +19,18 @@ if (-Not (Get-Command python -ErrorAction SilentlyContinue)) {
   winget install --id=Python.Python.3.12  -e
 }
 
+if (-Not (Get-Command zoxide -ErrorAction SilentlyContinue)) {
+  winget install --id=ajeetdsouza.zoxide  -e
+}
+
+if (-Not (Get-Command fzf -ErrorAction SilentlyContinue)) {
+  winget install --id=ajeetdsouza.zoxide  -e
+}
+
+if (-Not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
+  winget install JanDeDobbeleer.OhMyPosh -s winget
+}
+
 # if (-Not (Get-Command lua -ErrorAction SilentlyContinue)) {
 #   winget install "lua for windows"
 # }
@@ -95,6 +107,9 @@ Set-PSReadLineOption -PredictionSource None
 
 Set-PSReadLineKeyHandler -Key j -Function HistorySearchForward -ViMode Command
 Set-PSReadLineKeyHandler -Key k -Function HistorySearchBackward -ViMode Command
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/Downloads/dotarch/vendetta.omp.json) })
+Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 '@
 
 $profilePath = $PROFILE
