@@ -79,6 +79,7 @@ Plug 'tribhuwan-kumar/neo-tree.nvim'                                            
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
 Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
+Plug 'brenoprata10/nvim-highlight-colors'                                                     " Highlights colors
 Plug 'tribhuwan-kumar/custom-vim-airline'                                                     " Status bar
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
@@ -314,6 +315,10 @@ lua require('tree-sitter-config')
 
 " <-------------------------Colorscheme--------------------------------------->
 lua require('theme-config')
+
+
+" <------------------------Colorizer------------------------------------------>
+lua require('highlights-colors-config')
 
 
 " <------------------------Colorizer------------------------------------------>
