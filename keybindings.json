@@ -1,0 +1,103 @@
+{
+  "actions":
+  [
+    {
+      "command":
+      {
+        "action": "copy",
+        "singleLine": false
+      },
+      "id": "User.copy.644BA8F2",
+      "keys": "ctrl+c"
+    },
+    {
+      "command": "paste",
+      "id": "User.paste",
+      "keys": "ctrl+v"
+    },
+    {
+      "command":
+      {
+        "action": "splitPane",
+        "split": "auto",
+        "splitMode": "duplicate"
+      },
+      "id": "User.splitPane.A6751878",
+      "keys": "alt+shift+d"
+    },
+    {
+      "command": "find",
+      "id": "User.find",
+      "keys": "ctrl+shift+f"
+    },
+    {
+      "command":
+      {
+        "action": "moveFocus",
+        "direction": "down"
+      },
+      "keys": "ctrl+shift+j"
+    },
+    {
+      "command":
+      {
+        "action": "moveFocus",
+        "direction": "up"
+      },
+      "keys": "ctrl+shift+k"
+    },
+    {
+      "command":
+      {
+        "action": "moveFocus",
+        "direction": "right"
+      },
+      "keys": "ctrl+shift+l"
+    },
+    {
+      "command":
+      {
+        "action": "moveFocus",
+        "direction": "left"
+      },
+      "keys": "ctrl+shift+h"
+    },
+    {
+      "command":
+      {
+        "action": "splitPane",
+        "split": "vertical"
+      },
+      "keys": "ctrl+shift+p"
+    },
+    {
+      "command":
+      {
+        "action": "splitPane",
+        "split": "horizontal"
+      },
+      "keys": "ctrl+shift+b"
+    },
+    {
+      "command": "toggleFocusMode",
+      "keys": "ctrl+shift+space"
+    },
+    {
+      "command":
+      {
+        "action": "nextTab"
+      },
+      "id": "User.nextTab.0",
+      "keys": "ctrl+shift+i"
+    },
+    {
+      "command":
+      {
+        "action": "prevTab"
+      },
+      "id": "User.prevTab.0",
+      "keys": "ctrl+shift+o"
+    }
+  ],
+}
+
