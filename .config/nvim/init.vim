@@ -35,12 +35,14 @@ Plug 'tpope/vim-dadbod'                                                         
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
 Plug 'L3MON4D3/LuaSnip'                                                                       " Snippets engine
+Plug 'junegunn/fzf.vim'                                                                       " fzf vim
 Plug 'hrsh7th/nvim-cmp'                                                                       " Completion
 Plug 'hrsh7th/cmp-path'                                                                       " Path completion
 Plug 'prisma/vim-prisma'                                                                      " Prisma
 Plug 'github/copilot.vim'                                                                     " Copilot
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
+Plug 'tpope/vim-fugitive'                                                                     " Git
 Plug 'hrsh7th/cmp-buffer'                                                                     " Buffer completion
 Plug 'tpope/vim-obsession'                                                                    " Session management
 Plug 'gregsexton/MatchTag'                                                                    " Highlights matching html tags
