@@ -234,13 +234,39 @@ export PATH="HOME/.local/bin:$PATH"
 export PATH=~/.npm-global/bin:$PATH
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export PATH="$PATH:/home/freakybytes/.local/bin"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/.ripgreprc"
 
 # FZF
-export FZF_ALT_C_OPTS='--walker-skip .git,node_modules,target,env,__pycache__,.next,dist --preview "tree -C {}"'
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS+'--color=fg:#bdae93,fg+:#ebdbb2,bg:#0C0D0C,bg+:#292929 --color=hl:#bdae93,hl+:#ebdbb2,info:#afaf87,marker:#a9b665 --color=prompt:#ea6962,spinner:#7daea3,pointer:#e78a4e,header:#87afaf --color=border:#262626,label:#aeaeae,query:#d9d9d9 --border="rounded" --border-label="" --preview-window="border-rounded" --preview "bat -n --color=always --style=header,grid --line-range :500 {} 2> /dev/null"'
-export FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-vcs  --glob "!**/.git/*" --glob "!**/__pycache__/*" --glob "!**/node_modules/*" --glob "!**/env/*" --glob "!**/target/*" --glob "!**/.next/*" --glob "!**/dist/*"'
-export FZF_CTRL_T_OPTS='--walker-skip .git,node_modules,target,env,__pycache__,.next,dist --bind "ctrl-/:change-preview-window(down|hidden|)"'
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | wl-copy)+abort'"
+export FZF_DEFAULT_COMMAND="rg --files"
+
+export FZF_DEFAULT_OPTS="
+  --color=fg:#bdae93,fg+:#ebdbb2,bg:#0C0D0C,bg+:#292929
+  --color=hl:#bdae93,hl+:#ebdbb2,info:#afaf87,marker:#a9b665
+  --color=prompt:#ea6962,spinner:#7daea3,pointer:#e78a4e,header:#87afaf
+  --color=border:#262626,label:#aeaeae,query:#d9d9d9
+  --border-label=''
+  --border='rounded'
+  --preview-window='border-rounded'
+  --bind 'ctrl-y:preview-up,ctrl-e:preview-down'
+  --bind 'ctrl-b:preview-page-up,ctrl-f:preview-page-down'
+  --bind 'ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'
+  --bind 'shift-up:preview-top,shift-down:preview-bottom'
+  --bind 'alt-up:half-page-up,alt-down:half-page-down'
+  --preview 'bat -n --color=always --style=header,grid --line-range :500 {} 2> /dev/null'"
+
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target,env,__pycache__,.next,dist
+  --preview 'tree -C {}'"
+
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target,env,__pycache__,.next,dist
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}'
+  --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | wl-copy)+abort'"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

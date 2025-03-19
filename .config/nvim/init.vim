@@ -27,6 +27,9 @@ set signcolumn=yes:2
 set foldmethod=manual
 set completeopt-=preview
 set clipboard=unnamedplus
+set grepprg=rg\ --vimgrep
+set grepformat=%f:%l:%c:%m,%f
+
 
 " <--------------------------------------------------------Plugins using VIM-PLUG----------------------------------------------------------------------->
 call plug#begin()
@@ -71,7 +74,6 @@ Plug 'rasulomaroff/cmp-bufname'                                                 
 Plug 'AndrewRadev/tagalong.vim'                                                               " Auto rename tags
 Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
 Plug 'tribhuwan-kumar/CodeRunner'                                                             " Code Runner
-Plug 'norcalli/nvim-colorizer.lua'                                                            " Colorizer
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
 Plug 'mfussenegger/nvim-dap-python'                                                           " Python debugger
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
@@ -134,15 +136,12 @@ nnoremap <C-l> <C-w>l
 
 " FZF, Wrap, Tagbar, Visual Block, Code Runner keybinding
 nnoremap <C-z> <C-q>
-nnoremap <Leader>z <C-v>
 nnoremap <Leader><Esc> :noh<CR>
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| terminal<CR>
 nnoremap <Leader>b :botright split \| terminal<CR>
-nnoremap <Leader>r :VRunCode<CR>
 nnoremap <Leader>B :HRunCode<CR>
-nnoremap <Leader>t :tabnew \| term bash<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 nnoremap <Leader><Tab> :set tabstop=4 shiftwidth=4 expandtab<CR>
 
@@ -280,8 +279,15 @@ autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checkti
 " <---------------------------LSP--------------------------------------------->
 lua require("lsp-config")
 
-" keybindings
+                                                                                             " Keybindings
 nnoremap <Leader>l <C-]>
+nnoremap <C-]> :lua vim.lsp.buf.hover()<CR>
+nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
+
+" empty
+" nnoremap <Leader>c :lua vim.lsp.buf.rename()<CR>
+" nnoremap <Leader>r :VRunCode<CR>
+" nnoremap <Leader>t :tabnew \| term bash<CR>
 
 " <---------------------------Mason------------------------------------------->
 lua require("mason-config")
@@ -321,11 +327,6 @@ lua require('theme-config')
 
 " <------------------------Colorizer------------------------------------------>
 lua require('highlights-colors-config')
-
-
-" <------------------------Colorizer------------------------------------------>
-lua require('colorizer').setup()
-autocmd BufWritePost *  ColorizerReloadAllBuffers
 
 
 " <--------------------------Tagbar------------------------------------------>
@@ -491,6 +492,21 @@ let g:airline#extensions#nvimlsp#warning_symbol = ' '
 let g:airline#extensions#nvimlsp#show_line_numbers = 1
 let g:airline#extensions#nvimlsp#open_lnum_symbol = '('
 let g:airline#extensions#nvimlsp#close_lnum_symbol = ')'
+
+
+" <-----------------------------GreppRg----------------------------------------->
+function! ShowFirstResult()
+  let l:qflist = getqflist()
+  if !empty(l:qflist)
+    let l:first_result = l:qflist[0]
+    echo printf("(%d of %d): %s", 1, len(l:qflist), l:first_result.text)
+  else
+    echo "No matches found"
+  endif
+endfunction
+
+command! -nargs=+ Srg execute 'silent! grep! ' . <q-args> | call ShowFirstResult()
+
 
 " <-----------------------------Wilder----------------------------------------->
 autocmd CmdlineEnter * ++once call s:wilder_init() | call wilder#main#start()
