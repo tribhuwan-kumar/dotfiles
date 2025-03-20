@@ -39,10 +39,6 @@ if (-Not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
   winget install JanDeDobbeleer.OhMyPosh -s winget
 }
 
-if (-Not (Test-Path "C:\Program Files\Alacritty\alacritty.exe")) {
-  winget install -e --id Alacritty.Alacritty
-}
-
 if (-Not (Get-Module -ListAvailable -Name PSFzf)) {
     Install-Module -Name PSFzf -Force -Scope CurrentUser
 }
@@ -57,7 +53,6 @@ iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
 $CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 $dotarchPath = "$env:USERPROFILE\Downloads\dotarch"
 $nvimPath = "$env:LOCALAPPDATA\nvim"
-$alacrittyPath = "$env:APPDATA\alacritty"
 
 if (-Not (Test-Path $dotarchPath)) {
   git clone --branch win https://github.com/tribhuwan-kumar/dotarch.git "$env:USERPROFILE\Downloads\dotarch"
@@ -67,18 +62,13 @@ if (-Not (Test-Path $nvimPath)) {
     New-Item -ItemType Directory -Path $nvimPath
 }
 
-Get-ChildItem -Path $dotarchPath |  Where-Object { $_.Name -ne ".git" -and $_.Name -ne  "alacritty" } | ForEach-Object {
+Get-ChildItem -Path $dotarchPath |  Where-Object { $_.Name -ne ".git" -and $_.Name -ne  "accessories" } | ForEach-Object {
   $linkPath = "$nvimPath\$_"
   if (Test-Path $linkPath) {
     Remove-Item -Path $linkPath -Force
   }
   New-Item -ItemType SymbolicLink -Path $linkPath -Target "$dotarchPath\$_"
 }
-
-if (Test-Path $alacrittyPath) {
-  Remove-Item -Path $alacrittyPath -Force
-}
-New-Item -ItemType SymbolicLink -Path $alacrittyPath -Target "$dotarchPath\alacritty"
 
 # profile
 $profileContent = @'
@@ -130,14 +120,37 @@ Set-PSReadLineOption -PredictionSource None
 Set-PSReadLineKeyHandler -Key j -Function HistorySearchForward -ViMode Command
 Set-PSReadLineKeyHandler -Key k -Function HistorySearchBackward -ViMode Command
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/Downloads/dotarch/vendetta.omp.json) })
+Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/Downloads/dotarch/accessories/vendetta.omp.json) })
 Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
-$env:BAT_THEME = "gruvbox-dark"
-$env:FZF_ALT_C_OPTS = '--walker-skip .git,node_modules,target,env,__pycache__,.next,dist --preview "tree -C {}"'
-$env:FZF_DEFAULT_COMMAND = 'rg --files --hidden --ignore-vcs  --glob "!**/.git/*" --glob "!**/__pycache__/*" --glob "!**/node_modules/*" --glob "!**/env/*" --glob "!**/target/*" --glob "!**/.next/*" --glob "!**/dist/*"'
-$env:FZF_DEFAULT_OPTS = $FZF_DEFAULT_OPTS+'--color=fg:#bdae93,fg+:#ebdbb2,bg:#0C0D0C,bg+:#292929 --color=hl:#bdae93,hl+:#ebdbb2,info:#afaf87,marker:#a9b665 --color=prompt:#ea6962,spinner:#7daea3,pointer:#e78a4e,header:#87afaf --color=border:#262626,label:#aeaeae,query:#d9d9d9 --border="rounded" --border-label="" --preview-window="border-rounded" --preview "bat -n --color=always --style=header,grid --line-range :500 {} 2> NUL"'
-$env:FZF_CTRL_T_OPTS = '--walker-skip .git,node_modules,target,env,__pycache__,.next,dist --bind "ctrl-/:change-preview-window(down|hidden|)"'
-$env:FZF_CTRL_R_OPTS= '--preview "echo {}" --preview-window up:3:hidden:wrap --bind "ctrl-/:toggle-preview" --bind "ctrl-y:execute-silent(echo -n {2..} | Set-Clipboard)+abort"'
+$env:BAT_THEME = 'gruvbox-dark'
+$env:RIPGREP_CONFIG_PATH = "$HOME/Downloads/dotarch/accessories/.ripgreprc"
+$env:FZF_DEFAULT_COMMAND = 'rg --files'
+$env:FZF_DEFAULT_OPTS = '
+  --color=fg:#bdae93,fg+:#ebdbb2,bg:#0C0D0C,bg+:#292929
+  --color=hl:#bdae93,hl+:#ebdbb2,info:#afaf87,marker:#a9b665
+  --color=prompt:#ea6962,spinner:#7daea3,pointer:#e78a4e,header:#87afaf
+  --color=border:#262626,label:#aeaeae,query:#d9d9d9
+  --border-label=""
+  --info="right"
+  --border="rounded"
+  --preview-window="border-rounded"
+  --bind "ctrl-y:preview-up,ctrl-e:preview-down"
+  --bind "ctrl-b:preview-page-up,ctrl-f:preview-page-down"
+  --bind "ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down"
+  --bind "shift-up:preview-top,shift-down:preview-bottom"
+  --bind "alt-up:half-page-up,alt-down:half-page-down"
+  --preview "bat -n --color=always --style=header,grid --line-range :500 {} 2> NUL"'
+$env:FZF_CTRL_T_OPTS = '
+  --walker-skip .git,node_modules,target,env,__pycache__,.next,dist
+  --bind "ctrl-/:change-preview-window(down|hidden|)"'
+$env:FZF_CTRL_R_OPTS ='
+  --preview "echo {}"
+  --preview-window up:3:hidden:wrap
+  --bind "ctrl-/:toggle-preview"
+  --bind "ctrl-y:execute-silent(echo -n {2..} | Set-Clipboard)+abort"'
+$env:FZF_ALT_C_OPTS = '
+  --walker-skip .git,node_modules,target,env,__pycache__,.next,dist
+  --preview "tree -C {}"'
 '@
 
 $profilePath = $PROFILE

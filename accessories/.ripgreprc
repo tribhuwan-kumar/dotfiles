@@ -1,0 +1,18 @@
+--hidden
+--smart-case
+--ignore-vcs
+--max-columns=150
+--max-columns-preview
+
+# type
+--type-add
+web:*.{html,css,js}*
+
+# glob
+--glob=!**/.git/*
+--glob=!**/__pycache__/*
+--glob=!**/node_modules/*
+--glob=!**/env/*
+--glob=!**/target/*
+--glob=!**/.next/*
+--glob=!**/dist/*

@@ -27,6 +27,8 @@ set signcolumn=yes
 set foldmethod=manual
 set completeopt-=preview
 set clipboard=unnamedplus
+set grepprg=rg\ --vimgrep
+set grepformat=%f:%l:%c:%m
 
 " <--------------------------------------------------------Plugins using VIM-PLUG----------------------------------------------------------------------->
 call plug#begin()
@@ -138,18 +140,14 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " FZF, Wrap, Tagbar, Visual Block, Code Runner keybinding
-nnoremap <C-z> <C-q>
-nnoremap <Leader>z <C-v>
 nnoremap <Leader><Esc> :noh<CR>
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| term powershell.exe -nologo<CR>
 nnoremap <Leader>b :botright split \| term powershell.exe -nologo<CR>
-nnoremap <Leader>r :VRunCode<CR>
 nnoremap <Leader>B :HRunCode<CR>
-nnoremap <Leader>t :tabnew \| term bash<CR>
 nnoremap <Leader>R :source ~/AppData/Local/nvim/init.vim<CR>
-nnoremap <Leader><Tab> :set tabstop=4 shiftwidth=4 expandtab<CR>
+nnoremap <Leader><Tab> :setlocal tabstop=4 shiftwidth=4 expandtab<CR>
 
 " Prevent registering to clipboard
 nnoremap S "_S
@@ -285,8 +283,18 @@ autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checkti
 " <---------------------------LSP--------------------------------------------->
 lua require("lsp-config")
 
-" keybindings
+                                                                                             " Keybindings
 nnoremap <Leader>l <C-]>
+nnoremap <C-]> :lua vim.lsp.buf.hover()<CR>
+nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
+
+" empty
+" nnoremap <C-z> <C-q>
+" nnoremap <Leader>z <C-v>
+" nnoremap <Leader>c :lua vim.lsp.buf.rename()<CR>
+" nnoremap <Leader>r :VRunCode<CR>
+" nnoremap <Leader>t :tabnew \| term bash<CR>
+
 
 " <---------------------------Mason------------------------------------------->
 lua require("mason-config")
@@ -499,6 +507,52 @@ let g:airline#extensions#nvimlsp#warning_symbol = ' '
 let g:airline#extensions#nvimlsp#show_line_numbers = 1
 let g:airline#extensions#nvimlsp#open_lnum_symbol = '('
 let g:airline#extensions#nvimlsp#close_lnum_symbol = ')'
+
+
+" <-----------------------------VimgrepRg----------------------------------------->
+function! VimgrepRg(args)
+    let l:match = matchlist(a:args, '^/\(.\{-}\)/\([gfj]*\)\s*\(.*\)$')
+    if empty(l:match)
+        echohl ErrorMsg | echo "Invalid syntax. Use :Vrg /pattern/[flags] {file_pattern}" | echohl None
+        return
+    endif
+
+    let l:pattern = l:match[1]
+    let l:flags = l:match[2]
+    let l:file_pattern = l:match[3]
+
+    let l:pattern = '"' . l:pattern . '"'
+    let l:rg_flags = '--vimgrep'
+
+    if stridx(l:flags, 'g') >= 0
+        let l:rg_flags .= ' --no-heading'
+    endif
+
+    let l:file_pattern_cmd = join(map(split(l:file_pattern), '"--glob " . v:val'), ' ')
+    let l:rg_cmd = 'rg ' . l:rg_flags . ' ' . l:pattern . ' ' . l:file_pattern_cmd
+
+    let l:results = systemlist(l:rg_cmd)
+
+    if v:shell_error
+        echohl ErrorMsg | echo "Ripgrep Error: " . v:shell_error | echohl None
+    else
+        call setqflist([], 'r', {'title': 'Vrg', 'lines': l:results})
+        let l:qflist = getqflist()
+        if !empty(l:qflist)
+            let l:first_result = l:qflist[0]
+            echo printf("(%d of %d): %s", 1, len(l:qflist), l:first_result.text)
+        else
+            echo "No matches found"
+        endif
+        if stridx(l:flags, 'j') >= 0
+            cfirst
+        endif
+    endif
+endfunction
+
+command! -nargs=1 Vrg call VimgrepRg(<q-args>)
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* RG call fzf#vim#grep2("rg --column --line-number --no-heading --color=always --smart-case -- ", <q-args>, fzf#vim#with_preview(), <bang>0)
 
 " <-----------------------------Wilder----------------------------------------->
 autocmd CmdlineEnter * ++once call s:wilder_init() | call wilder#main#start()
