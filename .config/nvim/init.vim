@@ -494,18 +494,50 @@ let g:airline#extensions#nvimlsp#open_lnum_symbol = '('
 let g:airline#extensions#nvimlsp#close_lnum_symbol = ')'
 
 
-" <-----------------------------GreppRg----------------------------------------->
-function! ShowFirstResult()
-  let l:qflist = getqflist()
-  if !empty(l:qflist)
-    let l:first_result = l:qflist[0]
-    echo printf("(%d of %d): %s", 1, len(l:qflist), l:first_result.text)
-  else
-    echo "No matches found"
-  endif
+" <-----------------------------VimgrepRg----------------------------------------->
+function! VimgrepRg(args)
+    let l:match = matchlist(a:args, '^/\(.\{-}\)/\([gfj]*\)\s*\(.*\)$')
+    if empty(l:match)
+        echohl ErrorMsg | echo "Invalid syntax. Use :Vrg /pattern/[flags] {file_pattern}" | echohl None
+        return
+    endif
+
+    let l:pattern = l:match[1]
+    let l:flags = l:match[2]
+    let l:file_pattern = l:match[3]
+
+    let l:pattern = '"' . l:pattern . '"'
+    let l:rg_flags = '--vimgrep'
+
+    if stridx(l:flags, 'g') >= 0
+        let l:rg_flags .= ' --no-heading'
+    endif
+
+    let l:file_pattern_cmd = join(map(split(l:file_pattern), '"--glob " . v:val'), ' ')
+    let l:rg_cmd = 'rg ' . l:rg_flags . ' ' . l:pattern . ' ' . l:file_pattern_cmd
+
+    let l:results = systemlist(l:rg_cmd)
+
+    if v:shell_error
+        echohl ErrorMsg | echo "Ripgrep Error: " . v:shell_error | echohl None
+    else
+        call setqflist([], 'r', {'title': 'Vrg', 'lines': l:results})
+        let l:qflist = getqflist()
+        if !empty(l:qflist)
+            let l:first_result = l:qflist[0]
+            echo printf("(%d of %d): %s", 1, len(l:qflist), l:first_result.text)
+        else
+            echo "No matches found"
+        endif
+        if stridx(l:flags, 'j') >= 0
+            cfirst
+        endif
+    endif
 endfunction
 
-command! -nargs=+ Srg execute 'silent! grep! ' . <q-args> | call ShowFirstResult()
+command! -nargs=1 Vrg call VimgrepRg(<q-args>)
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* RG call fzf#vim#grep2("rg --column --line-number --no-heading --color=always --smart-case -- ", <q-args>, fzf#vim#with_preview(), <bang>0)
 
 
 " <-----------------------------Wilder----------------------------------------->
