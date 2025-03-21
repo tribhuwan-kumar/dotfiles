@@ -98,10 +98,14 @@ call plug#end()
 
 " <----------------------------Paths---------------------------------------->                  " Python bin path
 function! FindPythonPath()
-  let python_paths = split(trim(system('where.exe python 2>nul')), '\n')
-  let python_path = python_paths[0]
-  if !empty(python_path)
-    let g:python3_host_prog = python_path
+  let where_outputs = system('where.exe python 2>nul')
+  if v:shell_error
+    echo ""
+    return
+  endif
+  let python_paths = split(trim(where_outputs), '\n')
+  if !empty(python_paths)
+    let g:python3_host_prog = python_paths[0]
   endif
 endfunction
 
@@ -338,10 +342,14 @@ lua require('highlights-colors-config')
 
 " <--------------------------Tagbar------------------------------------------>
 function! FindCtagsPath()
-  let ctags_paths = split(trim(system('where.exe ctags 2>nul')), '\n')
-  let ctags_path = ctags_paths[0]
+  let ctags_output = system('where.exe ctags 2>nul')
+  if v:shell_error
+    echo ""
+    return
+  endif
+  let ctags_paths = split(trim(ctags_output), '\n')
   if !empty(ctags_path)
-    let g:tagbar_ctags_bin = ctags_path
+    let g:tagbar_ctags_bin = ctags_paths[0]
   endif
 endfunction
 

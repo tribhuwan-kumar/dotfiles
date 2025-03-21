@@ -4,10 +4,13 @@ Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*nvim*' } | F
 }
 
 if (-Not (Get-Command git -ErrorAction SilentlyContinue)) {
-    winget install --id Git.Git -e --source winget
+  # in case PATH got corrupt
+  winget uninstall --id Git.Git -e --source winget
+  winget install --id Git.Git -e --source winget
 }
 
 if (-Not (Get-Command nvim -ErrorAction SilentlyContinue)) {
+  winget uninstall --id=Neovim.Neovim  -e
   winget install --id=Neovim.Neovim  -e
 }
 
@@ -16,26 +19,32 @@ if (-Not (Get-Command bun -ErrorAction SilentlyContinue)) {
 }
 
 if (-Not (Get-Command python -ErrorAction SilentlyContinue)) {
+  winget uninstall --id=Python.Python.3.12  -e
   winget install --id=Python.Python.3.12  -e
 }
 
 if (-Not (Get-Command zoxide -ErrorAction SilentlyContinue)) {
+  winget uninstall --id=ajeetdsouza.zoxide  -e
   winget install --id=ajeetdsouza.zoxide  -e
 }
 
 if (-Not (Get-Command fzf -ErrorAction SilentlyContinue)) {
+  winget uninstall --id=junegunn.fzf  -e
   winget install --id=junegunn.fzf  -e
 }
 
 if (-Not (Get-Command bat -ErrorAction SilentlyContinue)) {
+  winget uninstall sharkdp.bat
   winget install sharkdp.bat
 }
 
 if (-Not (Get-Command rg -ErrorAction SilentlyContinue)) {
+  winget uninstall BurntSushi.ripgrep.MSVC
   winget install BurntSushi.ripgrep.MSVC
 }
 
 if (-Not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
+  winget uninstall JanDeDobbeleer.OhMyPosh -s winget
   winget install JanDeDobbeleer.OhMyPosh -s winget
 }
 
@@ -153,7 +162,6 @@ $env:FZF_ALT_C_OPTS = '
   --preview "tree -C {}"'
 '@
 
-setx PATH "$($env:PATH);$HOME/dotarch/accessories/bins"
 $profilePath = $PROFILE
 
 if (-Not (Test-Path $profilePath)) {
