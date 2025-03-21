@@ -38,6 +38,7 @@ local servers = {
   'html',
   'cssls',
   'ts_ls',
+  'clangd',
   'eslint',
   'pyright',
   'tailwindcss',

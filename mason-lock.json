@@ -1,4 +1,5 @@
 {
+  "clangd": "19.1.2",
   "eslint_d": "14.3.0",
   "powershell-editor-services": "v4.2.0",
   "rust-analyzer": "2025-03-10",

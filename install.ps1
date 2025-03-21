@@ -24,7 +24,7 @@ if (-Not (Get-Command zoxide -ErrorAction SilentlyContinue)) {
 }
 
 if (-Not (Get-Command fzf -ErrorAction SilentlyContinue)) {
-  winget install --id=ajeetdsouza.zoxide  -e
+  winget install --id=junegunn.fzf  -e
 }
 
 if (-Not (Get-Command bat -ErrorAction SilentlyContinue)) {
@@ -51,11 +51,11 @@ iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim-data/site/autoload/plug.vim" -Force
 
 $CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
-$dotarchPath = "$env:USERPROFILE\Downloads\dotarch"
+$dotarchPath = "$env:USERPROFILE\dotarch"
 $nvimPath = "$env:LOCALAPPDATA\nvim"
 
 if (-Not (Test-Path $dotarchPath)) {
-  git clone --branch win https://github.com/tribhuwan-kumar/dotarch.git "$env:USERPROFILE\Downloads\dotarch"
+  git clone --branch win https://github.com/tribhuwan-kumar/dotarch.git "$env:USERPROFILE\dotarch"
 }
 
 if (-Not (Test-Path $nvimPath)) {
@@ -106,7 +106,7 @@ function Show-GitLog {
 
 Set-Alias gpp Git-Push
 Set-Alias gpl Git-Pull
-Set-Alias gcc Git-Commit
+Set-Alias gcmt Git-Commit
 Set-Alias gss Show-GitStatus
 Set-Alias c Clear-Screen
 Set-Alias vi Open-Nvim
@@ -120,10 +120,10 @@ Set-PSReadLineOption -PredictionSource None
 Set-PSReadLineKeyHandler -Key j -Function HistorySearchForward -ViMode Command
 Set-PSReadLineKeyHandler -Key k -Function HistorySearchBackward -ViMode Command
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/Downloads/dotarch/accessories/vendetta.omp.json) })
+Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/dotarch/accessories/vendetta.omp.json) })
 Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 $env:BAT_THEME = 'gruvbox-dark'
-$env:RIPGREP_CONFIG_PATH = "$HOME/Downloads/dotarch/accessories/.ripgreprc"
+$env:RIPGREP_CONFIG_PATH = "$HOME/dotarch/accessories/.ripgreprc"
 $env:FZF_DEFAULT_COMMAND = 'rg --files'
 $env:FZF_DEFAULT_OPTS = '
   --color=fg:#bdae93,fg+:#ebdbb2,bg:#0C0D0C,bg+:#292929
@@ -153,6 +153,7 @@ $env:FZF_ALT_C_OPTS = '
   --preview "tree -C {}"'
 '@
 
+setx PATH "$($env:PATH);$HOME/dotarch/accessories/bins"
 $profilePath = $PROFILE
 
 if (-Not (Test-Path $profilePath)) {

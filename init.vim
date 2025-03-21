@@ -98,11 +98,11 @@ call plug#end()
 
 " <----------------------------Paths---------------------------------------->                  " Python bin path
 function! FindPythonPath()
-    let python_paths = split(trim(system('where.exe python 2>nul')), '\n')
-    let python_path = python_paths[0]
-    if !empty(python_path)
-        let g:python3_host_prog = python_path
-    endif
+  let python_paths = split(trim(system('where.exe python 2>nul')), '\n')
+  let python_path = python_paths[0]
+  if !empty(python_path)
+    let g:python3_host_prog = python_path
+  endif
 endfunction
 
 call FindPythonPath()
@@ -338,11 +338,11 @@ lua require('highlights-colors-config')
 
 " <--------------------------Tagbar------------------------------------------>
 function! FindCtagsPath()
-    let ctags_paths = split(trim(system('where.exe ctags 2>nul')), '\n')
-    let ctags_path = ctags_paths[0]
-    if !empty(ctags_path)
-        let g:tagbar_ctags_bin = ctags_path
-    endif
+  let ctags_paths = split(trim(system('where.exe ctags 2>nul')), '\n')
+  let ctags_path = ctags_paths[0]
+  if !empty(ctags_path)
+    let g:tagbar_ctags_bin = ctags_path
+  endif
 endfunction
 
 call FindCtagsPath()
@@ -441,9 +441,9 @@ inoremap <C-c> <C-o>:ColorPicker<CR>
 
 " <-----------------------------Preview---------------------------------------->
 function! OpenPreview()
-	setlocal previewheight=1
-	let l:line = line('.')
-	execute 'pedit +' . l:line . ' %'
+  setlocal previewheight=1
+  let l:line = line('.')
+  execute 'pedit +' . l:line . ' %'
 endfunction
                                                                                                    " Keybindings
 nnoremap <silent> gp :call OpenPreview()<CR>
@@ -451,9 +451,9 @@ nnoremap gq :pclose<CR>
 
 " <-----------------------------Folds------------------------------------------>
 augroup RememberFolds
-	autocmd!
-	autocmd BufWinLeave *.* mkview
-	autocmd BufWinEnter *.* silent! loadview
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
 augroup END
 
 
@@ -487,7 +487,7 @@ let g:airline#extensions#default#section_truncate_width = {
       \ }
 
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 
 let g:airline_theme='dark'                                                                      " Theme
@@ -511,43 +511,43 @@ let g:airline#extensions#nvimlsp#close_lnum_symbol = ')'
 
 " <-----------------------------VimgrepRg----------------------------------------->
 function! VimgrepRg(args)
-    let l:match = matchlist(a:args, '^/\(.\{-}\)/\([gfj]*\)\s*\(.*\)$')
-    if empty(l:match)
-        echohl ErrorMsg | echo "Invalid syntax. Use :Vrg /pattern/[flags] {file_pattern}" | echohl None
-        return
-    endif
+  let l:match = matchlist(a:args, '^/\(.\{-}\)/\([gfj]*\)\s*\(.*\)$')
+  if empty(l:match)
+    echohl ErrorMsg | echo "Invalid syntax. Use :Vrg /pattern/[flags] {file_pattern}" | echohl None
+    return
+  endif
 
-    let l:pattern = l:match[1]
-    let l:flags = l:match[2]
-    let l:file_pattern = l:match[3]
+  let l:pattern = l:match[1]
+  let l:flags = l:match[2]
+  let l:file_pattern = l:match[3]
 
-    let l:pattern = '"' . l:pattern . '"'
-    let l:rg_flags = '--vimgrep'
+  let l:pattern = '"' . l:pattern . '"'
+  let l:rg_flags = '--vimgrep'
 
-    if stridx(l:flags, 'g') >= 0
-        let l:rg_flags .= ' --no-heading'
-    endif
+  if stridx(l:flags, 'g') >= 0
+    let l:rg_flags .= ' --no-heading'
+  endif
 
-    let l:file_pattern_cmd = join(map(split(l:file_pattern), '"--glob " . v:val'), ' ')
-    let l:rg_cmd = 'rg ' . l:rg_flags . ' ' . l:pattern . ' ' . l:file_pattern_cmd
+  let l:file_pattern_cmd = join(map(split(l:file_pattern), '"--glob " . v:val'), ' ')
+  let l:rg_cmd = 'rg ' . l:rg_flags . ' ' . l:pattern . ' ' . l:file_pattern_cmd
 
-    let l:results = systemlist(l:rg_cmd)
+  let l:results = systemlist(l:rg_cmd)
 
-    if v:shell_error
-        echohl ErrorMsg | echo "Ripgrep Error: " . v:shell_error | echohl None
+  if v:shell_error
+    echohl ErrorMsg | echo "Ripgrep Error: " . v:shell_error | echohl None
+  else
+    call setqflist([], 'r', {'title': 'Vrg', 'lines': l:results})
+    let l:qflist = getqflist()
+    if !empty(l:qflist)
+      let l:first_result = l:qflist[0]
+      echo printf("(%d of %d): %s", 1, len(l:qflist), l:first_result.text)
     else
-        call setqflist([], 'r', {'title': 'Vrg', 'lines': l:results})
-        let l:qflist = getqflist()
-        if !empty(l:qflist)
-            let l:first_result = l:qflist[0]
-            echo printf("(%d of %d): %s", 1, len(l:qflist), l:first_result.text)
-        else
-            echo "No matches found"
-        endif
-        if stridx(l:flags, 'j') >= 0
-            cfirst
-        endif
+      echo "No matches found"
     endif
+    if stridx(l:flags, 'j') >= 0
+      cfirst
+    endif
+  endif
 endfunction
 
 command! -nargs=1 Vrg call VimgrepRg(<q-args>)
@@ -594,44 +594,44 @@ endfunction
 " <--------------------------Search word----------------------------------->
 set wildignore+=*\.git\**,*\.venv\**,*\dev\**,*\target\**,*\deps\**,*\_build\**,*\node_modules\**,*\__pycache__\**,*.json,*.lock,*.jpg,*.png,*.ico,*.jpeg,*.svg,*.ttf
 function SearchWordInFile()
-	let l:word = expand("<cword>")
-	let l:filename = expand("%")
-	let l:vimgrepcmd = printf(":vimgrep /%s/ %s", l:word, l:filename)
-	execute l:vimgrepcmd
+  let l:word = expand("<cword>")
+  let l:filename = expand("%")
+  let l:vimgrepcmd = printf(":vimgrep /%s/ %s", l:word, l:filename)
+  execute l:vimgrepcmd
 endfunction
 
 function SearchWordInSameExt()
-	let l:word = expand("<cword>")
-	let l:extension = expand("%:e")
-	let l:vimgrepcmd = printf(":vimgrep /%s/ **/*.%s", l:word, l:extension)
-	execute l:vimgrepcmd
+  let l:word = expand("<cword>")
+  let l:extension = expand("%:e")
+  let l:vimgrepcmd = printf(":vimgrep /%s/ **/*.%s", l:word, l:extension)
+  execute l:vimgrepcmd
 endfunction
 
 function ReplaceWordInFile()
-	let l:word = expand("<cword>")
-	let l:filename = expand("%")
-	let l:extension = expand("%:e")
-	let l:replacementWord = input("Enter the replacement word: ")
-	if l:replacementWord!= ''
-		let l:vimgrepcmd = printf(":vimgrep /%s/ %s | cdo s/%s/%s/g | w", l:word, l:filename, l:word, l:replacementWord)
-		silent execute l:vimgrepcmd
-		echo "Replaced '". l:word. "' with '". l:replacementWord. "'"
-	else
-		echo "No replacement word provided!"
-	endif
+  let l:word = expand("<cword>")
+  let l:filename = expand("%")
+  let l:extension = expand("%:e")
+  let l:replacementWord = input("Enter the replacement word: ")
+  if l:replacementWord!= ''
+    let l:vimgrepcmd = printf(":vimgrep /%s/ %s | cdo s/%s/%s/g | w", l:word, l:filename, l:word, l:replacementWord)
+    silent execute l:vimgrepcmd
+    echo "Replaced '". l:word. "' with '". l:replacementWord. "'"
+  else
+    echo "No replacement word provided!"
+  endif
 endfunction
 
 function ReplaceWordInSameExt()
-	let l:word = expand("<cword>")
-	let l:extension = expand("%:e")
-	let l:replacementWord = input("Enter the replacement word: ")
-	if l:replacementWord!= ''
-		let l:vimgrepcmd = printf(":vimgrep /%s/ **/*.%s | cdo s/%s/%s/g | w", l:word, l:extension, l:word, l:replacementWord)
-		silent execute l:vimgrepcmd
-		echo "Replaced '". l:word. "' with '". l:replacementWord "'" . "in whole project"
-	else
-		echo "No replacement word provided"
-	endif
+  let l:word = expand("<cword>")
+  let l:extension = expand("%:e")
+  let l:replacementWord = input("Enter the replacement word: ")
+  if l:replacementWord!= ''
+    let l:vimgrepcmd = printf(":vimgrep /%s/ **/*.%s | cdo s/%s/%s/g | w", l:word, l:extension, l:word, l:replacementWord)
+    silent execute l:vimgrepcmd
+    echo "Replaced '". l:word. "' with '". l:replacementWord "'" . "in whole project"
+  else
+    echo "No replacement word provided"
+  endif
 endfunction
 
 
