@@ -3,6 +3,10 @@ Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*nvim*' } | F
  "process with pid $($_.ProcessId) has been terminated."
 }
 
+if (-Not (Get-Command choco -ErrorAction SilentlyContinue)) {
+  Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+}
+
 if (-Not (Get-Command git -ErrorAction SilentlyContinue)) {
   # in case PATH got corrupt
   winget uninstall --id Git.Git -e --source winget
