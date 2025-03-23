@@ -71,18 +71,17 @@ Plug 'Jezda1337/nvim-html-css'                                                  
 Plug 'rasulomaroff/cmp-bufname'                                                               " Bufname completion
 Plug 'AndrewRadev/tagalong.vim'                                                               " Auto rename tags
 Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
-Plug 'tribhuwan-kumar/CodeRunner'                                                             " Code Runner
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
+Plug 'tribhuwan-kumar/vim-airline'                                                            " Status bar
+Plug 'nvim-neo-tree/neo-tree.nvim'                                                            " File System
 Plug 'mfussenegger/nvim-dap-python'                                                           " Python debugger
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
 Plug 'kristijanhusak/vim-dadbod-ui'                                                           " vim-dadbod UI
 Plug 'lukas-reineke/lsp-format.nvim'                                                          " Formatter
-Plug 'nvim-neo-tree/neo-tree.nvim'                                                            " File System
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
 Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
 Plug 'brenoprata10/nvim-highlight-colors'                                                     " Highlights colors
-Plug 'tribhuwan-kumar/custom-vim-airline'                                                     " Status bar
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                                " Lua native fuzzy finder
@@ -149,7 +148,6 @@ nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| term powershell.exe -nologo<CR>
 nnoremap <Leader>b :botright split \| term powershell.exe -nologo<CR>
-nnoremap <Leader>B :HRunCode<CR>
 nnoremap <Leader>R :source ~/AppData/Local/nvim/init.vim<CR>
 nnoremap <Leader><Tab> :setlocal tabstop=4 shiftwidth=4 expandtab<CR>
 
@@ -292,12 +290,13 @@ nnoremap <Leader>l <C-]>
 nnoremap <C-]> :lua vim.lsp.buf.hover()<CR>
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 
-" empty
+" empty keybinding
 " nnoremap <C-z> <C-q>
 " nnoremap <Leader>z <C-v>
 " nnoremap <Leader>c :lua vim.lsp.buf.rename()<CR>
 " nnoremap <Leader>r :VRunCode<CR>
 " nnoremap <Leader>t :tabnew \| term bash<CR>
+" nnoremap <Leader>B :HRunCode<CR>
 
 
 " <---------------------------Mason------------------------------------------->
