@@ -49,7 +49,11 @@ if (-Not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
 }
 
 if (-Not (Get-Module -ListAvailable -Name PSFzf)) {
-    Install-Module -Name PSFzf -Force -Scope CurrentUser
+  Install-Module -Name PSFzf -Force -Scope CurrentUser
+}
+
+if (-Not (Get-Command python -ErrorAction SilentlyContinue)) {
+  winget install --id=Python.Python.3.13  -e
 }
 
 # if (-Not (Get-Command lua -ErrorAction SilentlyContinue)) {
@@ -61,10 +65,18 @@ iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
 
 if (-Not (Get-Command cargo -ErrorAction SilentlyContinue)) {
   $rustInstallerUrl = "https://win.rustup.rs/x86_64"
-    $rustInstallerPath = "$env:TEMP\rustup-init.exe"
-    Invoke-WebRequest -Uri $rustInstallerUrl -OutFile $rustInstallerPath
-    Start-Process -FilePath $rustInstallerPath -Wait
-    Remove-Item -Path $rustInstallerPath -Force
+  $rustInstallerPath = "$env:TEMP\rustup-init.exe"
+  Invoke-WebRequest -Uri $rustInstallerUrl -OutFile $rustInstallerPath
+  Start-Process -FilePath $rustInstallerPath -Wait
+  Remove-Item -Path $rustInstallerPath -Force
+}
+
+if (-Not (Get-Command node -ErrorAction SilentlyContinue)) {
+  $nodeInstallerUrl = "https://nodejs.org/dist/v22.14.0/node-v22.14.0-x64.msi"
+  $nodeInstallerPath = "$env:TEMP\node-v22.14.0-x64.msi"
+  Invoke-WebRequest -Uri $nodeInstallerUrl -OutFile $nodeInstallerPath
+  Start-Process -FilePath $nodeInstallerPath -Wait
+  Remove-Item -Path $nodeInstallerPath -Force
 }
 
 $CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
