@@ -59,6 +59,14 @@ if (-Not (Get-Module -ListAvailable -Name PSFzf)) {
 iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim-data/site/autoload/plug.vim" -Force
 
+if (-Not (Get-Command cargo -ErrorAction SilentlyContinue)) {
+  $rustInstallerUrl = "https://win.rustup.rs/x86_64"
+    $rustInstallerPath = "$env:TEMP\rustup-init.exe"
+    Invoke-WebRequest -Uri $rustInstallerUrl -OutFile $rustInstallerPath
+    Start-Process -FilePath $rustInstallerPath -Wait
+    Remove-Item -Path $rustInstallerPath -Force
+}
+
 $CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 $dotarchPath = "$env:USERPROFILE\dotarch"
 $nvimPath = "$env:LOCALAPPDATA\nvim"
