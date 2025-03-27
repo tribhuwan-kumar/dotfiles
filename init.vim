@@ -145,6 +145,7 @@ nnoremap <C-l> <C-w>l
 " FZF, Wrap, Tagbar, Visual Block, Code Runner keybinding
 nnoremap <Leader><Esc> :noh<CR>
 nnoremap <Leader>f :FZF<CR>
+nnoremap <Leader>z :Buffers<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| term powershell.exe -nologo<CR>
 nnoremap <Leader>b :botright split \| term powershell.exe -nologo<CR>
@@ -180,84 +181,84 @@ nnoremap ,p o<ESC>p==
 
 " Short the SORROUNDINGS
 "CUT with no REG
-nnoremap c( "_ci(
-nnoremap c) "_ci)
-nnoremap c[ "_ci[
-nnoremap c] "_ci]
-nnoremap c{ "_ci{
-nnoremap c} "_ci}
-nnoremap c< "_ci<
-nnoremap c> "_ci>
-nnoremap c" "_ci"
-nnoremap c' "_ci'
-nnoremap c` "_ci`
-nnoremap cw "_ciw
-nnoremap cp "_cip
-nnoremap ct "_cit
+" nnoremap c( "_ci(
+" nnoremap c) "_ci)
+" nnoremap c[ "_ci[
+" nnoremap c] "_ci]
+" nnoremap c{ "_ci{
+" nnoremap c} "_ci}
+" nnoremap c< "_ci<
+" nnoremap c> "_ci>
+" nnoremap c" "_ci"
+" nnoremap c' "_ci'
+" nnoremap c` "_ci`
+" nnoremap cw "_ciw
+" nnoremap cp "_cip
+" nnoremap ct "_cit
 
 " Visually Select
-nnoremap v( vi(
-nnoremap v) vi)
-nnoremap v[ vi[
-nnoremap v] vi]
-nnoremap v{ vi{
-nnoremap v} vi}
-nnoremap v< vi<
-nnoremap v> vi>
-nnoremap v" vi"
-nnoremap v' vi'
-nnoremap v` vi`
-nnoremap vw viw
-nnoremap vp vip
-nnoremap vt vit
+" nnoremap v( vi(
+" nnoremap v) vi)
+" nnoremap v[ vi[
+" nnoremap v] vi]
+" nnoremap v{ vi{
+" nnoremap v} vi}
+" nnoremap v< vi<
+" nnoremap v> vi>
+" nnoremap v" vi"
+" nnoremap v' vi'
+" nnoremap v` vi`
+" nnoremap vw viw
+" nnoremap vp vip
+" nnoremap vt vit
 
 " Delete with no REG
-nnoremap d( "_di(
-nnoremap d) "_di)
-nnoremap d[ "_di[
-nnoremap d] "_di]
-nnoremap d{ "_di{
-nnoremap d} "_di}
-nnoremap d< "_di<
-nnoremap d> "_di>
-nnoremap d" "_di"
-nnoremap d' "_di'
-nnoremap d` "_di`
-nnoremap dw "_diw
-nnoremap dp "_dip
-nnoremap dt "_dit
+" nnoremap d( "_di(
+" nnoremap d) "_di)
+" nnoremap d[ "_di[
+" nnoremap d] "_di]
+" nnoremap d{ "_di{
+" nnoremap d} "_di}
+" nnoremap d< "_di<
+" nnoremap d> "_di>
+" nnoremap d" "_di"
+" nnoremap d' "_di'
+" nnoremap d` "_di`
+" nnoremap dw "_diw
+" nnoremap dp "_dip
+" nnoremap dt "_dit
 
 " Yank
-nnoremap y( yi(
-nnoremap y) yi)
-nnoremap y[ yi[
-nnoremap y] yi]
-nnoremap y{ yi{
-nnoremap y} yi}
-nnoremap y< yi<
-nnoremap y> yi>
-nnoremap y" yi"
-nnoremap y' yi'
-nnoremap y` yi`
-nnoremap yw yiw
-nnoremap yp yip
-nnoremap yt yit
+" nnoremap y( yi(
+" nnoremap y) yi)
+" nnoremap y[ yi[
+" nnoremap y] yi]
+" nnoremap y{ yi{
+" nnoremap y} yi}
+" nnoremap y< yi<
+" nnoremap y> yi>
+" nnoremap y" yi"
+" nnoremap y' yi'
+" nnoremap y` yi`
+" nnoremap yw yiw
+" nnoremap yp yip
+" nnoremap yt yit
 
 " CUT in REG
-nnoremap q( di(
-nnoremap q) di)
-nnoremap q[ di[
-nnoremap q] di]
-nnoremap q{ di{
-nnoremap q} di}
-nnoremap q< di<
-nnoremap q> di>
-nnoremap q" di"
-nnoremap q' di'
-nnoremap q` di`
-nnoremap qw diw
-nnoremap qp dip
-nnoremap qt dit
+" nnoremap q( di(
+" nnoremap q) di)
+" nnoremap q[ di[
+" nnoremap q] di]
+" nnoremap q{ di{
+" nnoremap q} di}
+" nnoremap q< di<
+" nnoremap q> di>
+" nnoremap q" di"
+" nnoremap q' di'
+" nnoremap q` di`
+" nnoremap qw diw
+" nnoremap qp dip
+" nnoremap qt dit
 
 " Move lines by index +1,-1
 inoremap <M-Up> <Esc>:m-2<CR>==gi
@@ -290,9 +291,8 @@ nnoremap <Leader>l <C-]>
 nnoremap <C-]> :lua vim.lsp.buf.hover()<CR>
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 
-" empty keybinding
+" empty keybindings
 " nnoremap <C-z> <C-q>
-" nnoremap <Leader>z <C-v>
 " nnoremap <Leader>c :lua vim.lsp.buf.rename()<CR>
 " nnoremap <Leader>r :VRunCode<CR>
 " nnoremap <Leader>t :tabnew \| term bash<CR>

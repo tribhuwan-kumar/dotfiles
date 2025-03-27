@@ -137,6 +137,16 @@ function Show-GitLog {
   git log --graph --abbrev-commit --decorate --format=format:'%C(green)%h%C(reset) - %C(magenta)%aD%C(reset) %C(yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(cyan)%s%C(reset) %C(dim blue)- %an%C(reset)' --all
 }
 
+function Update-Title {
+    $cwd = Get-Location | Split-Path -Leaf
+    $Host.UI.RawUI.WindowTitle = $cwd
+}
+
+Set-PSReadLineOption -AddToHistoryHandler {
+    Update-Title
+    return $true
+}
+
 Set-Alias gpp Git-Push
 Set-Alias gpl Git-Pull
 Set-Alias gcmt Git-Commit
