@@ -39,6 +39,7 @@ local servers = {
   'cssls',
   'ts_ls',
   'clangd',
+  'taplo',
   'eslint',
   'pyright',
   'tailwindcss',

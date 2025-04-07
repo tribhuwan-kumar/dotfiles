@@ -142,11 +142,6 @@ function Update-Title {
     $Host.UI.RawUI.WindowTitle = $cwd
 }
 
-Set-PSReadLineOption -AddToHistoryHandler {
-    Update-Title
-    return $true
-}
-
 Set-Alias gpp Git-Push
 Set-Alias gpl Git-Pull
 Set-Alias gcmt Git-Commit
@@ -159,7 +154,7 @@ Set-Alias glg Show-GitLog
 Import-Module PSReadLine
 Set-PSReadLineOption -EditMode Vi
 Set-PSReadLineOption -PredictionSource None
-
+Set-PSReadLineOption -AddToHistoryHandler { Update-Title return $true }
 Set-PSReadLineKeyHandler -Key j -Function HistorySearchForward -ViMode Command
 Set-PSReadLineKeyHandler -Key k -Function HistorySearchBackward -ViMode Command
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'

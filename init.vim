@@ -89,8 +89,8 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'                              
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main', 'commit': '2ebe591' }              " Copilot chat
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}       " Markdown preview
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main', 'commit': '7145910' }            " Copilot chat
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'bun install'}        " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
 call plug#end()
