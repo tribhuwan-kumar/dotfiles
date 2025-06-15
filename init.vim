@@ -10,6 +10,7 @@ set expandtab
 set splitright
 set ignorecase
 set autoindent
+set nocursorline
 set termguicolors
 set relativenumber
 set viewoptions-=curdir
@@ -89,7 +90,7 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'                              
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main', 'commit': '7145910' }            " Copilot chat
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main', 'commit': '7145910' }              " Copilot chat
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'bun install'}        " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
@@ -280,6 +281,7 @@ nnoremap _ <CMD>horizontal resize -2<CR>
 " <----------------------------Auto CMDs-------------------------------------->
 autocmd BufRead,BufNewFile *.http set filetype=http
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+autocmd BufEnter copilot-chat set nocursorline
 autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
 
 
@@ -424,6 +426,7 @@ nnoremap <Leader>e :lua require("harpoon.ui").nav_prev()<CR>
 
 " <---------------------------Markdown--------------------------------------->
 let g:instant_markdown_theme = 'dark'
+let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
 let g:instant_markdown_allow_unsafe_content = 1
 

@@ -1,9 +1,11 @@
 {
   "clangd": "20.1.0",
   "eslint_d": "14.3.0",
-  "rust-analyzer": "2025-03-24",
-  "tailwindcss-language-server": "0.14.11",
+  "pyright": "1.1.400",
+  "rust-analyzer": "2025-05-12",
+  "tailwindcss-language-server": "0.14.17",
   "taplo": "0.9.3",
   "typescript-language-server": "4.3.4",
+  "yaml-language-server": "1.18.0",
 
 }

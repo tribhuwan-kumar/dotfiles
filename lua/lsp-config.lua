@@ -41,6 +41,7 @@ local servers = {
   'clangd',
   'taplo',
   'eslint',
+  'yamlls',
   'pyright',
   'tailwindcss',
   'rust_analyzer',
@@ -51,6 +52,31 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+lspconfig['clangd'].setup {
+  capabilities = capabilities,
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
+}
+
+lspconfig['rust_analyzer'].setup {
+  capabilities = vim.tbl_extend('keep', capabilities or {}, {
+    offsetEncoding = { "utf-16" },
+  }),
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        loadOutDirsFromCheck = true, -- Automatically reload Cargo.toml changes
+        autoreload = true,          -- Enable autoreload for Cargo.toml
+      },
+      checkOnSave = {
+        command = "clippy",         -- Run `cargo clippy` on save
+      },
+    },
+  },
+}
 
 -- float border
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview

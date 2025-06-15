@@ -84,23 +84,23 @@ if (-Not (Get-Command node -ErrorAction SilentlyContinue)) {
 }
 
 $CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
-$dotarchPath = "$env:USERPROFILE\dotarch"
+$dotfilesPath = "$env:USERPROFILE\dotfiles"
 $nvimPath = "$env:LOCALAPPDATA\nvim"
 
-if (-Not (Test-Path $dotarchPath)) {
-  git clone --branch win https://github.com/tribhuwan-kumar/dotarch.git "$env:USERPROFILE\dotarch"
+if (-Not (Test-Path $dotfilesPath)) {
+  git clone --branch win https://github.com/tribhuwan-kumar/dotfiles.git "$env:USERPROFILE\dotfiles"
 }
 
 if (-Not (Test-Path $nvimPath)) {
     New-Item -ItemType Directory -Path $nvimPath
 }
 
-Get-ChildItem -Path $dotarchPath |  Where-Object { $_.Name -ne ".git" -and $_.Name -ne  "accessories" } | ForEach-Object {
+Get-ChildItem -Path $dotfilesPath |  Where-Object { $_.Name -ne ".git" -and $_.Name -ne  "accessories" } | ForEach-Object {
   $linkPath = "$nvimPath\$_"
   if (Test-Path $linkPath) {
     Remove-Item -Path $linkPath -Force
   }
-  New-Item -ItemType SymbolicLink -Path $linkPath -Target "$dotarchPath\$_"
+  New-Item -ItemType SymbolicLink -Path $linkPath -Target "$dotfilesPath\$_"
 }
 
 # profile
@@ -158,10 +158,10 @@ Set-PSReadLineOption -AddToHistoryHandler { Update-Title return $true }
 Set-PSReadLineKeyHandler -Key j -Function HistorySearchForward -ViMode Command
 Set-PSReadLineKeyHandler -Key k -Function HistorySearchBackward -ViMode Command
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/dotarch/accessories/vendetta.omp.json) })
+Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/dotfiles/accessories/vendetta.omp.json) })
 Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 $env:BAT_THEME = 'gruvbox-dark'
-$env:RIPGREP_CONFIG_PATH = "$HOME/dotarch/accessories/.ripgreprc"
+$env:RIPGREP_CONFIG_PATH = "$HOME/dotfiles/accessories/.ripgreprc"
 $env:FZF_DEFAULT_COMMAND = 'rg --files'
 $env:FZF_DEFAULT_OPTS = '
   --color=fg:#bdae93,fg+:#ebdbb2,bg:#0C0D0C,bg+:#292929
@@ -200,6 +200,6 @@ if (-Not (Test-Path $profilePath)) {
 Set-Content -Path $profilePath -Value $profileContent
 
 # permission
-takeown /F "$dotarchPath" /R /D Y
-icacls $dotarchPath /grant "`"$CurrentUser`":(OI)(CI)F" /T /Q
+takeown /F "$dotfilesPath" /R /D Y
+icacls $dotfilesPath /grant "`"$CurrentUser`":(OI)(CI)F" /T /Q
 
