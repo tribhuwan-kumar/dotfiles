@@ -19,6 +19,6 @@ curl -s -O https://raw.githubusercontent.com/tribhuwan-kumar/dotfiles/main/acces
 - Image Viewer: [imv](https://sr.ht/~exec64/imv/)
 - Video Player: [mpv](https://mpv.io/)
 - PDF Viewer: [MuPDF](https://mupdf.com/)
-- Fonts: [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans) & [San Francisco](https://github.com/tribhuwan-kumar/dotarch/tree/main/accessories/San%20Francisco)
+- Fonts: [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans) & [San Francisco](https://github.com/tribhuwan-kumar/dotfiles/tree/main/accessories/San%20Francisco)
 
 For managing dotfiles I use [Stow](https://www.gnu.org/software/stow/)
