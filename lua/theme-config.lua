@@ -1,6 +1,5 @@
 -- CATPPUCCIN
 require("catppuccin").setup({
-  coc_nvim = true,
   no_italic = false,
   no_bold = true,
   no_underline = false,
@@ -303,7 +302,7 @@ require("catppuccin").setup({
     gitsigns = true,
     treesitter = true,
     neotree = true,
-    coc_nvim = true,
+    mason = true,
     indent_blankline = {
       enabled = true,
       scope_color = "",
