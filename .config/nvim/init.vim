@@ -544,4 +544,5 @@ function! s:wilder_init() abort
 endfunction
 
 " ========================================...Sources
-source ~/dotarch/.config/nvim/qucik-word.vim
+source ~/dotfiles/.config/nvim/qucik-word.vim
+

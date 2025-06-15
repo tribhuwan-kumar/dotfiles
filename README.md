@@ -1,9 +1,9 @@
-# My dotarch
+# My dotfiles
 This is a collection of my dotfiles!!
 
 ### Set up in Arch Linux:
 ```bash
-curl -s -O https://raw.githubusercontent.com/tribhuwan-kumar/dotarch/main/accessories/setup.sh && chmod +x setup.sh && ./setup.sh
+curl -s -O https://raw.githubusercontent.com/tribhuwan-kumar/dotfiles/main/accessories/setup.sh && chmod +x setup.sh && ./setup.sh
 ```
 ### Softwares I use:
 

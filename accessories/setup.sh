@@ -58,7 +58,7 @@ installPackges() {
         echo -e "$package doesn't found in pacman attempting to install with yay!!"
         if ! yay --noconfirm "$package"; then
           echo -e "failed to install $package with both pacman and yay, manaual intervation is required"
-        else 
+        else
           echo -e "$package installed successfully!!"
         fi
       else
@@ -82,59 +82,59 @@ installOrphanPackages() {
   fi
   if fc-list | grep -i -e "FantasqueSans" -e "San Francisco" > /dev/null; then
     echo "fonts are already installed"
-  else 
-    sudo cp "$HOME/dotarch/accessories/FantasqueSansMono" "$HOME/dotarch/accessories/San Francisco" /usr/share/fonts
+  else
+    sudo cp "$HOME/dotfiles/accessories/FantasqueSansMono" "$HOME/dotfiles/accessories/San Francisco" /usr/share/fonts
   fi
   if [ ! -d "$HOME/.local/share/icons/WhiteSur" ]; then
     git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git && cd WhiteSur-icon-theme && ./install.sh && cd .. && rm -rf ./WhiteSur-icon-theme
   fi
   if [ ! -f "$HOME/.local/share/color-schemes/Vendetta.colors" ]; then
-    ln -s "$HOME/dotarch/accessories/KDE/Vendetta.colors" "$HOME/.local/share/color-schemes/Vendetta.colors"
+    ln -s "$HOME/dotfiles/accessories/KDE/Vendetta.colors" "$HOME/.local/share/color-schemes/Vendetta.colors"
   fi
 }
 
-setupDotarch() {
+setupDotfiles() {
   for config in "${configs[@]}"; do
     if [ -d "$config" ] || [ -f "$config" ] &> /dev/null; then
       echo -e "'$config' configuration already exists!!"
     fi
   done
   echo -e "configuration of these applications are already exists!!"
-  read -p "Are sure want to delete these configurations and use dotarch's configurations? [y/N] " RESPONSE
+  read -p "Are sure want to delete these configurations and use dotfiles's configurations? [y/N] " RESPONSE
   case "$RESPONSE" in
-    [yY][eE][sS]|[yY]) 
+    [yY][eE][sS]|[yY])
       for config in "${configs[@]}"; do
         mv "$config" "$config.bak"
       done
-      if [ ! -d "$HOME/dotarch" ] &> /dev/null; then
+      if [ ! -d "$HOME/dotfiles" ] &> /dev/null; then
         echo -e "checking essential pacakages"
         installPackges
         installOrphanPackages
-        echo -e "setting up dotarch, please wait!!"
-        git clone --branch lsp https://github/tribhuwan-kumar/dotarch.git "$HOME/dotarch"
-        if cd "$HOME/dotarch" && stow . > /dev/null; then
-          echo -e "dotarch's configuration was successfull, now you can enjoy the perfect OS enviorment :)"
+        echo -e "setting up dotfiles, please wait!!"
+        git clone --branch lsp https://github/tribhuwan-kumar/dotfiles.git "$HOME/dotfiles"
+        if cd "$HOME/dotfiles" && stow . > /dev/null; then
+          echo -e "dotfiles's configuration was successfull, now you can enjoy the perfect OS enviorment :)"
         else
           echo -e "something went wrong, please report it"
         fi
-      else 
+      else
         echo -e "checking essential pacakages"
         installPackges
         installOrphanPackages
-        if cd "$HOME/dotarch" && stow . > /dev/null; then
-          echo -e "dotarch's configuration was successfull, now you can enjoy the perfect OS enviorment :)"
+        if cd "$HOME/dotfiles" && stow . > /dev/null; then
+          echo -e "dotfiles's configuration was successfull, now you can enjoy the perfect OS enviorment :)"
         else
           echo -e "something went wrong, please report it"
         fi
       fi
       ;;
     *)
-      echo "dotarch setup cancelled!!"
+      echo "dotfiles setup cancelled!!"
       ;;
   esac
 }
 
-setupDotarch
+setupDotfiles
 
 # kde accent color ==> #726c5a
 

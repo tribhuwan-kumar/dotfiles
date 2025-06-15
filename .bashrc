@@ -13,7 +13,7 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 
 # BASH VI mode
-source $HOME/dotarch/accessories/bash-vi.sh
+source $HOME/dotfiles/accessories/bash-vi.sh
 bind 'set editing-mode vi'
 bind 'set show-mode-in-prompt on'
 bind 'set keyseq-timeout 0.01'
@@ -273,5 +273,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(fzf --bash)"
-eval "$(oh-my-posh --init --shell bash --config ~/dotarch/accessories/vendetta.omp.json)"
+eval "$(oh-my-posh --init --shell bash --config ~/dotfiles/accessories/vendetta.omp.json)"
 eval "$(zoxide init --cmd cd bash)"
