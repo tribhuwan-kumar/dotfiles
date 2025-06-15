@@ -140,9 +140,8 @@ nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>k :q<CR>
 nnoremap <Leader>p :vsplit \| terminal<CR>
 nnoremap <Leader>b :botright split \| terminal<CR>
-nnoremap <Leader>B :HRunCode<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
-nnoremap <Leader><Tab> :set tabstop=4 shiftwidth=4 expandtab<CR>
+nnoremap <Leader><Tab> :call ToggleTabWidth()<CR>
 
 " Prevent registering to clipboard
 nnoremap S "_S
@@ -172,85 +171,21 @@ nnoremap <Leader>v ^vg_
 nnoremap ,p o<ESC>p==
 
 " Short the SORROUNDINGS
-"CUT with no REG
-nnoremap c( "_ci(
-nnoremap c) "_ci)
-nnoremap c[ "_ci[
-nnoremap c] "_ci]
-nnoremap c{ "_ci{
-nnoremap c} "_ci}
-nnoremap c< "_ci<
-nnoremap c> "_ci>
-nnoremap c" "_ci"
-nnoremap c' "_ci'
-nnoremap c` "_ci`
-nnoremap cw "_ciw
-nnoremap cp "_cip
-nnoremap ct "_cit
-
-" Visually Select
-nnoremap v( vi(
-nnoremap v) vi)
-nnoremap v[ vi[
-nnoremap v] vi]
-nnoremap v{ vi{
-nnoremap v} vi}
-nnoremap v< vi<
-nnoremap v> vi>
-nnoremap v" vi"
-nnoremap v' vi'
-nnoremap v` vi`
-nnoremap vw viw
-nnoremap vp vip
-nnoremap vt vit
-
-" Delete with no REG
-nnoremap d( "_di(
-nnoremap d) "_di)
-nnoremap d[ "_di[
-nnoremap d] "_di]
-nnoremap d{ "_di{
-nnoremap d} "_di}
-nnoremap d< "_di<
-nnoremap d> "_di>
-nnoremap d" "_di"
-nnoremap d' "_di'
-nnoremap d` "_di`
-nnoremap dw "_diw
-nnoremap dp "_dip
-nnoremap dt "_dit
-
-" Yank
-nnoremap y( yi(
-nnoremap y) yi)
-nnoremap y[ yi[
-nnoremap y] yi]
-nnoremap y{ yi{
-nnoremap y} yi}
-nnoremap y< yi<
-nnoremap y> yi>
-nnoremap y" yi"
-nnoremap y' yi'
-nnoremap y` yi`
-nnoremap yw yiw
-nnoremap yp yip
-nnoremap yt yit
-
-" CUT in REG
-nnoremap q( di(
-nnoremap q) di)
-nnoremap q[ di[
-nnoremap q] di]
-nnoremap q{ di{
-nnoremap q} di}
-nnoremap q< di<
-nnoremap q> di>
-nnoremap q" di"
-nnoremap q' di'
-nnoremap q` di`
-nnoremap qw diw
-nnoremap qp dip
-nnoremap qt dit
+" Cut in REG
+nnoremap xi( di(
+nnoremap xi) di)
+nnoremap xi[ di[
+nnoremap xi] di]
+nnoremap xi{ di{
+nnoremap xi} di}
+nnoremap xi< di<
+nnoremap xi> di>
+nnoremap xi" di"
+nnoremap xi' di'
+nnoremap xi` di`
+nnoremap xiw diw
+nnoremap xip dip
+nnoremap xit dit
 
 " Move lines by index +1,-1
 inoremap <M-Up> <Esc>:m-2<CR>==gi
@@ -285,8 +220,8 @@ nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 
 " empty
 " nnoremap <Leader>c :lua vim.lsp.buf.rename()<CR>
-" nnoremap <Leader>r :VRunCode<CR>
 " nnoremap <Leader>t :tabnew \| term bash<CR>
+" nnoremap <Leader>B :HRunCode<CR>
 
 " ========================================...Mason
 lua require("mason-conf")
@@ -445,6 +380,19 @@ endfunction
 " Keybindings
 nnoremap <silent> gp :call OpenPreview()<CR>
 nnoremap gq :pclose<CR>
+
+
+" ========================================...Tabwidth
+function! ToggleTabWidth()
+  if &tabstop == 2
+    set tabstop=4 shiftwidth=4 softtabstop=4
+    echo "Tab width set to 4"
+  else
+    set tabstop=2 shiftwidth=2 softtabstop=2
+    echo "Tab width set to 2"
+  endif
+endfunction
+
 
 " ========================================...Folds
 augroup RememberFolds
