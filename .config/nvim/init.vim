@@ -1,4 +1,4 @@
-" <-------------------------Neovim Settings------------------------->
+" ========================================...Neovim Settings
 syntax on
 set nowrap
 set number
@@ -30,8 +30,7 @@ set clipboard=unnamedplus
 set grepprg=rg\ --vimgrep
 set grepformat=%f:%l:%c:%m,%f
 
-
-" <--------------------------------------------------------Plugins using VIM-PLUG----------------------------------------------------------------------->
+" ========================================...Plugins using VIM-PLUG
 call plug#begin()
 
 Plug 'tpope/vim-dadbod'                                                                       " Databases support
@@ -43,6 +42,7 @@ Plug 'hrsh7th/nvim-cmp'                                                         
 Plug 'hrsh7th/cmp-path'                                                                       " Path completion
 Plug 'prisma/vim-prisma'                                                                      " Prisma
 Plug 'github/copilot.vim'                                                                     " Copilot
+Plug 'stevearc/oil.nvim'                                                                      " File explorer
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
 Plug 'tpope/vim-fugitive'                                                                     " Git
@@ -98,12 +98,12 @@ Plug 'ryanoasis/vim-devicons'                                                   
 call plug#end()
 
 
-" <----------------------------Paths---------------------------------------->
-let g:python3_host_prog = "/usr/bin/python3"                                                  " Python bin path
+" ========================================...Paths
+let g:python3_host_prog = "/usr/bin/python3"
 
-" <-------------------------Keybindings------------------------------------->
-" let mapleader = "z"                                                                         " My binding
-let mapleader = "\<Space>"                                                                    " For better convenience
+" ========================================...Keybindings
+" let mapleader = "z"
+let mapleader = "\<Space>"
 
 " Help doc
 nnoremap <Leader>h K<CR>
@@ -269,16 +269,16 @@ nnoremap + <CMD>horizontal resize +2<CR>
 nnoremap _ <CMD>horizontal resize -2<CR>
 
 
-" <----------------------------Auto CMDs-------------------------------------->
+" ========================================...Auto CMDs
 autocmd BufRead,BufNewFile *.http set filetype=http
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
 
 
-" <---------------------------LSP--------------------------------------------->
-lua require("lsp-config")
+" ========================================...LSP
+lua require("lsp-conf")
 
-                                                                                             " Keybindings
+" Keybindings
 nnoremap <Leader>l <C-]>
 nnoremap <C-]> :lua vim.lsp.buf.hover()<CR>
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
@@ -288,76 +288,82 @@ nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 " nnoremap <Leader>r :VRunCode<CR>
 " nnoremap <Leader>t :tabnew \| term bash<CR>
 
-" <---------------------------Mason------------------------------------------->
-lua require("mason-config")
+" ========================================...Mason
+lua require("mason-conf")
 
 
-" <---------------------------Mason-Lock-------------------------------------->
-lua require("mason-lock-config")
+" ========================================...Oil
+lua require("oil-conf")
+
+" ========================================...Mason-Lock
+lua require("mason-lock-conf")
 
 
-" <---------------------------Completion-------------------------------------->
-lua require("completion-config")
+" ========================================...Completion
+lua require("completion-conf")
 
 
-" <---------------------------Snippets---------------------------------------->
-lua require("luasnip-config")
+" ========================================...Snippets
+lua require("luasnip-conf")
 
 
-" <---------------------------Indentline-------------------------------------->
-lua require("indentline-config")
+" ========================================...Indentline
+lua require("indentline-conf")
 
 
-" <---------------------------Curl-------------------------------------------->
-lua require("curl-config")
+" ========================================...Curl
+lua require("curl-conf")
 
 
-" <---------------------------Rocks------------------------------------------->
-lua require("rocks-config")
+" ========================================...Rocks
+lua require("rocks-conf")
 
 
-" <--------------------------Tresssitter-------------------------------------->
-lua require('tree-sitter-config')
+" ========================================...Tresssitter
+lua require('tree-sitter-conf')
 
 
-" <-------------------------Colorscheme--------------------------------------->
-lua require('theme-config')
+" ========================================...Colorscheme
+lua require('theme-conf')
 
 
-" <------------------------Colorizer------------------------------------------>
-lua require('highlights-colors-config')
+" ========================================...Colorizer
+lua require('hls-colors-conf')
 
 
-" <--------------------------Tagbar------------------------------------------>
-let g:tagbar_ctags_bin =  "/usr/bin/ctags"                                                    " Tagbar exburenant path
-                                                                                              " Keybindings
+" ========================================...Tagbar
+let g:tagbar_ctags_bin =  "/usr/bin/ctags"
+
+" Keybindings
 nmap <F1> :TagbarToggle<CR>
 
 
-" <----------------------------Autopairs------------------------------------->
-lua require("nvim-autopairs").setup {}
-lua require('autopairs-config')
+" ========================================...Autopairs
+lua require('autopairs-conf')
 
 
-" <----------------------------Comment--------------------------------------->
-lua require('comment-config')
-                                                                                               " Keybindings
+" ========================================...Comment
+lua require('comment-conf')
+
+" Keybindings
 vnoremap <Leader>/ :lua require('Comment.api').toggle.linewise()<CR>
 nnoremap <Leader>/ :lua require('Comment.api').toggle.linewise()<CR>
 
 
-" <---------------------------Neotree---------------------------------------->
-lua require("neotree-config")
-                                                                                                " Keybindings
+" ========================================...Neotree
+lua require("neotree-conf")
+
+" Keybindings
 nnoremap <C-q> :Neotree toggle<CR>
 nnoremap <C-c> :Neotree reveal_file=%<CR>
 
 
-" <-----------------------------Gitsigns------------------------------------>
-lua require('gitsigns-config')
+" ========================================...Gitsigns
+lua require('gitsigns-conf')
 set statusline+=%{get(b:,'gitsigns_status','')}
 autocmd BufWritePost,DirChanged * Gitsigns refresh
-                                                                                                " Keybindings
+
+" Keybindings
 nnoremap <Leader>i :Gitsigns preview_hunk_inline<CR>
 nnoremap <Leader>o :Gitsigns preview_hunk<CR>
 nnoremap <Leader>u :Gitsigns reset_hunk<CR>
@@ -367,12 +373,13 @@ nnoremap gs :Gitsigns stage_hunk<CR>
 nnoremap gr :Gitsigns undo_stage_hunk<CR>
 
 
-" <------------------------------DAP--------------------------------------->
+" ========================================...DAP
 lua require("dapui").setup()
-lua require('gdb-debugger')
+lua require('gdb-debugger-conf')
 lua require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 lua require('dap').set_log_level('DEBUG')
-                                                                                                " Keybindings
+
+" Keybindings
 nnoremap <Leader>db :lua require'dap'.toggle_breakpoint()<CR>
 nnoremap <Leader>dc :lua require'dap'.continue()<CR>
 nnoremap <Leader>ds :lua require'dap'.step_into()<CR>
@@ -380,12 +387,14 @@ nnoremap <Leader>do :lua require'dap'.step_over()<CR>
 nnoremap <Leader>dr :lua require'dap'.repl.open()<CR>
 
 
-" <----------------------------Harpoon--------------------------------------->
+" ========================================...Harpoon
 lua require("harpoon").setup()
-                                                                                                " Keybindings
+
+" Keybindings
 nnoremap <Leader>a  :lua require("harpoon.mark").add_file()<CR>
 nnoremap <Leader>j :lua require("harpoon.ui").toggle_quick_menu()<CR>
-                                                                                                " Jump to around files
+
+" Jump to around files
 nnoremap <Leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
 nnoremap <Leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
 nnoremap <Leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
@@ -394,46 +403,50 @@ nnoremap <Leader>5 :lua require("harpoon.ui").nav_file(5)<CR>
 nnoremap <Leader>6 :lua require("harpoon.ui").nav_file(6)<CR>
 nnoremap <Leader>7 :lua require("harpoon.ui").nav_file(7)<CR>
 nnoremap <Leader>8 :lua require("harpoon.ui").nav_file(8)<CR>
-                                                                                                  " File navigation
+
+" File navigation
 nnoremap <Leader>w :lua require("harpoon.ui").nav_next()<CR>
 nnoremap <Leader>e :lua require("harpoon.ui").nav_prev()<CR>
 
 
-" <---------------------------Markdown--------------------------------------->
+" ========================================...Markdown
 let g:instant_markdown_theme = 'dark'
 let g:instant_markdown_autostart = 0
 let g:instant_markdown_allow_unsafe_content = 1
 
 
-" <-----------------------------Copilot & Copilot chat--------------------------------------->
-lua require('copilot-chat')
+" ========================================...Copilot & Copilot chat
+lua require('copilot-chat-conf')
 let g:copilot_no_tab_map = v:true
 autocmd BufRead * Copilot disable
-                                                                                                   " Keybindings
+
+" Keybindings
 imap <C-L> <Plug>(copilot-accept-word)
 nnoremap <Leader>gg :CopilotChatToggle<CR>
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 
 
-" <-----------------------------ColorPicker------------------------------------>
+" ========================================...ColorPicker
 let g:NVIMColorPicker#InsertBefore#TheCursor = 1
-                                                                                                   " Keybindings
+
+" Keybindings
 nnoremap <Leader>s :ColorPicker<CR>
 vnoremap <Leader>s :ColorPicker<CR>
 inoremap <C-c> <C-o>:ColorPicker<CR>
 
 
-" <-----------------------------Preview---------------------------------------->
+" ========================================...Preview
 function! OpenPreview()
 	setlocal previewheight=1
 	let l:line = line('.')
 	execute 'pedit +' . l:line . ' %'
 endfunction
-                                                                                                   " Keybindings
+
+" Keybindings
 nnoremap <silent> gp :call OpenPreview()<CR>
 nnoremap gq :pclose<CR>
 
-" <-----------------------------Folds------------------------------------------>
+" ========================================...Folds
 augroup RememberFolds
 	autocmd!
 	autocmd BufWinLeave *.* mkview
@@ -441,7 +454,7 @@ augroup RememberFolds
 augroup END
 
 
-" <-----------------------------Silicon----------------------------------------->
+" ========================================...Silicon
 let g:silicon = {
       \   'theme':             'DarkNeon',
       \   'font':               'Fantasque Sans Mono',
@@ -460,7 +473,7 @@ let g:silicon = {
 let g:silicon['output'] = '~/Pictures/Code-Screenshots/vim-screenshot-{time:%Y-%m-%d-%H%M%S}.png'
 
 
-" <---------------------------Airline---------------------------------------->
+" ========================================...Airline
 let g:airline#extensions#default#section_truncate_width = {
       \ 'b': 80,
       \ 'x': 70,
@@ -474,16 +487,22 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-let g:airline_theme='dark'                                                                      " Theme
+" Theme
+let g:airline_theme='dark'
 
-let g:airline_section_z = '%2p%% %2l/%L:%1v'                                                    " Airline symbols
+" Airline symbols
+let g:airline_section_z = '%2p%% %2l/%L:%1v'
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 
-let g:airline#extensions#whitespace#enabled = 0                                                 " Whitespace
-let g:webdevicons_enable_airline_tabline = 1                                                    " Tabline
-let g:webdevicons_enable_airline_statusline = 1                                                 " Statusline
-let g:airline#extensions#tagbar#enabled = 0                                                     " Tagbar
+" Whitespace
+let g:airline#extensions#whitespace#enabled = 0
+" Tabline
+let g:webdevicons_enable_airline_tabline = 1
+" Statusline
+let g:webdevicons_enable_airline_statusline = 1
+" Tagbar
+let g:airline#extensions#tagbar#enabled = 0
 
 let g:airline#extensions#nvimlsp#enabled = 1
 let g:airline#extensions#nvimlsp#error_symbol = ' '
@@ -493,7 +512,7 @@ let g:airline#extensions#nvimlsp#open_lnum_symbol = '('
 let g:airline#extensions#nvimlsp#close_lnum_symbol = ')'
 
 
-" <-----------------------------VimgrepRg----------------------------------------->
+" ========================================...VimgrepRg
 function! VimgrepRg(args)
     let l:match = matchlist(a:args, '^/\(.\{-}\)/\([gfj]*\)\s*\(.*\)$')
     if empty(l:match)
@@ -539,7 +558,7 @@ command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-hea
 command! -bang -nargs=* RG call fzf#vim#grep2("rg --column --line-number --no-heading --color=always --smart-case -- ", <q-args>, fzf#vim#with_preview(), <bang>0)
 
 
-" <-----------------------------Wilder----------------------------------------->
+" ========================================...Wilder
 autocmd CmdlineEnter * ++once call s:wilder_init() | call wilder#main#start()
 
 function! s:wilder_init() abort
@@ -576,5 +595,5 @@ function! s:wilder_init() abort
     \ })))
 endfunction
 
-" <----------------------------Sources----------------------------------------->
+" ========================================...Sources
 source ~/dotarch/.config/nvim/qucik-word.vim
