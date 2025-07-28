@@ -54,6 +54,7 @@ Plug 'rcarriga/nvim-dap-ui'                                                     
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
+" Plug 'wnkz/monoglow.nvim'                                                                   " Monochrome theme
 Plug 'oysandvik94/curl.nvim'                                                                  " Curl
 Plug 'nvim-neotest/nvim-nio'                                                                  " Asynchronous IO
 Plug 'nvim-lua/plenary.nvim'                                                                  " Pop-up api
@@ -75,13 +76,12 @@ Plug 'AndrewRadev/tagalong.vim'                                                 
 Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
 Plug 'tribhuwan-kumar/vim-airline'                                                            " Status bar
-Plug 'nvim-neo-tree/neo-tree.nvim'                                                            " File System
 Plug 'mfussenegger/nvim-dap-python'                                                           " Python debugger
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
 Plug 'kristijanhusak/vim-dadbod-ui'                                                           " vim-dadbod UI
+Plug 'tribhuwan-kumar/neo-tree.nvim'                                                          " File System
 Plug 'lukas-reineke/lsp-format.nvim'                                                          " Formatter
-Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
-Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
+Plug 'tribhuwan-kumar/CopilotChat.nvim'                                                       " Copilot chat
 Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
 Plug 'brenoprata10/nvim-highlight-colors'                                                     " Highlights colors
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
@@ -90,8 +90,8 @@ Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                  
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " Tsx, Jsx commenting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
+" Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }                                 " MCP
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main', 'commit': '7145910' }              " Copilot chat
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'bun install'}        " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
@@ -148,11 +148,12 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" FZF, Wrap, Tagbar, Visual Block, Code Runner keybinding
+" FZF, Wrap, Tagbar, Visual-Block, Oil
 nnoremap <Leader><Esc> :noh<CR>
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>z :Buffers<CR>
 nnoremap <Leader>k :q<CR>
+nnoremap <Leader>c :Oil --float<CR>
 nnoremap <Leader>b :botright split \| term powershell.exe -nologo<CR>
 nnoremap <Leader>R :source ~/AppData/Local/nvim/init.vim<CR>
 nnoremap <Leader><Tab> :call ToggleTabWidth()<CR>
@@ -219,6 +220,7 @@ nnoremap _ <CMD>horizontal resize -2<CR>
 
 " ========================================...Auto CMDs
 autocmd BufRead,BufNewFile *.http set filetype=http
+autocmd BufWritePost Cargo.toml execute 'CargoReload'
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 autocmd BufEnter copilot-chat set nocursorline
 autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
@@ -236,7 +238,6 @@ nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 " nnoremap <C-z> <C-q>
 " nnoremap <Leader>c :lua vim.lsp.buf.rename()<CR>
 " nnoremap <Leader>p :vsplit \| term powershell.exe -nologo<CR>
-" nnoremap <Leader>r :VRunCode<CR>
 " nnoremap <Leader>t :tabnew \| term bash<CR>
 " nnoremap <Leader>B :HRunCode<CR>
 
@@ -279,6 +280,7 @@ lua require('tree-sitter-config')
 
 " ========================================...Colorscheme
 lua require('theme-config')
+" lua require('monochrome-conf')
 
 
 " ========================================...Colorizer
@@ -328,7 +330,7 @@ nnoremap <C-c> :Neotree reveal_file=%<CR>
 " ========================================...Gitsigns
 lua require('gitsigns-config')
 set statusline+=%{get(b:,'gitsigns_status','')}
-autocmd BufWritePost,DirChanged * Gitsigns refresh
+autocmd BufWritePost,DirChanged,DiffUpdated * Gitsigns refresh
 
 " Keybindings
 nnoremap <Leader>i :Gitsigns preview_hunk_inline<CR>

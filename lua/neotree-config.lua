@@ -4,6 +4,8 @@ require("neo-tree").setup({
     width =  30,
   },
   filesystem = {
+    hijack_netrw_behavior = "disabled",
+    use_libuv_file_watcher = true,
     filtered_items = {
       visible = false,
       hide_by_name = {
