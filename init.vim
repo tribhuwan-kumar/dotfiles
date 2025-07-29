@@ -227,7 +227,7 @@ autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checkti
 
 
 " ========================================...LSP
-lua require("lsp-config")
+lua require("lsp-conf")
 
 " Keybindings
 nnoremap <Leader>l <C-]>
@@ -236,14 +236,13 @@ nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 
 " empty keybindings
 " nnoremap <C-z> <C-q>
-" nnoremap <Leader>c :lua vim.lsp.buf.rename()<CR>
 " nnoremap <Leader>p :vsplit \| term powershell.exe -nologo<CR>
 " nnoremap <Leader>t :tabnew \| term bash<CR>
 " nnoremap <Leader>B :HRunCode<CR>
 
 
 " ========================================...Mason
-lua require("mason-config")
+lua require("mason-conf")
 
 
 " ========================================...Oil
@@ -251,40 +250,40 @@ lua require("oil-conf")
 
 
 " ========================================...Mason-Lock
-lua require("mason-lock-config")
+lua require("mason-lock-conf")
 
 
 " ========================================...Completion
-lua require("completion-config")
+lua require("completion-conf")
 
 
 " ========================================...Snippets
-lua require("luasnip-config")
+lua require("luasnip-conf")
 
 
 " ========================================...Indentline
-lua require("indentline-config")
+lua require("indentline-conf")
 
 
 " ========================================...Curl
-lua require("curl-config")
+lua require("curl-conf")
 
 
 " ========================================...Rocks
-lua require("rocks-config")
+lua require("rocks-conf")
 
 
 " ========================================...Tresssitter
-lua require('tree-sitter-config')
+lua require('tree-sitter-conf')
 
 
 " ========================================...Colorscheme
-lua require('theme-config')
+lua require('theme-conf')
 " lua require('monochrome-conf')
 
 
 " ========================================...Colorizer
-lua require('highlights-colors-config')
+lua require('highlights-colors-conf')
 
 
 " ========================================...Tagbar
@@ -307,12 +306,11 @@ nmap <F1> :TagbarToggle<CR>
 
 
 " ========================================...Autopairs
-lua require("nvim-autopairs").setup {}
-lua require('autopairs-config')
+lua require('autopairs-conf')
 
 
 " ========================================...Comment
-lua require('comment-config')
+lua require('comment-conf')
 
 " Keybindings
 vnoremap <Leader>/ :lua require('Comment.api').toggle.linewise()<CR>
@@ -320,7 +318,7 @@ nnoremap <Leader>/ :lua require('Comment.api').toggle.linewise()<CR>
 
 
 " ========================================...Neotree
-lua require("neotree-config")
+lua require("neotree-conf")
 
 " Keybindings
 nnoremap <C-q> :Neotree toggle<CR>
@@ -328,7 +326,7 @@ nnoremap <C-c> :Neotree reveal_file=%<CR>
 
 
 " ========================================...Gitsigns
-lua require('gitsigns-config')
+lua require("gitsigns-conf")
 set statusline+=%{get(b:,'gitsigns_status','')}
 autocmd BufWritePost,DirChanged,DiffUpdated * Gitsigns refresh
 
@@ -343,10 +341,7 @@ nnoremap gr :Gitsigns undo_stage_hunk<CR>
 
 
 " ========================================...DAP
-lua require("dapui").setup()
-lua require('gdb-debugger')
-lua require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-lua require('dap').set_log_level('DEBUG')
+lua require('gdb-debugger-conf')
 
 " Keybindings
 nnoremap <Leader>db :lua require'dap'.toggle_breakpoint()<CR>
@@ -386,7 +381,7 @@ let g:instant_markdown_allow_unsafe_content = 1
 
 
 " ========================================...Copilot & Copilot chat
-lua require('copilot-chat')
+lua require("copilot-chat-conf")
 let g:copilot_no_tab_map = v:true
 autocmd BufRead * Copilot disable
 

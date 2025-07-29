@@ -1,5 +1,7 @@
 local dap = require('dap')
+require('dap').set_log_level('DEBUG')
 local dapui = require('dapui').setup()
+require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 
 dap.listeners.before.attach.dapui_config = function()
   dapui.open()
