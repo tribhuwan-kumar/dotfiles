@@ -83,9 +83,12 @@ if (-Not (Get-Command node -ErrorAction SilentlyContinue)) {
   Remove-Item -Path $nodeInstallerPath -Force
 }
 
-$CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+$currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
+$currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 $dotfilesPath = "$env:USERPROFILE\dotfiles"
 $nvimPath = "$env:LOCALAPPDATA\nvim"
+$kanataTrayExe = "$dotfilesPath\accessories\kanata\bins\kanata-tray.exe"
+$kanataTrayConf = "$env:APPDATA\kanata-tray\kanata-tray.toml"
 
 if (-Not (Test-Path $dotfilesPath)) {
   git clone --branch win https://github.com/tribhuwan-kumar/dotfiles.git "$env:USERPROFILE\dotfiles"
@@ -95,12 +98,29 @@ if (-Not (Test-Path $nvimPath)) {
     New-Item -ItemType Directory -Path $nvimPath
 }
 
+if (-Not (Test-Path $kanatatray)) {
+    New-Item -ItemType Directory -Path $kanatatray
+}
+
 Get-ChildItem -Path $dotfilesPath |  Where-Object { $_.Name -ne ".git" -and $_.Name -ne  "accessories" } | ForEach-Object {
   $linkPath = "$nvimPath\$_"
   if (Test-Path $linkPath) {
     Remove-Item -Path $linkPath -Force
   }
   New-Item -ItemType SymbolicLink -Path $linkPath -Target "$dotfilesPath\$_"
+}
+
+Get-ChildItem -Path "$dotfilesPath\accessories\kanata" |  Where-Object { $_.Name -eq "config.kbd" } | ForEach-Object {
+  $linkPath = "$kanataTrayConf"
+  if (Test-Path $linkPath) {
+    Remove-Item -Path $linkPath -Force
+  }
+  New-Item -ItemType SymbolicLink -Path $linkPath -Target "$dotfilesPath\accessories\kanata\config.kbd"
+}
+
+if ($currentPath -notlike "*$kanataTrayExe*") {
+  [Environment]::SetEnvironmentVariable("Path", "$currentPath;$kanataTrayExe", "User")
+  $env:Path = [Environment]::GetEnvironmentVariable("Path", "User")
 }
 
 # profile
@@ -158,10 +178,10 @@ Set-PSReadLineOption -AddToHistoryHandler { Update-Title return $true }
 Set-PSReadLineKeyHandler -Key j -Function HistorySearchForward -ViMode Command
 Set-PSReadLineKeyHandler -Key k -Function HistorySearchBackward -ViMode Command
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/dotfiles/accessories/vendetta.omp.json) })
+Invoke-Expression (& { (oh-my-posh --init --shell powershell --config ~/dotfiles/accessories/oh-my-posh/vendetta.omp.json) })
 Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 $env:BAT_THEME = 'gruvbox-dark'
-$env:RIPGREP_CONFIG_PATH = "$HOME/dotfiles/accessories/.ripgreprc"
+$env:RIPGREP_CONFIG_PATH = "$HOME/dotfiles/accessories/ripgrep/.ripgreprc"
 $env:FZF_DEFAULT_COMMAND = 'rg --files'
 $env:FZF_DEFAULT_OPTS = '
   --color=fg:#bdae93,fg+:#ebdbb2,bg:#0C0D0C,bg+:#292929
@@ -201,5 +221,5 @@ Set-Content -Path $profilePath -Value $profileContent
 
 # permission
 takeown /F "$dotfilesPath" /R /D Y
-icacls $dotfilesPath /grant "`"$CurrentUser`":(OI)(CI)F" /T /Q
+icacls $dotfilesPath /grant "`"$currentUser`":(OI)(CI)F" /T /Q
 

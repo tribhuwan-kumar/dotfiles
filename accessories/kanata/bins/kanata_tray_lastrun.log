@@ -1,0 +1,18 @@
+2025-08-15T18:20:25.3931492+05:30 INFO kanata-tray [version=v0.7.1, commit=9af15f482be1ecc80ab6a169e091600cfd63426d, build_date=Mon Aug  4 07:33:23 UTC 2025] starting
+2025-08-15T18:20:25.3936611+05:30 INFO kanata-tray config folder: C:\Users\eirae\AppData\Roaming\kanata-tray
+2025-08-15T18:20:25.3941692+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\default.ico
+2025-08-15T18:20:25.3947093+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\crash.ico
+2025-08-15T18:20:25.3947093+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\pause.ico
+2025-08-15T18:20:25.3947093+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\live-reload.ico
+2025-08-15T18:20:35.2254641+05:30 INFO Running preset 'Default Preset'
+2025-08-15T18:20:35.2259656+05:30 INFO Running command: C:\Users\eirae/dotfiles/accessories/kanata/bins/kanata.exe -c C:\Users\eirae/dotfiles/accessories/kanata/config.kbd --port 5829
+2025-08-15T18:20:35.2385698+05:30 INFO Started kanata (pid=21404)
+2025-08-15T18:20:37.7568788+05:30 INFO Connected to kanata via TCP (127.0.0.1:62470)
+2025-08-15T18:42:22.4891517+05:30 ERROR tcp client: failed to read stream: read tcp 127.0.0.1:62470->127.0.0.1:5829: wsarecv: An existing connection was forcibly closed by the remote host.
+2025-08-15T18:42:22.4977555+05:30 INFO Waiting for all post-start-async hooks to exit
+2025-08-15T18:42:22.4981132+05:30 INFO All post-start-async hooks exited
+2025-08-15T18:42:22.4981132+05:30 INFO Previous kanata process terminated successfully
+2025-08-15T18:43:32.4645347+05:30 INFO Running preset 'Default Preset'
+2025-08-15T18:43:32.4645347+05:30 INFO Running command: C:\Users\eirae/dotfiles/accessories/kanata/bins/kanata.exe -c C:\Users\eirae/dotfiles/accessories/kanata/config.kbd --port 5829
+2025-08-15T18:43:32.4664108+05:30 INFO Started kanata (pid=10308)
+2025-08-15T18:43:34.9805099+05:30 INFO Connected to kanata via TCP (127.0.0.1:62542)

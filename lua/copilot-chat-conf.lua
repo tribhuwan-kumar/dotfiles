@@ -1,23 +1,28 @@
 local chat = require("CopilotChat")
 local select = require("CopilotChat.select")
+
 require("CopilotChat").setup {
-  selection = select.unnamed,
+  selection = require('CopilotChat.select').visual,
   debug = true,
+  log_level = 'debug',
   show_help = false,
   show_folds = false,
   language = "English",
+  chat_autocomplete = true,
   auto_follow_cursor = false,
   highlight_selection = false,
   context = "buffers",
   build = "make tiktoken",
   disable_extra_info = 'no',
-  question_header = '## Me ',
-  error_header = '## Error ',
-  answer_header = '## Copilot ',
+  headers = {
+    user = '## Me ',
+    assistant = '## Copilot ',
+    tool = '## Tool ',
+  },
   mappings = {
     complete = {
       detail = 'Use @<Tab> or /<Tab> for options.',
-      insert ='<C-l>',
+      insert ='<Nop>',
     },
     close = {
       normal = '<C-x>',

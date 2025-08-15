@@ -50,7 +50,6 @@ Plug 'hrsh7th/cmp-buffer'                                                       
 Plug 'tpope/vim-obsession'                                                                    " Session management
 Plug 'gregsexton/MatchTag'                                                                    " Highlights matching html tags
 Plug 'onsails/lspkind.nvim'                                                                   " LSP icons
-Plug 'rcarriga/nvim-dap-ui'                                                                   " DAP UI
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
@@ -62,7 +61,6 @@ Plug 'numToStr/Comment.nvim'                                                    
 Plug 'neovim/nvim-lspconfig'                                                                  " Native LSP
 Plug 'segeljakt/vim-silicon'                                                                  " Screenshot
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
-Plug 'mfussenegger/nvim-dap'                                                                  " Debugger
 Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
 Plug 'lewis6991/gitsigns.nvim'                                                                " Git Signs
@@ -76,7 +74,6 @@ Plug 'AndrewRadev/tagalong.vim'                                                 
 Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
 Plug 'tribhuwan-kumar/vim-airline'                                                            " Status bar
-Plug 'mfussenegger/nvim-dap-python'                                                           " Python debugger
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
 Plug 'kristijanhusak/vim-dadbod-ui'                                                           " vim-dadbod UI
 Plug 'tribhuwan-kumar/neo-tree.nvim'                                                          " File System
@@ -92,7 +89,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                             
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 " Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }                                 " MCP
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'bun install'}        " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
 call plug#end()
@@ -114,33 +110,21 @@ endfunction
 call FindPythonPath()
 
 " ========================================...Keybindings
-" My binding
-" let mapleader = "z"
-
-" For better convinience
 let mapleader = "\<Space>"
-
-" Help doc
-nnoremap <Leader>h K<CR>
 
 " Exit by 'Esc' in terminal mode
 tnoremap <Esc><Esc> <C-\><C-n>
 
 " Open recent file
-:nnoremap <Leader>or :edit #<1<CR>
+nnoremap <Leader>or :edit #<1<CR>
 
 " Cursor navigation
-:noremap j gj
-:noremap k gk
-nnoremap <C-d> <C-d>zz
-
-" Tab management
-nnoremap <C-o> :b#<CR>
-nnoremap <C-i> :tabp<CR>
+noremap j gj
+noremap k gk
 
 " Insert mode keybindings
-inoremap <C-O> <C-o>o
-inoremap <C-b> <C-o>diw
+" inoremap <C-O> <C-o>o
+" inoremap <C-b> <C-o>diw
 
 " Navigation in windows
 nnoremap <C-h> <C-w>h
@@ -172,14 +156,7 @@ vnoremap d "_d
 vnoremap D "_D
 vnoremap c "_c
 
-" Selection
-nnoremap <S-h> vh
-nnoremap <S-j> vj
-nnoremap <S-k> vk
-nnoremap <S-l> vl
-
 " Save, Selection
-nnoremap <C-s> :w<CR>
 nnoremap <C-g> ggVG
 vnoremap <BS> "_d
 nnoremap <Leader>v ^vg_
@@ -235,8 +212,6 @@ nnoremap <C-]> :lua vim.lsp.buf.hover()<CR>
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 
 " empty keybindings
-" nnoremap <C-z> <C-q>
-" nnoremap <Leader>p :vsplit \| term powershell.exe -nologo<CR>
 " nnoremap <Leader>t :tabnew \| term bash<CR>
 " nnoremap <Leader>B :HRunCode<CR>
 
@@ -284,6 +259,19 @@ lua require('theme-conf')
 
 " ========================================...Colorizer
 lua require('highlights-colors-conf')
+
+
+" ========================================...Netrw
+let g:netrw_altv = 1
+let g:netrw_banner = 0
+let g:netrw_alto = 0
+let g:netrw_preview = 1
+let g:netrw_winsize = 15
+let g:netrw_browse_split = 4
+
+" keybindings
+nnoremap <C-z> :Sex!<CR>
+map <Leader>p :let @/=expand("%:t") <Bar> execute 'Explore' expand("%:h") <Bar> normal n<CR>
 
 
 " ========================================...Tagbar
@@ -340,17 +328,6 @@ nnoremap gs :Gitsigns stage_hunk<CR>
 nnoremap gr :Gitsigns undo_stage_hunk<CR>
 
 
-" ========================================...DAP
-lua require('gdb-debugger-conf')
-
-" Keybindings
-nnoremap <Leader>db :lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <Leader>dc :lua require'dap'.continue()<CR>
-nnoremap <Leader>ds :lua require'dap'.step_into()<CR>
-nnoremap <Leader>do :lua require'dap'.step_over()<CR>
-nnoremap <Leader>dr :lua require'dap'.repl.open()<CR>
-
-
 " ========================================...Harpoon
 lua require("harpoon").setup()
 
@@ -373,31 +350,15 @@ nnoremap <Leader>w :lua require("harpoon.ui").nav_next()<CR>
 nnoremap <Leader>e :lua require("harpoon.ui").nav_prev()<CR>
 
 
-" ========================================...Markdown
-let g:instant_markdown_theme = 'dark'
-let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
-let g:instant_markdown_allow_unsafe_content = 1
-
-
 " ========================================...Copilot & Copilot chat
 lua require("copilot-chat-conf")
 let g:copilot_no_tab_map = v:true
 autocmd BufRead * Copilot disable
 
 " Keybindings
-imap <C-L> <Plug>(copilot-accept-word)
+imap <Nop> <Plug>(copilot-accept-word)
 nnoremap <Leader>gg :CopilotChatToggle<CR>
-imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
-
-
-" ========================================...ColorPicker
-let g:NVIMColorPicker#InsertBefore#TheCursor = 1
-
-" Keybindings
-nnoremap <Leader>s :ColorPicker<CR>
-vnoremap <Leader>s :ColorPicker<CR>
-inoremap <C-c> <C-o>:ColorPicker<CR>
+imap <silent><script><expr> <Nop> copilot#Accept("\<CR>")
 
 
 " ========================================...Preview
@@ -430,25 +391,6 @@ function! ToggleTabWidth()
     echo "Tab width set to 2"
   endif
 endfunction
-
-
-" ========================================...Silicon
-let g:silicon = {
-      \   'theme':             'DarkNeon',
-      \   'font':               'Fantasque Sans Mono',
-      \   'background':         '#090909',
-      \   'shadow-color':       '#000000',
-      \   'line-pad':                   2,
-      \   'pad-horiz':                 80,
-      \   'pad-vert':                 100,
-      \   'shadow-blur-radius':         0,
-      \   'shadow-offset-x':            0,
-      \   'shadow-offset-y':            0,
-      \   'line-number':           v:true,
-      \   'round-corner':          v:true,
-      \   'window-controls':       v:true
-      \ }
-let g:silicon['output'] = '~/Pictures/Code-Screenshots/vim-screenshot-{time:%Y-%m-%d-%H%M%S}.png'
 
 
 " ========================================...Airline

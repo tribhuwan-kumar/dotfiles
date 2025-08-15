@@ -1,12 +1,15 @@
 {
-  "clangd": "20.1.0",
+  "clangd": "20.1.8",
   "eslint-lsp": "4.10.0",
   "eslint_d": "14.3.0",
   "html-lsp": "4.10.0",
+  "json-lsp": "4.10.0",
+  "jsonlint": "1.6.3",
   "pyright": "1.1.403",
-  "rust-analyzer": "2025-07-28",
-  "tailwindcss-language-server": "0.14.25",
+  "rust-analyzer": "2025-08-04",
+  "tailwindcss-language-server": "0.14.26",
   "taplo": "0.10.0",
-  "typescript-language-server": "4.3.4",
+  "typescript-language-server": "4.4.0",
+  "vim-language-server": "2.3.1",
   "yaml-language-server": "1.18.0"
 }
