@@ -13,12 +13,8 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.INFO] = "󰁙 ",
       [vim.diagnostic.severity.HINT] = " ",
     },
-    linehl = {
-      [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-    },
-    numhl = {
-      [vim.diagnostic.severity.WARN] = 'WarningMsg',
-    },
+    linehl = {},
+    numhl = {},
   },
   virtual_text = false,
   signs = true,
