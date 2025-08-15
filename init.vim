@@ -393,82 +393,8 @@ function! ToggleTabWidth()
 endfunction
 
 
-" ========================================...Airline
-let g:airline#extensions#default#section_truncate_width = {
-      \ 'b': 80,
-      \ 'x': 70,
-      \ 'y': 80,
-      \ 'z': 40,
-      \ 'warning': 40,
-      \ 'error': 40,
-      \ }
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-" Theme
-let g:airline_theme='dark'
-
-" Airline symbols
-let g:airline_section_z = '%2p%% %2l/%L:%1v'
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-
-" Whitespace
-let g:airline#extensions#whitespace#enabled = 0
-" Tabline
-let g:webdevicons_enable_airline_tabline = 1
-" Statusline
-let g:webdevicons_enable_airline_statusline = 1
-" Tagbar
-let g:airline#extensions#tagbar#enabled = 0
-
-let g:airline#extensions#nvimlsp#enabled = 1
-let g:airline#extensions#nvimlsp#error_symbol = ' '
-let g:airline#extensions#nvimlsp#warning_symbol = ' '
-let g:airline#extensions#nvimlsp#show_line_numbers = 1
-let g:airline#extensions#nvimlsp#open_lnum_symbol = '('
-let g:airline#extensions#nvimlsp#close_lnum_symbol = ')'
-
-
-" ========================================...Wilder
-autocmd CmdlineEnter * ++once call s:wilder_init() | call wilder#main#start()
-
-function! s:wilder_init() abort
-  call wilder#setup({
-    \ 'modes': [':', '/', '?'],
-    \ 'next_key': '<Tab>',
-    \ 'previous_key': '<S-Tab>',
-    \ 'accept_key': '<Down>',
-    \ 'reject_key': '<Up>',
-    \ 'enable_cmdline_enter': 0,
-    \ })
-
-  let s:highlighters = [
-    \ wilder#pcre2_highlighter(),
-    \ wilder#basic_highlighter(),
-    \ ]
-
-  call wilder#set_option('pipeline', wilder#branch(
-    \ wilder#cmdline_pipeline({
-    \   'fuzzy': 1,
-    \   'fuzzy_filter': wilder#lua_fzy_filter(),
-    \ }),
-    \ wilder#python_search_pipeline(),
-    \ ))
-
-  call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
-    \ 'highlights': {
-    \   'border': 'Normal',
-    \ },
-    \ 'border': 'rounded',
-    \ 'highlighter': s:highlighters,
-    \ 'left': [' ', wilder#popupmenu_devicons()],
-    \ 'right': [' ', wilder#popupmenu_scrollbar()],
-    \ })))
-endfunction
-
 " ========================================...Sources
-source ~/dotfiles/quick-word.vim
+source ~/dotfiles/vim/airline-conf.vim
+source ~/dotfiles/vim/wilder-conf.vim
+source ~/dotfiles/vim/quick-word.vim
 
