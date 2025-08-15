@@ -1,7 +1,6 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 local lspkind = require('lspkind')
--- local lspconfig = require('lspconfig')
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -55,8 +54,6 @@ local servers = {
   'tailwindcss',
   'rust_analyzer',
 }
-
-vim.lsp.enable('html')
 
 for _, lsp in ipairs(servers) do
   vim.lsp.enable(lsp)
