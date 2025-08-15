@@ -63,7 +63,6 @@ Plug 'segeljakt/vim-silicon'                                                    
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
 Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
-Plug 'lewis6991/gitsigns.nvim'                                                                " Git Signs
 Plug 'tribhuwan-kumar/harpoon'                                                                " File tracking
 Plug 'zapling/mason-lock.nvim'                                                                " Mason lock
 Plug 'williamboman/mason.nvim'                                                                " LSP installer
@@ -87,8 +86,9 @@ Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                  
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " Tsx, Jsx commenting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
-" Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }                                 " MCP
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }                                 " Better syntax highlighting
+" Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }                               " MCP
+Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main', 'commit': 'e44821b' }                     " Git Signs
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
 call plug#end()
