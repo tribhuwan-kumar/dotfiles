@@ -13,7 +13,7 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 
 # BASH VI mode
-source $HOME/dotfiles/accessories/bash-vi.sh
+source $HOME/dotfiles/accessories/shell/bash-vi.sh
 bind 'set editing-mode vi'
 bind 'set show-mode-in-prompt on'
 bind 'set keyseq-timeout 0.01'
@@ -43,10 +43,11 @@ alias gp='git push'
 alias gpl='git pull'
 alias gcl='git clone'
 alias gc='git commit'
-alias gs='git status'
-alias gaa='git add --all'
+alias gss='git status'
 alias trsh='trashbhuwan'
 alias psrch='pip_search'
+alias gaa='git add --all'
+alias ssh="kitty +kitten ssh"
 alias grep='grep -i --color=auto'
 alias hibernate='systemctl hibernate'
 alias ls="exa --icons --group-directories-first"
@@ -234,6 +235,7 @@ export PATH="HOME/.local/bin:$PATH"
 export PATH=~/.npm-global/bin:$PATH
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export PATH="$PATH:/home/freakybytes/.local/bin"
+export PATH="$PATH:/home/freakybytes/.cargo/bin"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/.ripgreprc"
 
 # FZF
@@ -273,5 +275,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(fzf --bash)"
-eval "$(oh-my-posh --init --shell bash --config ~/dotfiles/accessories/vendetta.omp.json)"
+eval "$(oh-my-posh --init --shell bash --config ~/dotfiles/accessories/oh-my-posh/vendetta.omp.json)"
 eval "$(zoxide init --cmd cd bash)"

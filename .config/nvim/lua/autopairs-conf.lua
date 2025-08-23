@@ -5,6 +5,7 @@ local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 npairs.setup({
   check_ts = true,
+  disable_in_visualblock = true,
 })
 
 local ts_node_func_parens_disabled = {
@@ -31,4 +32,3 @@ cmp.event:on(
     sh = false,
   })
 )
-

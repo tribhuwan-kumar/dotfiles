@@ -9,7 +9,6 @@ vim.keymap.set("n", "<Nop>", function()
   curl.open_global_tab()
 end, { desc = "Open a curl tab with gloabl scope" })
 
--- These commands will prompt you for a name for your collection
 vim.keymap.set("n", "<Nop>", function()
   curl.create_scoped_collection()
 end, { desc = "Create or open a collection with a name from user input" })

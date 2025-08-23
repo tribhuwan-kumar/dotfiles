@@ -1,4 +1,4 @@
-set wildignore+=*/.git/**,*/.venv/**,*/dev/**,*/target/**,*/deps/**,*/_build/**,*/node_modules/**,*/__pycache__/**,*.json,*.lock,*.jpg,*.png,*.ico,*.jpeg,*.svg,*.ttf,*/trash/**
+set wildignore+=*/.git/**,*/.venv/**,*/dev/**,*/target/**,*/deps/**,*/_build/**,*/node_modules/**,*/__pycache__/**,*.json,*.lock,*.jpg,*.png,*.ico,*.jpeg,*.svg,*.ttf
 
 function SearchWordInFile()
 	let l:word = ''
@@ -114,33 +114,6 @@ endfunction
 
 command! -nargs=1 Vrg call VimgrepRg(<q-args>)
 
-function! VrgHighlightPattern() abort
-  let l:cmdline = getcmdline()
-  if l:cmdline =~# '^:Vrg\s\+/[^ ]*'
-    let l:match = matchlist(l:cmdline, '^:Vrg\s\+/\([^ ]*\)')
-    if !empty(l:match)
-      let l:pattern = l:match[1]
-      if exists('g:vrg_match_id') && g:vrg_match_id != -1
-        silent! call matchdelete(g:vrg_match_id)
-      endif
-      if len(l:pattern) > 0
-        let g:vrg_match_id = matchadd('Search', '\V' . escape(l:pattern, '\'))
-      endif
-    endif
-  else
-    if exists('g:vrg_match_id') && g:vrg_match_id != -1
-      silent! call matchdelete(g:vrg_match_id)
-      let g:vrg_match_id = -1
-    endif
-  endif
-endfunction
-
-augroup VrgHighlight
-  autocmd!
-  autocmd CmdlineChanged : call VrgHighlightPattern()
-  autocmd CmdlineLeave :silent! call matchdelete(g:vrg_match_id)
-augroup END
-
 nnoremap sw :call SearchWordInFile()<CR>
 nnoremap sp :call SearchWordInSameExt()<CR>
 vnoremap sw :<C-u>call SearchWordInFile()<CR>
@@ -152,3 +125,6 @@ nnoremap co :copen<CR>
 nnoremap cq :cclose<CR>
 nnoremap cn :cnext<CR>
 nnoremap cm :cprevious<CR>
+
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* RG call fzf#vim#grep2("rg --column --line-number --no-heading --color=always --smart-case -- ", <q-args>, fzf#vim#with_preview(), <bang>0)
