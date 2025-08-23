@@ -34,6 +34,7 @@ packages=(
   "zoxide"
   "luajit"
   "nodejs"
+  "kanata"
   "firefox"
   "nethogs"
   "neofetch"
@@ -137,4 +138,3 @@ setupDotfiles() {
 setupDotfiles
 
 # kde accent color ==> #726c5a
-

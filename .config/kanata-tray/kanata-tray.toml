@@ -6,5 +6,5 @@ control_server_enable = true
 [defaults]
 tcp_port = 5829
 autorestart_on_crash = true
-kanata_executable = '~/.config/kanata-tray/bins/kanata'
+kanata_executable = ''
 kanata_config = '~/.config/kanata/config.kbd'
