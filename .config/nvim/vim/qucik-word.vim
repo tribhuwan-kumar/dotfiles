@@ -1,4 +1,4 @@
-set wildignore+=*\.git\**,*\.venv\**,*\dev\**,*\target\**,*\deps\**,*\_build\**,*\node_modules\**,*\__pycache__\**,*.json,*.lock,*.jpg,*.png,*.ico,*.jpeg,*.svg,*.ttf
+set wildignore+=*/.git/**,*/.venv/**,*/dev/**,*/target/**,*/deps/**,*/_build/**,*/node_modules/**,*/__pycache__/**,*.json,*.lock,*.jpg,*.png,*.ico,*.jpeg,*.svg,*.ttf
 
 function! VimgrepRg(args)
   let l:match = matchlist(a:args, '^/\(.\{-}\)/\([gfj]*\)\s*\(.*\)$')
@@ -23,7 +23,7 @@ function! VimgrepRg(args)
     let l:file_pattern_cmd = '--glob "' . escape(l:file_pattern, '"') . '"'
   endif
 
-  let l:rg_cmd = 'rg ' . l:rg_flags . ' ' . l:pattern . ' ' . l:file_pattern_cmd
+  let l:rg_cmd = 'rg -F ' . l:rg_flags . ' ' . l:pattern . ' ' . l:file_pattern_cmd
 
   let l:results = systemlist(l:rg_cmd)
 
@@ -44,47 +44,41 @@ function! VimgrepRg(args)
   endif
 endfunction
 
-function SearchWordInFile()
-	let l:word = ''
-  if mode() =~# 'v'
-    let l:old_reg = getreg('"')
-    normal! gv"zy
-		let l:word = escape(@z, '/\')
-		call setreg('"', l:old_reg)
+function! SearchPatternInFile()
+	let l:pattern = ''
+  if mode() =~# 'v' || mode() =~# 'V'
+    normal! "zy
+		let l:pattern = escape(@z, '/\')
 	else
-		let l:word = expand("<cword>")
+		let l:pattern = expand("<cword>") " if its not visual, treat as word
 	endif
 	let l:filename = expand("%")
-	let l:vimgrepcmd = printf(":Vrg /%s/ %s", l:word, l:filename)
+	let l:vimgrepcmd = printf(":Vrg /%s/ %s", l:pattern, l:filename)
 	execute l:vimgrepcmd
 endfunction
 
-function SearchWordInSameExt()
-	let l:word = ''
-	if mode() =~# 'v'
-		let l:old_reg = getreg('"')
-		normal! gv"zy
-		let l:word = escape(@z, '/\')
-		call setreg('"', l:old_reg)
+function! SearchPatternInSameExt()
+	let l:pattern = ''
+  if mode() =~# 'v' || mode() =~# 'V'
+    normal! "zy
+		let l:pattern = escape(@z, '/\')
 	else
-		let l:word = expand("<cword>")
+		let l:pattern = expand("<cword>")
 	endif
 	let l:extension = expand("%:e")
-	let l:vimgrepcmd = printf(":Vrg /%s/ **/*.%s", l:word, l:extension)
+	let l:vimgrepcmd = printf(":Vrg /%s/ **/*.%s", l:pattern, l:extension)
 	execute l:vimgrepcmd
 endfunction
 
-function SearchWordInProject()
-	let l:word = ''
-	if mode() =~# 'v'
-		let l:old_reg = getreg('"')
-		normal! gv"zy
-		let l:word = escape(@z, '/\')
-		call setreg('"', l:old_reg)
+function! SearchPatternInProject()
+	let l:pattern = ''
+  if mode() =~# 'v' || mode() =~# 'V'
+		normal! "zy
+		let l:pattern = escape(@z, '/\')
 	else
-		let l:word = expand("<cword>")
+		let l:pattern = expand("<cword>")
 	endif
-	let l:vimgrepcmd = printf(":Vrg /%s/", l:word) " no need to pass getcwd()
+	let l:vimgrepcmd = printf(":Vrg /%s/", l:pattern) " no need to pass getcwd()
 	execute l:vimgrepcmd
 endfunction
 
@@ -92,12 +86,12 @@ nnoremap co :copen<CR>
 nnoremap cq :cclose<CR>
 nnoremap cn :cnext<CR>
 nnoremap cm :cprevious<CR>
-nnoremap sw :call SearchWordInFile()<CR>
-nnoremap sp :call SearchWordInSameExt()<CR>
-nnoremap sP :call SearchWordInProject()<CR>
-vnoremap sw :<C-u>call SearchWordInFile()<CR>
-vnoremap sp :<C-u>call SearchWordInSameExt()<CR>
-vnoremap sP :<C-u>call SearchWordInProject()<CR>
+nnoremap sw <cmd>call SearchPatternInFile()<CR>
+nnoremap sp <cmd>call SearchPatternInSameExt()<CR>
+nnoremap sP <cmd>call SearchPatternInProject()<CR>
+vnoremap sw <cmd>call SearchPatternInFile()<CR>
+vnoremap sp <cmd>call SearchPatternInSameExt()<CR>
+vnoremap sP <cmd>call SearchPatternInProject()<CR>
 command! -nargs=+ Vrg call VimgrepRg(<q-args>)
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=* RG call fzf#vim#grep2("rg --column --line-number --no-heading --color=always --smart-case -- ", <q-args>, fzf#vim#with_preview(), <bang>0)
