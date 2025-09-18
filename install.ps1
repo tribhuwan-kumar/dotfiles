@@ -138,7 +138,7 @@ function Git-Commit {
 }
 
 function Show-GitStatus {
-  git status
+  git status -uno
 }
 
 function Open-Nvim {

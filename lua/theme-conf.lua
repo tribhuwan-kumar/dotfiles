@@ -1,4 +1,4 @@
--- CATPPUCCIN
+-- Catppuccin
 require("catppuccin").setup({
   no_italic = false,
   no_bold = true,
@@ -51,10 +51,13 @@ require("catppuccin").setup({
   },
   highlight_overrides = {
     all = function (colors)
+      local O = require("catppuccin").options
+      local active_bg = O.transparent_background and colors.none or colors.mantle
+      local inactive_bg = O.transparent_background and colors.none or colors.crust
       return {
         CmpItemMenu = { fg = colors.surface2 },
         CursorLineNr = { fg = colors.text },
-        FloatBorder = { bg = colors.base, fg = colors.surface0 },
+        FloatBorder = { bg = active_bg, fg = colors.subtext0 },
         Visual = { bg = colors.surface0 },
         VisualNOS = { bg = colors.surface0 },
         LineNr = { fg = colors.overlay0 },
@@ -69,17 +72,17 @@ require("catppuccin").setup({
         NeoTreeGitUnstaged = { fg = colors.red },
         NeoTreeGitUntracked = { fg = colors.green },
         NeoTreeIndent = { fg = colors.surface1 },
-        NeoTreeNormal = { bg = colors.mantle },
-        NeoTreeNormalNC = { bg = colors.mantle },
+        NeoTreeNormal = { bg = active_bg },
+        NeoTreeNormalNC = { bg = active_bg },
         NeoTreeRootName = { fg = colors.subtext1, style = { "bold" } },
-        NeoTreeTabActive = { fg = colors.text, bg = colors.mantle },
-        NeoTreeTabInactive = { fg = colors.surface2, bg = colors.crust },
-        NeoTreeTabSeparatorActive = { fg = colors.mantle, bg = colors.mantle },
-        NeoTreeTabSeparatorInactive = { fg = colors.crust, bg = colors.crust },
-        NeoTreeWinSeparator = { fg = colors.base, bg = colors.base },
-        NormalFloat = { bg = colors.base },
-        Pmenu = { bg = colors.mantle, fg = "" },
-        PmenuSel = { bg = colors.surface0, fg = "" },
+        NeoTreeTabActive = { fg = colors.text, bg = active_bg },
+        NeoTreeTabInactive = { fg = colors.surface2, bg = inactive_bg },
+        NeoTreeTabSeparatorActive = { fg = colors.mantle, bg = active_bg },
+        NeoTreeTabSeparatorInactive = { fg = colors.crust, bg = inactive_bg },
+        NeoTreeWinSeparator = { fg = colors.base, bg = active_bg },
+        NormalFloat = { bg = active_bg },
+        Pmenu = { bg = active_bg, fg = colors.subtext1 },
+        PmenuSel = { bg = colors.surface0, fg = colors.subtext0 },
         VertSplit = { bg = colors.base, fg = colors.surface0 },
         YankHighlight = { bg = colors.surface2 },
         FidgetTask = { fg = colors.subtext2 },
@@ -301,8 +304,11 @@ require("catppuccin").setup({
   integrations = {
     gitsigns = true,
     treesitter = true,
-    neotree = true,
     mason = true,
+    neotree = {
+      enabled = true,
+      transparent_background = true,
+    },
     indent_blankline = {
       enabled = true,
       scope_color = "",
@@ -318,7 +324,7 @@ require("catppuccin").setup({
         ok = { "underline" },
       },
       inlay_hints = {
-        background = true,
+        transparent_background = true,
       },
     },
   },

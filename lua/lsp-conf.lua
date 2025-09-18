@@ -40,6 +40,7 @@ local servers = {
   'html',
   'cssls',
   'vimls',
+  'lua_ls',
   'ts_ls',
   'taplo',
   'clangd',

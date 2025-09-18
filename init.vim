@@ -47,8 +47,6 @@ Plug 'github/copilot.vim'                                                       
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
 Plug 'hrsh7th/cmp-buffer'                                                                     " Buffer completion
-Plug 'tpope/vim-obsession'                                                                    " Session management
-Plug 'gregsexton/MatchTag'                                                                    " Highlights matching html tags
 Plug 'onsails/lspkind.nvim'                                                                   " LSP icons
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
@@ -61,15 +59,16 @@ Plug 'numToStr/Comment.nvim'                                                    
 Plug 'neovim/nvim-lspconfig'                                                                  " Native LSP
 Plug 'segeljakt/vim-silicon'                                                                  " Screenshot
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
+Plug 'windwp/nvim-ts-autotag'                                                                 " Auto rename tags
 Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
+Plug 'valloric/MatchTagAlways'                                                                " Highlights matching tags
 Plug 'tribhuwan-kumar/harpoon'                                                                " File tracking
 Plug 'zapling/mason-lock.nvim'                                                                " Mason lock
 Plug 'williamboman/mason.nvim'                                                                " LSP installer
 Plug 'aurum77/live-server.nvim'                                                               " Live Server
 Plug 'Jezda1337/nvim-html-css'                                                                " HTML completion
 Plug 'rasulomaroff/cmp-bufname'                                                               " Bufname completion
-Plug 'AndrewRadev/tagalong.vim'                                                               " Auto rename tags
 Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
 Plug 'tribhuwan-kumar/vim-airline'                                                            " Status bar
@@ -77,7 +76,7 @@ Plug 'rafamadriz/friendly-snippets'                                             
 Plug 'kristijanhusak/vim-dadbod-ui'                                                           " vim-dadbod UI
 Plug 'tribhuwan-kumar/neo-tree.nvim'                                                          " File System
 Plug 'lukas-reineke/lsp-format.nvim'                                                          " Formatter
-Plug 'tribhuwan-kumar/CopilotChat.nvim'                                                       " Copilot chat
+Plug 'CopilotC-Nvim/CopilotChat.nvim'                                                         " Copilot chat
 Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
 Plug 'brenoprata10/nvim-highlight-colors'                                                     " Highlights colors
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
@@ -87,7 +86,6 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'                              
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }                                 " Better syntax highlighting
-" Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }                               " MCP
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main', 'commit': 'e44821b' }                     " Git Signs
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
@@ -113,7 +111,7 @@ call FindPythonPath()
 let mapleader = "\<Space>"
 
 " Exit by 'Esc' in terminal mode
-tnoremap <Esc><Esc> <C-\><C-n>
+tnoremap <C-g> <C-\><C-n>
 
 " Open recent file
 nnoremap <Leader>or :edit #<1<CR>
@@ -197,7 +195,6 @@ nnoremap _ <CMD>horizontal resize -2<CR>
 
 " ========================================...Auto CMDs
 autocmd BufRead,BufNewFile *.http set filetype=http
-autocmd BufWritePost Cargo.toml execute 'CargoReload'
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 autocmd BufEnter copilot-chat set nocursorline
 autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
@@ -261,6 +258,9 @@ lua require('theme-conf')
 lua require('highlights-colors-conf')
 
 
+" ========================================...Auto rename tags
+lua require("ts-tag-conf")
+
 " ========================================...Netrw
 let g:netrw_altv = 1
 let g:netrw_banner = 0
@@ -273,6 +273,19 @@ let g:netrw_browse_split = 4
 nnoremap <C-z> :Sex!<CR>
 map <Leader>p :let @/=expand("%:t") <Bar> execute 'Explore' expand("%:h") <Bar> normal n<CR>
 
+
+" ========================================...Highlight Tags
+let g:mta_filetypes = {
+      \ 'html' : 1,
+      \ 'xhtml' : 1,
+      \ 'xml' : 1,
+      \ 'jinja' : 1,
+      \ 'eruby' : 1,
+      \ 'django' : 1,
+      \ 'htmldjango' : 1,
+      \ 'typescriptreact' : 1,
+      \ 'javascriptreact' : 1,
+      \}
 
 " ========================================...Tagbar
 function! FindCtagsPath()
