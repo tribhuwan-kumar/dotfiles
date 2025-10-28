@@ -47,7 +47,7 @@ alias gss='git status -uno'
 alias trsh='trashbhuwan'
 alias psrch='pip_search'
 alias gaa='git add --all'
-alias ssh="kitty +kitten ssh"
+alias kssh="kitty +kitten ssh"
 alias grep='grep -i --color=auto'
 alias hibernate='systemctl hibernate'
 alias ls="exa --icons --group-directories-first"
@@ -277,3 +277,4 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(fzf --bash)"
 eval "$(oh-my-posh --init --shell bash --config ~/dotfiles/accessories/oh-my-posh/vendetta.omp.json)"
 eval "$(zoxide init --cmd cd bash)"
+export PATH="$PATH:/home/freakybytes/Desktop/Repos/purge/target/release/"

@@ -109,7 +109,7 @@ let mapleader = "\<Space>"
 nnoremap <Leader>h K<CR>
 
 " Exit by 'Esc' in terminal mode
-tnoremap <Esc><Esc> <C-\><C-n>
+tnoremap <C-g> <C-\><C-n>
 
 " Open recent file
 nnoremap <Leader>or :edit #<1<CR>
@@ -386,3 +386,7 @@ let config_dir = stdpath("config") . "/vim/"
 for file in glob(config_dir . "*.vim", 1, 1)
   execute "source " . file
 endfor
+
+" ========================================...Vim Tmux Navigator
+let g:tmux_navigator_preserve_zoom = 1
+let g:tmux_navigator_disable_when_zoomed = 1

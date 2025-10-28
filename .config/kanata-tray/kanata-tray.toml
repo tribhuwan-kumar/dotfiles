@@ -4,6 +4,7 @@
 control_server_enable = true
 
 [defaults]
+autorun = true
 tcp_port = 5829
 autorestart_on_crash = true
 kanata_executable = ''
