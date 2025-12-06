@@ -25,6 +25,7 @@ packages=(
   "ufw"
   "bat"
   "lua"
+  "less"
   "wget"
   "stow"
   "tree"
