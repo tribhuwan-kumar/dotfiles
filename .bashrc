@@ -223,20 +223,22 @@ ex=:\
 *.pdf=:\
 *.nix=:\
 "
-. "/home/freakybytes/.deno/env"
 
 # Some exports
 export EDITOR="nvim"
 export TERMIAL="kitty"
-export BAT_THEME="gruvbox-dark"
 export BROWSER="firefox"
-export LC_ALL=en_IN.UTF-8
-export PATH="HOME/.local/bin:$PATH"
-export PATH=~/.npm-global/bin:$PATH
+export BAT_THEME="gruvbox-dark"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export PATH="$PATH:/home/freakybytes/.local/bin"
-export PATH="$PATH:/home/freakybytes/.cargo/bin"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/.ripgreprc"
+export LC_ALL=en_IN.UTF-8
+export PATH="$PATH:$HOME/.bun/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.cargo/env"
+export PATH="$PATH:$HOME/.npm-global/bin"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # FZF
 export FZF_DEFAULT_COMMAND="rg --files"
@@ -277,4 +279,4 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(fzf --bash)"
 eval "$(oh-my-posh --init --shell bash --config ~/dotfiles/accessories/oh-my-posh/vendetta.omp.json)"
 eval "$(zoxide init --cmd cd bash)"
-export PATH="$PATH:/home/freakybytes/Desktop/Repos/purge/target/release/"
+

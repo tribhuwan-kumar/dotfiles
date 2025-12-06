@@ -44,6 +44,7 @@ local servers = {
   'cmake',
   'taplo',
   'yamlls',
+  'svelte',
   'jsonls',
   'bashls',
   'lua_ls',

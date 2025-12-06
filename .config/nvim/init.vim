@@ -92,7 +92,7 @@ Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                      
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }                                 " Better syntax highlighting
 " Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }                               " MCP
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main', 'commit': 'e44821b' }                     " Git Signs
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}       " Markdown preview
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'bun install'}        " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
 call plug#end()

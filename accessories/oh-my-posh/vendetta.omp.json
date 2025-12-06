@@ -25,7 +25,7 @@
           "properties": {
             "cache_duration": "none",
             "folder_icon": "..\ue5fe..",
-            "home_icon": "~",
+            "home_icon": " ~",
             "style": "folder"
           },
           "template": "{{ .Path }} ",

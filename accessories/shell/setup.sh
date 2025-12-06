@@ -13,7 +13,7 @@ configs=(
 )
 
 packages=(
-  "base-devel"
+  "bc"
   "lf"
   "git"
   "bat"
@@ -22,34 +22,85 @@ packages=(
   "feh"
   "fzf"
   "eza"
+  "ufw"
   "bat"
   "lua"
+  "wget"
   "stow"
   "tree"
   "tmux"
   "htop"
   "kitty"
+  "p7zip"
+  "bluez"
+  "rsync"
+  "aria2"
   "neovim"
   "nomacs"
   "zoxide"
   "luajit"
-  "nodejs"
   "kanata"
+  "blueman"
+  "kvantum"
+  "nftables"
+  "flatpak"
+  "ntfs-3g"
   "firefox"
   "nethogs"
+  "kwallet"
   "neofetch"
   "ctpv-git"
+  "pipewire"
   "luarocks"
+  "spectacle"
+  "alsa-utils"
   "shellcheck"
   "teamviewer"
   "oh-my-posh"
+  "intel-ucode"
+  "kwallet-pam"
+  "wireplumber"
+  "exfat-utils"
+  "ksshaskpass"
+  "bluez-utils"
+  "sof-firmware"
   "wl-clipboard"
+  "iptables-nft"
+  "pipewire-alsa"
+  "pipewire-jack"
+  "alsa-firmware"
+  "kwalletmanager"
+  "kde-gtk-config"
+  "pipewire-pulse"
   "tree-sitter-lua"
   "bash-completion"
+  "plasma-firewall"
   "telegram-desktop"
   "proton-vpn-gtk-app"
-  "firefox-developer-edition"
+  "pipewire-libcamera"
+  "power-profiles-daemon"
+  "exfat-utils" "ntfs-3g" "aria2"
 )
+
+installBase() {
+  if ! command -v git &> /dev/null; then
+    sudo pacman -S git base-devel
+  fi
+  if ! command -v yay &> /dev/null; then
+    git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si
+  fi
+  if ! command -v rustc &> /dev/null; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  fi
+  if ! command -v bun &> /dev/null; then
+    curl -fsSL https://bun.com/install | bash
+  fi
+  if ! command -v npm &> /dev/null; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+  fi
+}
+
+installBase
 
 installPackges() {
   for package in "${packages[@]}"; do
@@ -84,13 +135,7 @@ installOrphanPackages() {
   if fc-list | grep -i -e "FantasqueSans" -e "San Francisco" > /dev/null; then
     echo "fonts are already installed"
   else
-    sudo cp "$HOME/dotfiles/accessories/FantasqueSansMono" "$HOME/dotfiles/accessories/San Francisco" /usr/share/fonts
-  fi
-  if [ ! -d "$HOME/.local/share/icons/WhiteSur" ]; then
-    git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git && cd WhiteSur-icon-theme && ./install.sh && cd .. && rm -rf ./WhiteSur-icon-theme
-  fi
-  if [ ! -f "$HOME/.local/share/color-schemes/Vendetta.colors" ]; then
-    ln -s "$HOME/dotfiles/accessories/KDE/Vendetta.colors" "$HOME/.local/share/color-schemes/Vendetta.colors"
+    sudo cp -r "$HOME/dotfiles/accessories/fonts/FantasqueSansMono" "$HOME/dotfiles/accessories/fonts/San Francisco" /usr/share/fonts
   fi
 }
 
@@ -108,11 +153,11 @@ setupDotfiles() {
         mv "$config" "$config.bak"
       done
       if [ ! -d "$HOME/dotfiles" ] &> /dev/null; then
+        echo -e "setting up dotfiles, please wait!!"
+        git clone --branch lsp https://github/tribhuwan-kumar/dotfiles.git "$HOME/dotfiles"
         echo -e "checking essential pacakages"
         installPackges
         installOrphanPackages
-        echo -e "setting up dotfiles, please wait!!"
-        git clone --branch lsp https://github/tribhuwan-kumar/dotfiles.git "$HOME/dotfiles"
         if cd "$HOME/dotfiles" && stow . > /dev/null; then
           echo -e "dotfiles's configuration was successfull, now you can enjoy the perfect OS enviorment :)"
         else
@@ -136,5 +181,3 @@ setupDotfiles() {
 }
 
 setupDotfiles
-
-# kde accent color ==> #726c5a
