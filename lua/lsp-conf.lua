@@ -39,6 +39,7 @@ local border = {
 local servers = {
   'html',
   'cssls',
+  'gopls',
   'vimls',
   'lua_ls',
   'ts_ls',
@@ -50,6 +51,7 @@ local servers = {
   'pyright',
   'tailwindcss',
   'rust_analyzer',
+  'golangci_lint_ls',
 }
 
 for _, lsp in ipairs(servers) do

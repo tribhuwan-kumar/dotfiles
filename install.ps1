@@ -60,6 +60,8 @@ if (-Not (Get-Command python -ErrorAction SilentlyContinue)) {
   winget install --id=Python.Python.3.13  -e
 }
 
+winget install "Flow Launcher"
+
 # if (-Not (Get-Command lua -ErrorAction SilentlyContinue)) {
 #   winget install "lua for windows"
 # }

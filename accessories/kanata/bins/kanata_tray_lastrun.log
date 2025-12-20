@@ -1,10 +1,16 @@
-2025-09-13T18:06:51.4388966+05:30 INFO kanata-tray [version=v0.7.1, commit=9af15f482be1ecc80ab6a169e091600cfd63426d, build_date=Mon Aug  4 07:33:23 UTC 2025] starting
-2025-09-13T18:06:51.4411992+05:30 INFO kanata-tray config folder: C:\Users\eirae\AppData\Roaming\kanata-tray
-2025-09-13T18:06:51.4627124+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\default.ico
-2025-09-13T18:06:51.4764116+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\crash.ico
-2025-09-13T18:06:51.4899582+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\pause.ico
-2025-09-13T18:06:51.5043502+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\live-reload.ico
-2025-09-13T18:06:59.0215526+05:30 INFO Running preset 'Default Preset'
-2025-09-13T18:06:59.022058+05:30 INFO Running command: C:\Users\eirae/dotfiles/accessories/kanata/bins/kanata.exe -c C:\Users\eirae/dotfiles/accessories/kanata/config.kbd --port 5829
-2025-09-13T18:06:59.0469448+05:30 INFO Started kanata (pid=25432)
-2025-09-13T18:07:01.5576155+05:30 INFO Connected to kanata via TCP (127.0.0.1:54655)
+2025-11-23T12:32:12.2211955+05:30 INFO kanata-tray [version=v0.7.1, commit=9af15f482be1ecc80ab6a169e091600cfd63426d, build_date=Mon Aug  4 07:33:23 UTC 2025] starting
+2025-11-23T12:32:12.2218777+05:30 INFO kanata-tray config folder: C:\Users\eirae\AppData\Roaming\kanata-tray
+2025-11-23T12:32:12.2475761+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\default.ico
+2025-11-23T12:32:12.2600087+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\crash.ico
+2025-11-23T12:32:12.2742292+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\pause.ico
+2025-11-23T12:32:12.2889599+05:30 INFO loading status icon: C:\Users\eirae\AppData\Roaming\kanata-tray\status_icons\live-reload.ico
+2025-11-23T12:32:12.3431372+05:30 INFO Control server running at 127.0.0.1:8100
+2025-11-23T12:32:12.36133+05:30 INFO Running preset 'Default Preset'
+2025-11-23T12:32:12.361981+05:30 INFO Running command: C:\Users\eirae/dotfiles/accessories/kanata/bins/kanata.exe -c C:\Users\eirae/dotfiles/accessories/kanata/config.kbd --port 5829
+2025-11-23T12:32:12.3730655+05:30 INFO Started kanata (pid=15008)
+2025-11-23T12:32:14.8934085+05:30 INFO Connected to kanata via TCP (127.0.0.1:60214)
+2025-11-23T12:43:19.7771965+05:30 ERROR tcp client: failed to read stream: read tcp 127.0.0.1:60214->127.0.0.1:5829: wsarecv: An existing connection was forcibly closed by the remote host.
+2025-11-23T12:43:19.7925409+05:30 INFO Waiting for all post-start-async hooks to exit
+2025-11-23T12:43:19.7925409+05:30 INFO All post-start-async hooks exited
+2025-11-23T12:43:19.7925409+05:30 INFO Previous kanata process terminated successfully
+2025-11-23T16:20:55.1218553+05:30 - Exiting
