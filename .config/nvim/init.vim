@@ -49,7 +49,6 @@ Plug 'honza/vim-snippets'                                                       
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
 Plug 'hrsh7th/cmp-buffer'                                                                     " Buffer completion
 Plug 'tpope/vim-obsession'                                                                    " Session management
-Plug 'gregsexton/MatchTag'                                                                    " Highlights matching html tags
 Plug 'onsails/lspkind.nvim'                                                                   " LSP icons
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
@@ -62,8 +61,10 @@ Plug 'numToStr/Comment.nvim'                                                    
 Plug 'neovim/nvim-lspconfig'                                                                  " Native LSP
 Plug 'segeljakt/vim-silicon'                                                                  " Screenshot
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
+Plug 'windwp/nvim-ts-autotag'                                                                 " Auto rename tags
 Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
+Plug 'valloric/MatchTagAlways'                                                                " Highlights matching tags
 Plug 'tribhuwan-kumar/harpoon'                                                                " File tracking
 Plug 'zapling/mason-lock.nvim'                                                                " Mason lock
 Plug 'williamboman/mason.nvim'                                                                " LSP installer
@@ -89,9 +90,9 @@ Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                  
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " Tsx, Jsx commenting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }                                 " Better syntax highlighting
 " Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }                               " MCP
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main', 'commit': 'e44821b' }                     " Git Signs
+Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }             " Better syntax highlighting
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'bun install'}        " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
@@ -250,6 +251,10 @@ lua require('theme-conf')
 lua require('highlight-colors-conf')
 
 
+" ========================================...Auto rename tags
+lua require("ts-tag-conf")
+
+
 " ========================================...Netrw
 let g:netrw_altv = 1
 let g:netrw_banner = 0
@@ -371,6 +376,21 @@ function! ToggleTabWidth()
     echo "Tab width set to 2"
   endif
 endfunction
+
+
+" ========================================...Highlight Tags
+let g:mta_filetypes = {
+      \ 'html' : 1,
+      \ 'xhtml' : 1,
+      \ 'xml' : 1,
+      \ 'jinja' : 1,
+      \ 'eruby' : 1,
+      \ 'django' : 1,
+      \ 'svelte' : 1,
+      \ 'htmldjango' : 1,
+      \ 'typescriptreact' : 1,
+      \ 'javascriptreact' : 1,
+      \}
 
 
 " ========================================...Folds

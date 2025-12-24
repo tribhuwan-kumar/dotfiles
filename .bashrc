@@ -231,6 +231,7 @@ export BROWSER="firefox"
 export BAT_THEME="gruvbox-dark"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/.ripgreprc"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export LC_ALL=en_IN.UTF-8
 export PATH="$PATH:$HOME/.bun/bin"
 export PATH="$PATH:$HOME/.local/bin"
@@ -277,6 +278,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(fzf --bash)"
+eval "$(direnv hook bash)"
 eval "$(oh-my-posh --init --shell bash --config ~/dotfiles/accessories/oh-my-posh/vendetta.omp.json)"
 eval "$(zoxide init --cmd cd bash)"
 
