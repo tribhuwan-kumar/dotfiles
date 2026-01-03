@@ -78,7 +78,6 @@ Plug 'tribhuwan-kumar/vim-airline'                                              
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
 Plug 'kristijanhusak/vim-dadbod-ui'                                                           " vim-dadbod UI
 Plug 'lukas-reineke/lsp-format.nvim'                                                          " Formatter
-Plug 'tribhuwan-kumar/neo-tree.nvim'                                                          " File System
 Plug 'CopilotC-Nvim/CopilotChat.nvim'                                                         " Copilot chat
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
@@ -93,6 +92,7 @@ Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                      
 " Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }                               " MCP
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main', 'commit': 'e44821b' }                     " Git Signs
 Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }             " Better syntax highlighting
+Plug 'tribhuwan-kumar/neo-tree.nvim', { 'branch': 95835a8'main', 'commit': '95835a8' }        " File System
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'bun install'}        " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
@@ -118,6 +118,10 @@ nnoremap <Leader>or :edit #<1<CR>
 " Cursor navigation
 noremap j gj
 noremap k gk
+
+" Tab navigation
+nnoremap <C-p> :tabn<CR>
+nnoremap <C-[> :tabp<CR>
 
 " Navigation in windows
 nnoremap <C-h> <C-w>h
