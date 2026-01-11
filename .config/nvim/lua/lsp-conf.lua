@@ -53,6 +53,7 @@ local servers = {
   'pyright',
   'marksman',
   'dockerls',
+  'kulala_ls',
   'tailwindcss',
   'mdx_analyzer',
   'rust_analyzer',

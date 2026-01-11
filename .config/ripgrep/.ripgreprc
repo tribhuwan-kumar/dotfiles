@@ -19,4 +19,5 @@ web:*.{html,css,js}*
 --glob=!**/env/*
 --glob=!**/venv/*
 --glob=!**/*.svg
+--glob=!**/*.lock
 --glob=!**/*.svelte-kit

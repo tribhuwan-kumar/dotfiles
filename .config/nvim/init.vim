@@ -39,7 +39,8 @@ Plug 'tpope/vim-dadbod'                                                         
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
 Plug 'L3MON4D3/LuaSnip'                                                                       " Snippets engine
-Plug 'junegunn/fzf.vim'                                                                       " fzf vim
+Plug 'tpope/vim-dotenv'                                                                       " Dotenv
+Plug 'junegunn/fzf.vim'                                                                       " FZF vim
 Plug 'hrsh7th/nvim-cmp'                                                                       " Completion
 Plug 'hrsh7th/cmp-path'                                                                       " Path completion
 Plug 'prisma/vim-prisma'                                                                      " Prisma
@@ -48,12 +49,12 @@ Plug 'github/copilot.vim'                                                       
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
 Plug 'hrsh7th/cmp-buffer'                                                                     " Buffer completion
-Plug 'tpope/vim-obsession'                                                                    " Session management
 Plug 'onsails/lspkind.nvim'                                                                   " LSP icons
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
 " Plug 'wnkz/monoglow.nvim'                                                                   " Monochrome theme
+Plug 'stevearc/conform.nvim'                                                                  " Formatter
 Plug 'oysandvik94/curl.nvim'                                                                  " Curl
 Plug 'nvim-neotest/nvim-nio'                                                                  " Asynchronous IO
 Plug 'nvim-lua/plenary.nvim'                                                                  " Pop-up api
@@ -64,15 +65,16 @@ Plug 'windwp/nvim-autopairs'                                                    
 Plug 'windwp/nvim-ts-autotag'                                                                 " Auto rename tags
 Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
-Plug 'valloric/MatchTagAlways'                                                                " Highlights matching tags
 Plug 'tribhuwan-kumar/harpoon'                                                                " File tracking
 Plug 'zapling/mason-lock.nvim'                                                                " Mason lock
 Plug 'williamboman/mason.nvim'                                                                " LSP installer
-Plug 'aurum77/live-server.nvim'                                                               " Live Server
 Plug 'Jezda1337/nvim-html-css'                                                                " HTML completion
+Plug 'aurum77/live-server.nvim'                                                               " Live Server
+Plug 'mistweaverco/kulala.nvim'                                                               " Http client
 Plug 'rasulomaroff/cmp-bufname'                                                               " Bufname completion
 Plug 'AndrewRadev/tagalong.vim'                                                               " Auto rename tags
 Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
+Plug 'tribhuwan-kumar/matchtags'                                                                " Highlights matching tags
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
 Plug 'tribhuwan-kumar/vim-airline'                                                            " Status bar
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
@@ -84,6 +86,7 @@ Plug 'tribhuwan-kumar/NVIMColorPicker'                                          
 Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
 Plug 'brenoprata10/nvim-highlight-colors'                                                     " Highlights colors
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
+Plug 'kristijanhusak/vim-dadbod-completion'                                                   " DB compeletion
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                                " Lua native fuzzy finder
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " Tsx, Jsx commenting
@@ -91,8 +94,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                             
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 " Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }                               " MCP
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main', 'commit': 'e44821b' }                     " Git Signs
+Plug 'tribhuwan-kumar/neo-tree.nvim', { 'branch': 'main', 'commit': '95835a8' }               " File System
 Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }             " Better syntax highlighting
-Plug 'tribhuwan-kumar/neo-tree.nvim', { 'branch': 95835a8'main', 'commit': '95835a8' }        " File System
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'bun install'}        " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
@@ -208,6 +211,14 @@ lua require("lsp-conf")
 nnoremap <Leader>l <C-]>
 nnoremap <C-]> :lua vim.lsp.buf.hover()<CR>
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
+
+
+" ========================================...Conform
+lua require("conform-conf")
+
+
+" ========================================...Kulala
+lua require("kulala-conf")
 
 
 " ========================================...Mason
