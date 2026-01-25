@@ -37,6 +37,7 @@ call plug#begin()
 
 Plug 'tpope/vim-dadbod'                                                                       " Databases support
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
+Plug 'ibhagwan/fzf-lua'                                                                       " FZF Lua
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
 Plug 'L3MON4D3/LuaSnip'                                                                       " Snippets engine
 Plug 'tpope/vim-dotenv'                                                                       " Dotenv
@@ -49,6 +50,7 @@ Plug 'github/copilot.vim'                                                       
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
 Plug 'hrsh7th/cmp-buffer'                                                                     " Buffer completion
+Plug 'kawre/leetcode.nvim'                                                                    " Leetcode
 Plug 'onsails/lspkind.nvim'                                                                   " LSP icons
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
@@ -73,8 +75,9 @@ Plug 'aurum77/live-server.nvim'                                                 
 Plug 'mistweaverco/kulala.nvim'                                                               " Http client
 Plug 'rasulomaroff/cmp-bufname'                                                               " Bufname completion
 Plug 'AndrewRadev/tagalong.vim'                                                               " Auto rename tags
+Plug 'xeluxee/competitest.nvim'                                                               " Competitive programming
 Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
-Plug 'tribhuwan-kumar/matchtags'                                                                " Highlights matching tags
+Plug 'tribhuwan-kumar/matchtags'                                                              " Highlights matching tags
 Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
 Plug 'tribhuwan-kumar/vim-airline'                                                            " Status bar
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
@@ -92,7 +95,6 @@ Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                  
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " Tsx, Jsx commenting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
-" Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }                               " MCP
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main', 'commit': 'e44821b' }                     " Git Signs
 Plug 'tribhuwan-kumar/neo-tree.nvim', { 'branch': 'main', 'commit': '95835a8' }               " File System
 Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }             " Better syntax highlighting
@@ -217,8 +219,16 @@ nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 lua require("conform-conf")
 
 
+" ========================================...Leetcode
+lua require("leetcode-conf")
+
+
+" ========================================...Compitest
+lua require("compitest-conf")
+
+
 " ========================================...Kulala
-lua require("kulala-conf")
+" lua require("kulala-conf")
 
 
 " ========================================...Mason

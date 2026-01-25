@@ -49,7 +49,7 @@ alias psrch='pip_search'
 alias gaa='git add --all'
 alias kssh="kitty +kitten ssh"
 alias grep='grep -i --color=auto'
-alias hibernate='systemctl hibernate'
+alias hibernate='sudo systemctl hibernate'
 alias ls="exa --icons --group-directories-first"
 alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(green)%h%C(reset) - %C(magenta)%aD%C(reset) %C(yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(cyan)%s%C(reset) %C(dim blue)- %an%C(reset)' --all"
 alias pyenv-venv='export PYENV_ROOT="$HOME/.pyenv" && [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH" && eval "$(pyenv init - bash)"'

@@ -79,6 +79,12 @@ vim.lsp.config('rust_analyzer', {
   }),
   settings = {
     ["rust-analyzer"] = {
+      procMacro = {
+        enable = true
+      },
+      check = {
+        ignore = { "E0412" },
+      },
       cargo = {
         loadOutDirsFromCheck = true,
         autoreload = true,
