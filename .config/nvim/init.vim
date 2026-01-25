@@ -126,7 +126,7 @@ noremap k gk
 
 " Tab navigation
 nnoremap <C-p> :tabn<CR>
-nnoremap <C-[> :tabp<CR>
+nnoremap <C-]> :tabp<CR>
 
 " Navigation in windows
 nnoremap <C-h> <C-w>h
@@ -211,7 +211,6 @@ lua require("lsp-conf")
 
 " Keybindings
 nnoremap <Leader>l <C-]>
-nnoremap <C-]> :lua vim.lsp.buf.hover()<CR>
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 
 
