@@ -1,21 +1,22 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 local lspkind = require('lspkind')
-local lspconfig = require('lspconfig')
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 require("luasnip.loaders.from_vscode").lazy_load()
 
 -- diagnostic icons
-local signs = { Error = "󰁙 ", Warn = " ", Hint = "󰁙 ", Info = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
--- diagnostic config
 vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.INFO] = "󰁙 ",
+      [vim.diagnostic.severity.HINT] = " ",
+    },
+    linehl = {},
+    numhl = {},
+  },
   virtual_text = false,
-  signs = true,
   underline = true,
   update_in_insert = false,
   severity_sort = false,
@@ -23,38 +24,75 @@ vim.diagnostic.config({
 
 -- border
 local border = {
-  {"🭽", "FloatBorder"},
-  {"▔", "FloatBorder"},
-  {"🭾", "FloatBorder"},
-  {"▕", "FloatBorder"},
-  {"🭿", "FloatBorder"},
-  {"▁", "FloatBorder"},
-  {"🭼", "FloatBorder"},
-  {"▏", "FloatBorder"},
+  {"╭", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╮", "FloatBorder"},
+  {"│", "FloatBorder"},
+  {"╯", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╰", "FloatBorder"},
+  {"│", "FloatBorder"},
 }
 
 -- servers
 local servers = {
-  'ccls',
   'html',
   'cssls',
   'ts_ls',
   'jdtls',
   'vimls',
+  'cmake',
+  'taplo',
+  'yamlls',
+  'svelte',
+  'jsonls',
   'bashls',
   'lua_ls',
   'clangd',
   'eslint',
   'pyright',
+  'marksman',
+  'dockerls',
+  'kulala_ls',
   'tailwindcss',
+  'mdx_analyzer',
   'rust_analyzer',
+  'css_variables',
+  'cssmodules_ls',
 }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    capabilities = capabilities,
-  }
+  vim.lsp.enable(lsp)
 end
+
+vim.lsp.config('clangd', {
+  capabilities = capabilities,
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
+})
+
+vim.lsp.config('rust_analyzer', {
+  capabilities = vim.tbl_extend('keep', capabilities or {}, {
+    offsetEncoding = { "utf-16" },
+  }),
+  settings = {
+    ["rust-analyzer"] = {
+      procMacro = {
+        enable = true
+      },
+      check = {
+        ignore = { "E0412" },
+      },
+      cargo = {
+        loadOutDirsFromCheck = true,
+        autoreload = true,
+      },
+      checkOnSave = true,
+    },
+  },
+})
 
 -- float border
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -141,4 +179,3 @@ lspkind.init({
     TypeParameter = "♛",
   },
 })
-

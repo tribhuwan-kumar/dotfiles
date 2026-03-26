@@ -10,6 +10,7 @@ set expandtab
 set splitright
 set ignorecase
 set autoindent
+set nocursorline
 set termguicolors
 set relativenumber
 set viewoptions-=curdir
@@ -28,32 +29,34 @@ set foldmethod=manual
 set completeopt-=preview
 set clipboard=unnamedplus
 set grepprg=rg\ --vimgrep
-set grepformat=%f:%l:%c:%m,%f
+set grepformat=%f:%l:%c:%m
+
 
 " ========================================...Plugins using VIM-PLUG
 call plug#begin()
 
 Plug 'tpope/vim-dadbod'                                                                       " Databases support
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
+Plug 'ibhagwan/fzf-lua'                                                                       " FZF Lua
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
 Plug 'L3MON4D3/LuaSnip'                                                                       " Snippets engine
-Plug 'junegunn/fzf.vim'                                                                       " fzf vim
+Plug 'tpope/vim-dotenv'                                                                       " Dotenv
+Plug 'junegunn/fzf.vim'                                                                       " FZF vim
 Plug 'hrsh7th/nvim-cmp'                                                                       " Completion
 Plug 'hrsh7th/cmp-path'                                                                       " Path completion
 Plug 'prisma/vim-prisma'                                                                      " Prisma
-Plug 'github/copilot.vim'                                                                     " Copilot
 Plug 'stevearc/oil.nvim'                                                                      " File explorer
+Plug 'github/copilot.vim'                                                                     " Copilot
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
-Plug 'tpope/vim-fugitive'                                                                     " Git
 Plug 'hrsh7th/cmp-buffer'                                                                     " Buffer completion
-Plug 'tpope/vim-obsession'                                                                    " Session management
-Plug 'gregsexton/MatchTag'                                                                    " Highlights matching html tags
+Plug 'kawre/leetcode.nvim'                                                                    " Leetcode
 Plug 'onsails/lspkind.nvim'                                                                   " LSP icons
-Plug 'rcarriga/nvim-dap-ui'                                                                   " DAP UI
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
+" Plug 'wnkz/monoglow.nvim'                                                                   " Monochrome theme
+Plug 'stevearc/conform.nvim'                                                                  " Formatter
 Plug 'oysandvik94/curl.nvim'                                                                  " Curl
 Plug 'nvim-neotest/nvim-nio'                                                                  " Asynchronous IO
 Plug 'nvim-lua/plenary.nvim'                                                                  " Pop-up api
@@ -61,71 +64,69 @@ Plug 'numToStr/Comment.nvim'                                                    
 Plug 'neovim/nvim-lspconfig'                                                                  " Native LSP
 Plug 'segeljakt/vim-silicon'                                                                  " Screenshot
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
-Plug 'mfussenegger/nvim-dap'                                                                  " Debugger
+Plug 'windwp/nvim-ts-autotag'                                                                 " Auto rename tags
 Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
-Plug 'lewis6991/gitsigns.nvim'                                                                " Git Signs
 Plug 'tribhuwan-kumar/harpoon'                                                                " File tracking
 Plug 'zapling/mason-lock.nvim'                                                                " Mason lock
 Plug 'williamboman/mason.nvim'                                                                " LSP installer
-Plug 'aurum77/live-server.nvim'                                                               " Live Server
 Plug 'Jezda1337/nvim-html-css'                                                                " HTML completion
+Plug 'aurum77/live-server.nvim'                                                               " Live Server
+Plug 'mistweaverco/kulala.nvim'                                                               " Http client
 Plug 'rasulomaroff/cmp-bufname'                                                               " Bufname completion
 Plug 'AndrewRadev/tagalong.vim'                                                               " Auto rename tags
+Plug 'xeluxee/competitest.nvim'                                                               " Competitive programming
 Plug 'saadparwaiz1/cmp_luasnip'                                                               " Snippets completion
+Plug 'tribhuwan-kumar/matchtags'                                                              " Highlights matching tags
+Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
 Plug 'nvim-neo-tree/neo-tree.nvim'                                                            " File System
 Plug 'tribhuwan-kumar/vim-airline'                                                            " Status bar
-Plug 'nvim-tree/nvim-web-devicons'                                                            " Web icons
-Plug 'mfussenegger/nvim-dap-python'                                                           " Python debugger
 Plug 'rafamadriz/friendly-snippets'                                                           " Snippets
 Plug 'kristijanhusak/vim-dadbod-ui'                                                           " vim-dadbod UI
 Plug 'lukas-reineke/lsp-format.nvim'                                                          " Formatter
+Plug 'CopilotC-Nvim/CopilotChat.nvim'                                                         " Copilot chat
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
 Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
 Plug 'brenoprata10/nvim-highlight-colors'                                                     " Highlights colors
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
+Plug 'kristijanhusak/vim-dadbod-completion'                                                   " DB compeletion
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                                " Better theme
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                                " Lua native fuzzy finder
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " Tsx, Jsx commenting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                   " Better syntax highlighting
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary', 'commit': '2ebe591' }            " Copilot chat
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}       " Markdown preview
+Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main', 'commit': 'e44821b' }                     " Git Signs
+Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }             " Better syntax highlighting
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'bun install'}        " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
 call plug#end()
 
 
 " ========================================...Paths
-let g:python3_host_prog = "/usr/local/bin/python3"
+let g:python3_host_prog = "/usr/bin/python3"
+
 
 " ========================================...Keybindings
-" let mapleader = "z"
 let mapleader = "\<Space>"
 
 " Help doc
 nnoremap <Leader>h K<CR>
 
 " Exit by 'Esc' in terminal mode
-tnoremap <Esc><Esc> <C-\><C-n>
+tnoremap <C-g> <C-\><C-n>
 
 " Open recent file
-:nnoremap <Leader>or :edit #<1<CR>
+nnoremap <Leader>or :edit #<1<CR>
 
 " Cursor navigation
-:noremap j gj
-:noremap k gk
-nnoremap <C-d> <C-d>zz
+noremap j gj
+noremap k gk
 
-" Tab management
-nnoremap <C-o> :b#<CR>
-nnoremap <C-i> :tabp<CR>
-
-" Insert mode keybindings
-inoremap <C-O> <C-o>o
-inoremap <C-b> <C-o>diw
+" Tab navigation
+nnoremap <C-p> :tabn<CR>
+nnoremap <C-]> :tabp<CR>
 
 " Navigation in windows
 nnoremap <C-h> <C-w>h
@@ -133,12 +134,12 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" FZF, Wrap, Tagbar, Visual Block, Code Runner keybinding
-nnoremap <C-z> <C-q>
+" FZF, Wrap, Tagbar, Visual-Block, Oil
 nnoremap <Leader><Esc> :noh<CR>
 nnoremap <Leader>f :FZF<CR>
+nnoremap <Leader>z :Buffers<CR>
 nnoremap <Leader>k :q<CR>
-nnoremap <Leader>p :vsplit \| terminal<CR>
+nnoremap <Leader>c :Oil --float<CR>
 nnoremap <Leader>b :botright split \| terminal<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 nnoremap <Leader><Tab> :call ToggleTabWidth()<CR>
@@ -157,20 +158,12 @@ vnoremap d "_d
 vnoremap D "_D
 vnoremap c "_c
 
-" Selection
-nnoremap <S-h> vh
-nnoremap <S-j> vj
-nnoremap <S-k> vk
-nnoremap <S-l> vl
-
 " Save, Selection
-nnoremap <C-s> :w<CR>
 nnoremap <C-g> ggVG
 vnoremap <BS> "_d
 nnoremap <Leader>v ^vg_
 nnoremap ,p o<ESC>p==
 
-" Short the SORROUNDINGS
 " Cut in REG
 nnoremap xi( di(
 nnoremap xi) di)
@@ -186,6 +179,8 @@ nnoremap xi` di`
 nnoremap xiw diw
 nnoremap xip dip
 nnoremap xit dit
+nnoremap xib di(
+nnoremap xiB di{
 
 " Move lines by index +1,-1
 inoremap <M-Up> <Esc>:m-2<CR>==gi
@@ -207,6 +202,7 @@ nnoremap _ <CMD>horizontal resize -2<CR>
 " ========================================...Auto CMDs
 autocmd BufRead,BufNewFile *.http set filetype=http
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+autocmd BufEnter copilot-chat set nocursorline
 autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
 
 
@@ -215,13 +211,24 @@ lua require("lsp-conf")
 
 " Keybindings
 nnoremap <Leader>l <C-]>
-nnoremap <C-]> :lua vim.lsp.buf.hover()<CR>
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 
-" empty
-" nnoremap <Leader>c :lua vim.lsp.buf.rename()<CR>
-" nnoremap <Leader>t :tabnew \| term bash<CR>
-" nnoremap <Leader>B :HRunCode<CR>
+
+" ========================================...Conform
+lua require("conform-conf")
+
+
+" ========================================...Leetcode
+lua require("leetcode-conf")
+
+
+" ========================================...Compitest
+lua require("compitest-conf")
+
+
+" ========================================...Kulala
+" lua require("kulala-conf")
+
 
 " ========================================...Mason
 lua require("mason-conf")
@@ -229,6 +236,7 @@ lua require("mason-conf")
 
 " ========================================...Oil
 lua require("oil-conf")
+
 
 " ========================================...Mason-Lock
 lua require("mason-lock-conf")
@@ -260,10 +268,24 @@ lua require('tree-sitter-conf')
 
 " ========================================...Colorscheme
 lua require('theme-conf')
+" lua require('monochrome-conf')
 
 
 " ========================================...Colorizer
-" lua require('hls-colors-conf')
+lua require('highlight-colors-conf')
+
+
+" ========================================...Auto rename tags
+lua require("ts-tag-conf")
+
+
+" ========================================...Netrw
+let g:netrw_altv = 1
+let g:netrw_banner = 0
+let g:netrw_alto = 0
+let g:netrw_preview = 1
+let g:netrw_winsize = 15
+let g:netrw_browse_split = 4
 
 
 " ========================================...Tagbar
@@ -294,9 +316,9 @@ nnoremap <C-c> :Neotree reveal_file=%<CR>
 
 
 " ========================================...Gitsigns
-lua require('gitsigns-conf')
+lua require("gitsigns-conf")
 set statusline+=%{get(b:,'gitsigns_status','')}
-autocmd BufWritePost,DirChanged * Gitsigns refresh
+autocmd BufWritePost,DirChanged,DiffUpdated * Gitsigns refresh
 
 " Keybindings
 nnoremap <Leader>i :Gitsigns preview_hunk_inline<CR>
@@ -306,20 +328,6 @@ nnoremap <Leader>n :Gitsigns next_hunk<CR>
 nnoremap <Leader>m :Gitsigns prev_hunk<CR>
 nnoremap gs :Gitsigns stage_hunk<CR>
 nnoremap gr :Gitsigns undo_stage_hunk<CR>
-
-
-" ========================================...DAP
-lua require("dapui").setup()
-lua require('gdb-debugger-conf')
-lua require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-lua require('dap').set_log_level('DEBUG')
-
-" Keybindings
-nnoremap <Leader>db :lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <Leader>dc :lua require'dap'.continue()<CR>
-nnoremap <Leader>ds :lua require'dap'.step_into()<CR>
-nnoremap <Leader>do :lua require'dap'.step_over()<CR>
-nnoremap <Leader>dr :lua require'dap'.repl.open()<CR>
 
 
 " ========================================...Harpoon
@@ -351,12 +359,12 @@ let g:instant_markdown_allow_unsafe_content = 1
 
 
 " ========================================...Copilot & Copilot chat
-lua require('copilot-chat-conf')
+lua require("copilot-chat-conf")
 let g:copilot_no_tab_map = v:true
 autocmd BufRead * Copilot disable
 
 " Keybindings
-imap <C-L> <Plug>(copilot-accept-word)
+imap <Nop> <Plug>(copilot-accept-word)
 nnoremap <Leader>gg :CopilotChatToggle<CR>
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 
@@ -394,6 +402,21 @@ function! ToggleTabWidth()
 endfunction
 
 
+" ========================================...Highlight Tags
+let g:mta_filetypes = {
+      \ 'html' : 1,
+      \ 'xhtml' : 1,
+      \ 'xml' : 1,
+      \ 'jinja' : 1,
+      \ 'eruby' : 1,
+      \ 'django' : 1,
+      \ 'svelte' : 1,
+      \ 'htmldjango' : 1,
+      \ 'typescriptreact' : 1,
+      \ 'javascriptreact' : 1,
+      \}
+
+
 " ========================================...Folds
 augroup RememberFolds
 	autocmd!
@@ -402,104 +425,12 @@ augroup RememberFolds
 augroup END
 
 
-" ========================================...Silicon
-let g:silicon = {
-      \   'theme':             'DarkNeon',
-      \   'font':               'Fantasque Sans Mono',
-      \   'background':         '#090909',
-      \   'shadow-color':       '#000000',
-      \   'line-pad':                   2,
-      \   'pad-horiz':                 80,
-      \   'pad-vert':                 100,
-      \   'shadow-blur-radius':         0,
-      \   'shadow-offset-x':            0,
-      \   'shadow-offset-y':            0,
-      \   'line-number':           v:true,
-      \   'round-corner':          v:true,
-      \   'window-controls':       v:true
-      \ }
-let g:silicon['output'] = '~/Pictures/Code-Screenshots/vim-screenshot-{time:%Y-%m-%d-%H%M%S}.png'
-
-
-" ========================================...Airline
-let g:airline#extensions#default#section_truncate_width = {
-      \ 'b': 80,
-      \ 'x': 70,
-      \ 'y': 80,
-      \ 'z': 40,
-      \ 'warning': 40,
-      \ 'error': 40,
-      \ }
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" Theme
-let g:airline_theme='dark'
-
-" Airline symbols
-let g:airline_section_z = '%2p%% %2l/%L:%1v'
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-
-" Whitespace
-let g:airline#extensions#whitespace#enabled = 0
-" Tabline
-let g:webdevicons_enable_airline_tabline = 1
-" Statusline
-let g:webdevicons_enable_airline_statusline = 1
-" Tagbar
-let g:airline#extensions#tagbar#enabled = 0
-
-let g:airline#extensions#nvimlsp#enabled = 1
-let g:airline#extensions#nvimlsp#error_symbol = ' '
-let g:airline#extensions#nvimlsp#warning_symbol = ' '
-let g:airline#extensions#nvimlsp#show_line_numbers = 1
-let g:airline#extensions#nvimlsp#open_lnum_symbol = '('
-let g:airline#extensions#nvimlsp#close_lnum_symbol = ')'
-
-
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=* RG call fzf#vim#grep2("rg --column --line-number --no-heading --color=always --smart-case -- ", <q-args>, fzf#vim#with_preview(), <bang>0)
-
-
-" ========================================...Wilder
-autocmd CmdlineEnter * ++once call s:wilder_init() | call wilder#main#start()
-
-function! s:wilder_init() abort
-  call wilder#setup({
-    \ 'modes': [':', '/', '?'],
-    \ 'next_key': '<Tab>',
-    \ 'previous_key': '<S-Tab>',
-    \ 'accept_key': '<Down>',
-    \ 'reject_key': '<Up>',
-    \ 'enable_cmdline_enter': 0,
-    \ })
-
-  let s:highlighters = [
-    \ wilder#pcre2_highlighter(),
-    \ wilder#basic_highlighter(),
-    \ ]
-
-  call wilder#set_option('pipeline', wilder#branch(
-    \ wilder#cmdline_pipeline({
-    \   'fuzzy': 1,
-    \   'fuzzy_filter': wilder#lua_fzy_filter(),
-    \ }),
-    \ wilder#python_search_pipeline(),
-    \ ))
-
-  call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
-    \ 'highlights': {
-    \   'border': 'Normal',
-    \ },
-    \ 'border': 'rounded',
-    \ 'highlighter': s:highlighters,
-    \ 'left': [' ', wilder#popupmenu_devicons()],
-    \ 'right': [' ', wilder#popupmenu_scrollbar()],
-    \ })))
-endfunction
-
 " ========================================...Sources
-source ~/dotfiles/.config/nvim/qucik-word.vim
+let config_dir = stdpath("config") . "/vim/"
+for file in glob(config_dir . "*.vim", 1, 1)
+  execute "source " . file
+endfor
+
+" ========================================...Vim Tmux Navigator
+let g:tmux_navigator_preserve_zoom = 1
+let g:tmux_navigator_disable_when_zoomed = 1

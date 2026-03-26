@@ -10,7 +10,7 @@ PS1='[\u@\h \W]\$ '
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(fzf --bash)"
 eval "$(zoxide init --cmd cd bash)"
-eval "$(oh-my-posh --init --shell bash --config ~/dotfiles/accessories/vendetta.omp.json)"
+eval "$(oh-my-posh --init --shell bash --config ~/dotfiles/accessories/oh-my-posh/vendetta.omp.json)"
 
 # History
 shopt -s histappend
@@ -20,7 +20,7 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 
 # BASH VI mode
-source $HOME/dotfiles/accessories/bash-vi.sh
+source $HOME/dotfiles/accessories/shell/bash-vi.sh
 bind 'set editing-mode vi'
 bind 'set show-mode-in-prompt on'
 bind 'set keyseq-timeout 0.01'
@@ -63,7 +63,7 @@ alias gp='git push'
 alias gpl='git pull'
 alias gcl='git clone'
 alias gc='git commit'
-alias gs='git status'
+alias gss='git status'
 alias gaa='git add --all'
 alias trsh='trashbhuwan'
 alias grep='grep -i --color=auto'
