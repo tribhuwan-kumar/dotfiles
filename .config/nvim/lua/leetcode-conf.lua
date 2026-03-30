@@ -1,5 +1,5 @@
 require("leetcode").setup({
-  lang = "rust",
+  lang = "cpp",
   picker = { provider = "fzf-lua" },
   plugins = {
     non_standalone = true,
@@ -8,6 +8,9 @@ require("leetcode").setup({
   injector = {
     ["rust"] = {
       before = { '#[allow(dead_code)]', 'fn main(){}', '#[allow(dead_code)]', 'struct Solution;' },
+    },
+    ["cpp"] = {
+      before = { '#include<bits/stdc++.h>', 'using namespace std;' },
     },
   },
   hooks = {

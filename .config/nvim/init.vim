@@ -364,9 +364,9 @@ let g:copilot_no_tab_map = v:true
 autocmd BufRead * Copilot disable
 
 " Keybindings
-imap <Nop> <Plug>(copilot-accept-word)
+imap <C-E> <Plug>(copilot-accept-word)
 nnoremap <Leader>gg :CopilotChatToggle<CR>
-imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
+" imap <silent><script><expr> <C-E> copilot#Accept("\<CR>")
 
 
 " ========================================...ColorPicker
