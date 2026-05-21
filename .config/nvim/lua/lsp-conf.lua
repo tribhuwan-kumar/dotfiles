@@ -179,3 +179,25 @@ lspkind.init({
     TypeParameter = "♛",
   },
 })
+
+-- vim.api.nvim_create_autocmd("BufAdd", {
+--   callback = function()
+--     local bufs = vim.fn.getbufinfo({ buflisted = 1 })
+--     if #bufs > 5 then
+--       for _, buf in ipairs(bufs) do
+--         if buf.bufnr ~= vim.api.nvim_get_current_buf() then
+--           vim.cmd("bdelete " .. buf.bufnr)
+--           break
+--         end
+--       end
+--     end
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd({ "FocusLost", "InsertLeave", "TextChanged" }, {
+--   callback = function()
+--     if vim.bo.modified and vim.bo.buftype == "" then
+--       vim.cmd("silent! update")
+--     end
+--   end,
+-- })

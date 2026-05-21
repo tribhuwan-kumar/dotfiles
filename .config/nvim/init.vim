@@ -39,7 +39,6 @@ Plug 'tpope/vim-dadbod'                                                         
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'ibhagwan/fzf-lua'                                                                       " FZF Lua
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
-Plug 'L3MON4D3/LuaSnip'                                                                       " Snippets engine
 Plug 'tpope/vim-dotenv'                                                                       " Dotenv
 Plug 'junegunn/fzf.vim'                                                                       " FZF vim
 Plug 'hrsh7th/nvim-cmp'                                                                       " Completion
@@ -65,7 +64,6 @@ Plug 'neovim/nvim-lspconfig'                                                    
 Plug 'segeljakt/vim-silicon'                                                                  " Screenshot
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
 Plug 'windwp/nvim-ts-autotag'                                                                 " Auto rename tags
-Plug 'pocco81/auto-save.nvim'                                                                 " Auto Save
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
 Plug 'tribhuwan-kumar/harpoon'                                                                " File tracking
 Plug 'zapling/mason-lock.nvim'                                                                " Mason lock
@@ -87,6 +85,7 @@ Plug 'CopilotC-Nvim/CopilotChat.nvim'                                           
 Plug 'christoomey/vim-tmux-navigator'                                                         " Tmux navigator
 Plug 'tribhuwan-kumar/NVIMColorPicker'                                                        " Color Picker
 Plug 'williamboman/mason-lspconfig.nvim'                                                      " Mason LSP
+Plug 'romus204/tree-sitter-manager.nvim'                                                      " TS manager
 Plug 'brenoprata10/nvim-highlight-colors'                                                     " Highlights colors
 Plug 'lukas-reineke/indent-blankline.nvim'                                                    " Indents line
 Plug 'kristijanhusak/vim-dadbod-completion'                                                   " DB compeletion
@@ -94,10 +93,11 @@ Plug 'catppuccin/nvim', { 'as': 'catppuccin' }                                  
 Plug 'romgrk/fzy-lua-native', { 'do': 'make' }                                                " Lua native fuzzy finder
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                                            " Tsx, Jsx commenting
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                           " Fuzzy finder
+Plug 'L3MON4D3/LuaSnip', { 'do': 'make install_jsregexp' }                                    " Snippets engine
 Plug 'gelguy/wilder.nvim', { 'do': 'UpdateRemotePlugins' }                                    " Commands fuzzy finder
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main', 'commit': 'e44821b' }                     " Git Signs
 Plug 'tribhuwan-kumar/neo-tree.nvim', { 'branch': 'main', 'commit': '95835a8' }               " File System
-Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }             " Better syntax highlighting
+Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }               " Better syntax highlighting
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'bun install'}        " Markdown preview
 Plug 'ryanoasis/vim-devicons'                                                                 " Developer icons ----> This should be at the end
 
@@ -201,6 +201,8 @@ nnoremap _ <CMD>horizontal resize -2<CR>
 
 " ========================================...Auto CMDs
 autocmd BufRead,BufNewFile *.http set filetype=http
+autocmd BufEnter,BufNewFile *.curl setfiletype bash
+autocmd BufEnter copilot-chat setfiletype markdown
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 autocmd BufEnter copilot-chat set nocursorline
 autocmd BufEnter,CursorHold,CursorHoldI *.* if mode() !=# 'c' | execute 'checktime' | endif
@@ -212,6 +214,14 @@ lua require("lsp-conf")
 " Keybindings
 nnoremap <Leader>l <C-]>
 nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
+
+
+" ========================================...Auto save
+lua require("auto-save")
+
+
+" ========================================...Manage buffers
+lua require("manage-buffers")
 
 
 " ========================================...Conform
@@ -227,8 +237,8 @@ lua require("compitest-conf")
 
 
 " ========================================...Kulala
-" lua require("kulala-conf")
-
+lua require("kulala-conf")
+nnoremap <Leader>s :lua require("kulala").run()<CR>
 
 " ========================================...Mason
 lua require("mason-conf")
@@ -373,8 +383,7 @@ nnoremap <Leader>gg :CopilotChatToggle<CR>
 let g:NVIMColorPicker#InsertBefore#TheCursor = 1
 
 " Keybindings
-nnoremap <Leader>s :ColorPicker<CR>
-vnoremap <Leader>s :ColorPicker<CR>
+nnoremap <Leader>q :ColorPicker<CR>
 inoremap <C-c> <C-o>:ColorPicker<CR>
 
 

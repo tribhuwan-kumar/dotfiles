@@ -2,7 +2,8 @@ local chat = require("CopilotChat")
 local select = require("CopilotChat.select")
 
 require("CopilotChat").setup {
-  model = 'gpt-5.3-codex',
+  model = 'gpt-5.4-mini',
+  trusted_tools = true,
   selection = require('CopilotChat.select').visual,
   debug = true,
   log_level = 'debug',

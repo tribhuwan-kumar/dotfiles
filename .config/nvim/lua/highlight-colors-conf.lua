@@ -7,3 +7,5 @@ require('nvim-highlight-colors').setup({
     'copilot-chat'
   },
 })
+
+vim.lsp.document_color.enable(false)

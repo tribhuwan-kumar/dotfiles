@@ -70,7 +70,34 @@ function! SearchPatternInSameExt()
 	execute l:vimgrepcmd
 endfunction
 
+function! SearchAndReplacePatternInSameExt()
+	let l:pattern = ''
+  if mode() =~# 'v' || mode() =~# 'V'
+    normal! "zy
+		let l:pattern = escape(@z, '/\')
+	else
+		let l:pattern = expand("<cword>")
+	endif
+	let l:extension = expand("%:e")
+	let l:vimgrepcmd = printf(":Vrg /%s/ **/*.%s", l:pattern, l:extension)
+	execute l:vimgrepcmd
+	let l:cdocmd = printf(":cdo | s/%s/%s **/*.%s", l:pattern, l:extension)
+	execute l:cdocmd
+endfunction
+
 function! SearchPatternInProject()
+	let l:pattern = ''
+  if mode() =~# 'v' || mode() =~# 'V'
+		normal! "zy
+		let l:pattern = escape(@z, '/\')
+	else
+		let l:pattern = expand("<cword>")
+	endif
+	let l:vimgrepcmd = printf(":Vrg /%s/", l:pattern) " no need to pass getcwd()
+	execute l:vimgrepcmd
+endfunction
+
+function! SearchAndReplacePatternInProject()
 	let l:pattern = ''
   if mode() =~# 'v' || mode() =~# 'V'
 		normal! "zy
