@@ -94,6 +94,16 @@ vim.lsp.config('rust_analyzer', {
   },
 })
 
+vim.lsp.config('pyright', {
+  on_init = function(client)
+    local venv_path = client.config.root_dir .. "/.venv/bin/python"
+    if vim.fn.executable(venv_path) == 1 then
+      client.config.settings.python.pythonPath = venv_path
+      client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+    end
+  end,
+})
+
 -- float border
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -180,24 +190,3 @@ lspkind.init({
   },
 })
 
--- vim.api.nvim_create_autocmd("BufAdd", {
---   callback = function()
---     local bufs = vim.fn.getbufinfo({ buflisted = 1 })
---     if #bufs > 5 then
---       for _, buf in ipairs(bufs) do
---         if buf.bufnr ~= vim.api.nvim_get_current_buf() then
---           vim.cmd("bdelete " .. buf.bufnr)
---           break
---         end
---       end
---     end
---   end,
--- })
---
--- vim.api.nvim_create_autocmd({ "FocusLost", "InsertLeave", "TextChanged" }, {
---   callback = function()
---     if vim.bo.modified and vim.bo.buftype == "" then
---       vim.cmd("silent! update")
---     end
---   end,
--- })

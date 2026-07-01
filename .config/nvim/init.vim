@@ -47,6 +47,7 @@ Plug 'prisma/vim-prisma'                                                        
 Plug 'stevearc/oil.nvim'                                                                      " File explorer
 Plug 'github/copilot.vim'                                                                     " Copilot
 Plug 'honza/vim-snippets'                                                                     " Snippets
+Plug 'wnkz/monoglow.nvim'                                                                     " Monochrome theme
 Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
 Plug 'hrsh7th/cmp-buffer'                                                                     " Buffer completion
 Plug 'kawre/leetcode.nvim'                                                                    " Leetcode
@@ -54,7 +55,6 @@ Plug 'onsails/lspkind.nvim'                                                     
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
-" Plug 'wnkz/monoglow.nvim'                                                                   " Monochrome theme
 Plug 'stevearc/conform.nvim'                                                                  " Formatter
 Plug 'oysandvik94/curl.nvim'                                                                  " Curl
 Plug 'nvim-neotest/nvim-nio'                                                                  " Asynchronous IO
@@ -278,7 +278,6 @@ lua require('tree-sitter-conf')
 
 " ========================================...Colorscheme
 lua require('theme-conf')
-" lua require('monochrome-conf')
 
 
 " ========================================...Colorizer

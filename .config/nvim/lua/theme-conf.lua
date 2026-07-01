@@ -330,4 +330,15 @@ require("catppuccin").setup({
   },
 })
 
-vim.cmd.colorscheme "catppuccin"
+-- vim.cmd.colorscheme "catppuccin"
+
+-- Monoglow
+require("monoglow").setup({
+  style = "void",
+  transparent = true,
+  plugins = {
+    all = package.loaded.lazy == nil,
+  },
+})
+
+vim.cmd[[colorscheme monoglow]]

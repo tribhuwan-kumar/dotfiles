@@ -226,6 +226,7 @@ ex=:\
 
 # Some exports
 export EDITOR="nvim"
+export VISUAL="nvim"
 export TERMIAL="kitty"
 export BROWSER="firefox"
 export BAT_THEME="gruvbox-dark"
