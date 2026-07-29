@@ -22,6 +22,9 @@ vim.diagnostic.config({
   severity_sort = false,
 })
 
+-- don't highlight diagnostic hints
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { underline = false })
+
 -- border
 local border = {
   {"╭", "FloatBorder"},
@@ -43,6 +46,7 @@ local servers = {
   'vimls',
   'cmake',
   'taplo',
+  'dartls',
   'yamlls',
   'svelte',
   'jsonls',
@@ -59,6 +63,7 @@ local servers = {
   'rust_analyzer',
   'css_variables',
   'cssmodules_ls',
+  'kotlin_language_server',
 }
 
 for _, lsp in ipairs(servers) do

@@ -1,1 +1,4 @@
 *.log
+*.tar
+trash
+pass.txt

@@ -63,6 +63,7 @@ Plug 'numToStr/Comment.nvim'                                                    
 Plug 'neovim/nvim-lspconfig'                                                                  " Native LSP
 Plug 'segeljakt/vim-silicon'                                                                  " Screenshot
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
+Plug 'stevearc/dressing.nvim'                                                                 " Ui
 Plug 'windwp/nvim-ts-autotag'                                                                 " Auto rename tags
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
 Plug 'tribhuwan-kumar/harpoon'                                                                " File tracking
