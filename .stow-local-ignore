@@ -3,3 +3,6 @@
 .editorconfig
 accessories
 README.md
+*.tar
+*.log
+*.txt
