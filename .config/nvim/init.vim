@@ -35,6 +35,7 @@ set grepformat=%f:%l:%c:%m
 " ========================================...Plugins using VIM-PLUG
 call plug#begin()
 
+Plug 'lervag/vimtex'                                                                          " Latex
 Plug 'tpope/vim-dadbod'                                                                       " Databases support
 Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'ibhagwan/fzf-lua'                                                                       " FZF Lua
@@ -55,6 +56,7 @@ Plug 'onsails/lspkind.nvim'                                                     
 Plug 'MunifTanjim/nui.nvim'                                                                   " UI component library
 Plug 'hrsh7th/cmp-nvim-lsp'                                                                   " LSP completion
 Plug 'lifepillar/pgsql.vim'                                                                   " PostgreSQL syntax highlighting
+" Plug 'andymass/vim-matchup'                                                                 " Match up
 Plug 'stevearc/conform.nvim'                                                                  " Formatter
 Plug 'oysandvik94/curl.nvim'                                                                  " Curl
 Plug 'nvim-neotest/nvim-nio'                                                                  " Asynchronous IO
@@ -202,7 +204,7 @@ nnoremap _ <CMD>horizontal resize -2<CR>
 
 " ========================================...Auto CMDs
 autocmd BufRead,BufNewFile *.http set filetype=http
-autocmd BufEnter,BufNewFile *.curl setfiletype bash
+autocmd BufEnter,BufNewFile *.curl setfiletype curl
 autocmd BufEnter copilot-chat setfiletype markdown
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 autocmd BufEnter copilot-chat set nocursorline

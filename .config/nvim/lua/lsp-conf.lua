@@ -78,6 +78,28 @@ vim.lsp.config('clangd', {
   },
 })
 
+vim.lsp.config('tailwindcss', {
+  capabilities = capabilities,
+  settings = {
+    tailwindCSS = {
+      lint = {
+        suggestCanonicalClasses = "ignore"
+      }
+    }
+  }
+})
+
+vim.lsp.config('texlab', {
+  capabilities = capabilities,
+  settings = {
+    tailwindCSS = {
+      lint = {
+        suggestCanonicalClasses = "ignore"
+      }
+    }
+  }
+})
+
 vim.lsp.config('rust_analyzer', {
   capabilities = vim.tbl_extend('keep', capabilities or {}, {
     offsetEncoding = { "utf-16" },
