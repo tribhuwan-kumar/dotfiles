@@ -123,10 +123,13 @@ vim.lsp.config('rust_analyzer', {
 
 vim.lsp.config('pyright', {
   on_init = function(client)
-    local venv_path = client.config.root_dir .. "/.venv/bin/python"
-    if vim.fn.executable(venv_path) == 1 then
-      client.config.settings.python.pythonPath = venv_path
-      client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+    local root = client.config and client.config.root_dir
+    local venv_path = root and (root .. "/.venv/bin/python") or nil
+    if venv_path ~= nil then
+      if vim.fn.executable(venv_path) == 1 then
+        client.config.settings.python.pythonPath = venv_path
+        client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+      end
     end
   end,
 })

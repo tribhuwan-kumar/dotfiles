@@ -5,3 +5,4 @@ vim.api.nvim_create_autocmd({ "FocusLost", "InsertLeave", "TextChanged" }, {
     end
   end,
 })
+

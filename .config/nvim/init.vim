@@ -37,7 +37,6 @@ call plug#begin()
 
 Plug 'lervag/vimtex'                                                                          " Latex
 Plug 'tpope/vim-dadbod'                                                                       " Databases support
-Plug 'tpope/vim-repeat'                                                                       " Repeat support
 Plug 'ibhagwan/fzf-lua'                                                                       " FZF Lua
 Plug 'preservim/tagbar'                                                                       " Tagbar & code navigation
 Plug 'tpope/vim-dotenv'                                                                       " Dotenv
@@ -49,7 +48,6 @@ Plug 'stevearc/oil.nvim'                                                        
 Plug 'github/copilot.vim'                                                                     " Copilot
 Plug 'honza/vim-snippets'                                                                     " Snippets
 Plug 'wnkz/monoglow.nvim'                                                                     " Monochrome theme
-Plug 'tpope/vim-surround'                                                                     " Surrounding ysw
 Plug 'hrsh7th/cmp-buffer'                                                                     " Buffer completion
 Plug 'kawre/leetcode.nvim'                                                                    " Leetcode
 Plug 'onsails/lspkind.nvim'                                                                   " LSP icons
@@ -65,6 +63,8 @@ Plug 'numToStr/Comment.nvim'                                                    
 Plug 'neovim/nvim-lspconfig'                                                                  " Native LSP
 Plug 'segeljakt/vim-silicon'                                                                  " Screenshot
 Plug 'windwp/nvim-autopairs'                                                                  " Auto closing pairs
+Plug 'kylechui/nvim-surround'
+Plug 'sindrets/diffview.nvim'                                                                 " Diff view
 Plug 'stevearc/dressing.nvim'                                                                 " Ui
 Plug 'windwp/nvim-ts-autotag'                                                                 " Auto rename tags
 Plug 'mg979/vim-visual-multi'                                                                 " Multiple cursors
@@ -146,6 +146,7 @@ nnoremap <Leader>c :Oil --float<CR>
 nnoremap <Leader>b :botright split \| terminal<CR>
 nnoremap <Leader>R :source ~/.config/nvim/init.vim<CR>
 nnoremap <Leader><Tab> :call ToggleTabWidth()<CR>
+nnoremap <silent> [ :let @/='\<'.expand('<cword>').'\>'<CR>:set hlsearch<CR>
 
 " Prevent registering to clipboard
 nnoremap S "_S
@@ -201,7 +202,6 @@ nnoremap ( <CMD>vertical resize -5<CR>
 nnoremap + <CMD>horizontal resize +2<CR>
 nnoremap _ <CMD>horizontal resize -2<CR>
 
-
 " ========================================...Auto CMDs
 autocmd BufRead,BufNewFile *.http set filetype=http
 autocmd BufEnter,BufNewFile *.curl setfiletype curl
@@ -220,7 +220,15 @@ nnoremap <Leader>r :lua vim.lsp.buf.rename()<CR>
 
 
 " ========================================...Auto save
-lua require("auto-save")
+" lua require("autosave-conf")
+
+
+" ========================================...Diffview
+lua require("diffview-conf")
+
+
+" ========================================...Surround
+lua require("surround-conf")
 
 
 " ========================================...Manage buffers
